@@ -1,4 +1,5 @@
 import json
+import random
 
 class Wallet:
     
@@ -9,12 +10,13 @@ class Wallet:
         
     def create_private_key(self, create_wallet.password):
         i = 0
-        self.private_key = (for i < 255) {
+        self.private_key = (for i < 127) {
             
-            self.private_binary_key += randint(0, 1)
+            self.private_binary_key += random.randint(0, 1)
             i += 1
             
         })
+        return self.private_key
         
     def create_public_key(self, create_wallet.password):
         self.public_key = 0100000101000010
