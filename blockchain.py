@@ -9,13 +9,14 @@ class Wallet:
     public_keys = {}
     
     def create_wallet(self, password):
+        
         self.password = ""
         self.private_keys = private_keys
         self.public_keys = public_keys
         
     def lock_wallet(self, password):
         
-        walletFile = (((json.stringify('privkeys: ' +private_keys +", 'pubkeys': " + public_keys) ^password ^blockchain.constants.constant1 ^blockchain.constants.constant2 ^blockchain.constants.constant3 ^blockchain.constants.constant4 ^blockchain.constants.constant5) + 30)
+        walletFile = (((json.stringify('privkeys: ' +private_keys +", 'pubkeys': " + public_keys) *password *blockchain.constants.constant1 *blockchain.constants.constant2 *blockchain.constants.constant3 *blockchain.constants.constant4 *blockchain.constants.constant5) + 30)
         
     def unlock_wallet(self, password):
         
@@ -24,14 +25,22 @@ class Wallet:
         
     def create_private_key(self, create_wallet.password):
         
+        number = null
+        prevnumber = null
         i = 0
-        self.private_key = (for i < 127) {
+        for (i < 128) {
             
-            self.private_binary_key += random.randint(0, 1)
-            i += 1
+            random.randint(0, 61)
+            if (number != prevnumber) {
+                
+                self.private_key += key
+                i += 1
+                
+            }
             
-        })
+        }
         private_keys.insert(len(private_keys), self)
+        i = 0
         
     def create_public_key(self, chosensecretkey):
         
