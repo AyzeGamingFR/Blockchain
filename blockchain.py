@@ -57,9 +57,10 @@ class Wallet:
 
 class Blockchain:
     
-    constants = {"constant1": "blockchain", "constant2": "cryptocurrency", "constant3": "testchain", "constant4": "nfcs", "constant5": "tokens"}
+    constants = {"constant1": "blockchain", "constant2": "cryptocurrency", "constant3": "testchain", "constant4": "nfcs", "constant5": "tokens", "constant6": ""}
     
     def init(self):
+        
         self.actual_transactions = {}
         self.blockchain = {}
         self.blockchainnumber = 0
@@ -68,6 +69,7 @@ class Blockchain:
         self.nodes = set()
     
     def create_transaction(self, sender, receiver, coins, message):
+        
         self.hash = "0000000000000000000000000000000000000000000000000000000000000000"
         self.prevhash = self.hash
         self.sender = sender
@@ -78,15 +80,20 @@ class Blockchain:
         self.hash = (self.datas ^ Wallet.private_keys + blockchain.difficulty) %36
         
     def create_block(self, previoushash, transactions, transactionsnumber, totalfees):
+        
         self.hash = "0000000000000000000000000000000000000000000000000000000000000000"
         self.prevhash = self.hash
         self.txs = transactions
         self.txsnumber = transactionsnumber
         self.fees = totalfees
         self.hash = hashlib.sha256(self.prevhash, self.txs, self.txsnumber, self.fees).hexdigest()
-        self.hash = (self.hash + blockchain.difficulty) %36
+        self.hash = (((self.hash -"A") + blockchain.difficulty) +"A") %36
         blockchain.insert(len(blockchain), self.hash)
-        self.prevhash = self.hash, self.txs = {}, self.txsnumber = 0, self.fees = 0, self.hash = "0000000000000000000000000000000000000000000000000000000000000000"
+        self.prevhash = self.hash, self.txs = {}, self.txsnumber = 0, self.fees = 0
+        
+    def verify_block(self):
+        
+        self.hash = ((())) 
     
 class node:
     
