@@ -6,7 +6,15 @@ class Wallet:
         self.password = ""
         self.private_keys = {}
         self.public_keys = {}
-        self.private_keys = self.private_keys + () 
+        
+    def create_private_key(self):
+        i = 0
+        self.private_key = (for i < 255) {
+            
+            self.private_binary_key += randint(0, 1)
+            i += 1
+            
+        });
 
 class Blockchain:
     
@@ -19,7 +27,8 @@ class Blockchain:
         self.nodes = set()
     
     def create_transaction(self, sender, receiver, coins, message):
-        self.previoushash = self.previoushash
+        self.previoushash = self.hash
+        self.hash = "0000000000000000000000000000000000000000000000000000000000000000"
         self.sender = sender
         self.receiver = receiver
         self.coins = coins
@@ -27,7 +36,8 @@ class Blockchain:
         self = self ^ privateKey + difficulty
         
     def create_block(self, previoushash, transactions, transactionsnumber, totalfees):
-        self.prevhash = previoushash
+        self.prevhash = self.hash
+        self.hash = "0000000000000000000000000000000000000000000000000000000000000000"
         self.txs = transactions
         self.txsnumber = transactionsnumber
         self.fees = totalfees
