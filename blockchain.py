@@ -1,5 +1,13 @@
 import json
 
+class Wallet:
+    
+    def create_wallet(self, password):
+        self.password = ""
+        self.private_keys = {}
+        self.public_keys = {}
+        self.private_keys = self.private_keys + () 
+
 class Blockchain:
     
     def init(self):
