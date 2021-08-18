@@ -7,14 +7,17 @@ class Wallet:
         self.private_keys = {}
         self.public_keys = {}
         
-    def create_private_key(self):
+    def create_private_key(self, create_wallet.password):
         i = 0
         self.private_key = (for i < 255) {
             
             self.private_binary_key += randint(0, 1)
             i += 1
             
-        });
+        })
+        
+    def create_public_key(self, create_wallet.password):
+        self.public_key = 0100000101000010
 
 class Blockchain:
     
