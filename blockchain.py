@@ -16,12 +16,12 @@ class Wallet:
         
     def lock_wallet(self, password):
         
-        walletFile = (((json.stringify('privkeys: ' +private_keys +", 'pubkeys': " + public_keys) *password *blockchain.constants.constant1 *blockchain.constants.constant2 *blockchain.constants.constant3 *blockchain.constants.constant4 *blockchain.constants.constant5) + 30)
+        walletFile = (((json.stringify('privkeys: ' +private_keys +", 'pubkeys': " + public_keys) *password *blockchain.constants.constant1 *blockchain.constants.constant2 *blockchain.constants.constant3 *blockchain.constants.constant4 *blockchain.constants.constant5 *blockchain.constants.constant6) + 52)
         
     def unlock_wallet(self, password):
         
-        private_keys = (((walletFile /password /blockchain.constants.constant1 /blockchain.constants.constant2 /blockchain.constants.constant3 /blockchain.constants.constant4 /blockchain.constants.constant5).privkeys) - 30)
-        public_keys = (((walletFile /password /blockchain.constants.constant1 /blockchain.constants.constant2 /blockchain.constants.constant3 /blockchain.constants.constant4 /blockchain.constants.constant5).pubkeys) - 30)
+        private_keys = ((walletFile /password /blockchain.constants.constant1 /blockchain.constants.constant2 /blockchain.constants.constant3 /blockchain.constants.constant4 /blockchain.constants.constant5 /blockchain.constants.constant6).privkeys) - 62)
+        public_keys = ((walletFile /password /blockchain.constants.constant1 /blockchain.constants.constant2 /blockchain.constants.constant3 /blockchain.constants.constant4 /blockchain.constants.constant5 /blockchain.constants.constant6).pubkeys) - 62)
         
     def create_private_key(self, create_wallet.password):
         
@@ -57,6 +57,8 @@ class Wallet:
 
 class Blockchain:
     
+    constants = {"constant1": "blockchain", "constant2": "cryptocurrency", "constant3": "testchain", "constant4": "nfcs", "constant5": "tokens"}
+    
     def init(self):
         self.actual_transactions = {}
         self.blockchain = {}
@@ -86,5 +88,11 @@ class Blockchain:
         blockchain.insert(len(blockchain), self.hash)
         self.prevhash = self.hash, self.txs = {}, self.txsnumber = 0, self.fees = 0, self.hash = "0000000000000000000000000000000000000000000000000000000000000000"
     
+class node:
+    
+    def addPeer(self):
+        
+        
+        
 blockchain = Blockchain
 wallet = wallet
