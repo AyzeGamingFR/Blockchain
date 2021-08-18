@@ -64,7 +64,7 @@ class Blockchain:
         self.txsnumber = transactionsnumber
         self.fees = totalfees
         self.hash = hashlib.sha256(self.prevhash, self.txs, self.txsnumber, self.fees).hexdigest()
-        self.hash = 
+        self.hash = (self.hash + blockchain.difficulty) %36
         blockchain.insert(len(blockchain), self.hash)
         self.prevhash = self.hash, self.txs = {}, self.txsnumber = 0, self.fees = 0, self.hash = "0000000000000000000000000000000000000000000000000000000000000000"
     
