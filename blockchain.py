@@ -1,14 +1,21 @@
+import hashlib
 import json
 import random
 
 class Wallet:
     
+    private_keys = {}
+    public_keys = {};
     def create_wallet(self, password):
         self.password = ""
-        self.private_keys = {}
-        self.public_keys = {}
+        self.private_keys = private_keys
+        self.public_keys = public_keys
+        
+    def unlock_wallet(self, password):
+        
         
     def create_private_key(self, create_wallet.password):
+        
         i = 0
         self.private_key = (for i < 127) {
             
@@ -16,10 +23,20 @@ class Wallet:
             i += 1
             
         })
-        return self.private_key
+        private_keys.insert(len(private_keys), self)
         
-    def create_public_key(self, create_wallet.password):
-        self.public_key = 0100000101000010
+    def create_public_key(self, chosensecretkey):
+        
+        if (len(private_keys) < chosensecretkey) {
+            
+            println("Error, the chosen secret key is not in the private keys !")
+            
+        } else {
+            
+            self.public_key = "AB" + hashlib.sha256(private_keys[chosensecretkey[0:512]]).hexdigest()[0:496]
+            public_keys.insert(len(public_keys), self)
+            
+        }
 
 class Blockchain:
     
@@ -32,19 +49,24 @@ class Blockchain:
         self.nodes = set()
     
     def create_transaction(self, sender, receiver, coins, message):
-        self.previoushash = self.hash
         self.hash = "0000000000000000000000000000000000000000000000000000000000000000"
+        self.prevhash = self.hash
         self.sender = sender
         self.receiver = receiver
         self.coins = coins
         self.message = message
-        self = self ^ privateKey + difficulty
+        self.hash = () ^ Wallet.private_keys + blockchain.difficulty
         
     def create_block(self, previoushash, transactions, transactionsnumber, totalfees):
-        self.prevhash = self.hash
         self.hash = "0000000000000000000000000000000000000000000000000000000000000000"
+        self.prevhash = self.hash
         self.txs = transactions
         self.txsnumber = transactionsnumber
         self.fees = totalfees
+        self.hash = hashlib.sha256(self.prevhash, self.txs, self.txsnumber, self.fees).hexdigest()
+        self.hash = 
+        blockchain.insert(len(blockchain), self.hash)
+        self.prevhash = self.hash, self.txs = {}, self.txsnumber = 0, self.fees = 0, self.hash = "0000000000000000000000000000000000000000000000000000000000000000"
     
 blockchain = Blockchain
+wallet = wallet
