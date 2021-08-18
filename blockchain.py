@@ -5,7 +5,7 @@ import random
 class Wallet:
     
     private_keys = {}
-    public_keys = {};
+    public_keys = {}
     def create_wallet(self, password):
         self.password = ""
         self.private_keys = private_keys
@@ -55,7 +55,8 @@ class Blockchain:
         self.receiver = receiver
         self.coins = coins
         self.message = message
-        self.hash = () ^ Wallet.private_keys + blockchain.difficulty
+        self.datas = (self.prevhash + self.sender + self.receiver + self.coins + self.message)
+        self.hash = (self.datas ^ Wallet.private_keys + blockchain.difficulty) %36
         
     def create_block(self, previoushash, transactions, transactionsnumber, totalfees):
         self.hash = "0000000000000000000000000000000000000000000000000000000000000000"
