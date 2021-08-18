@@ -4,15 +4,23 @@ import random
 
 class Wallet:
     
+    walletFile = open("wallet.abdat", "r+")
     private_keys = {}
     public_keys = {}
+    
     def create_wallet(self, password):
         self.password = ""
         self.private_keys = private_keys
         self.public_keys = public_keys
         
+    def lock_wallet(self, password):
+        
+        walletFile = (((json.stringify('privkeys: ' +private_keys +", 'pubkeys': " + public_keys) ^password ^blockchain.constants.constant1 ^blockchain.constants.constant2 ^blockchain.constants.constant3 ^blockchain.constants.constant4 ^blockchain.constants.constant5) + 30)
+        
     def unlock_wallet(self, password):
         
+        private_keys = (((walletFile /password /blockchain.constants.constant1 /blockchain.constants.constant2 /blockchain.constants.constant3 /blockchain.constants.constant4 /blockchain.constants.constant5).privkeys) - 30)
+        public_keys = (((walletFile /password /blockchain.constants.constant1 /blockchain.constants.constant2 /blockchain.constants.constant3 /blockchain.constants.constant4 /blockchain.constants.constant5).pubkeys) - 30)
         
     def create_private_key(self, create_wallet.password):
         
