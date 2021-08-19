@@ -2,6 +2,63 @@ import hashlib
 import json
 import random
 
+class algorithms:
+    
+    def leaa(datas, password, difficulty):
+        
+        self = null
+        self.constants = "'constant1': 'leaalgorithm', 'constant2': 'leacoin', 'constant3': 'blockchain', 'constant4': 'crypto', 'constant5': 'algorithm', 'constant6': 'chain', 'constant7': 'hashed', 'constant8': 'wallets'"
+        self.datas = datas
+        self.difficulty = difficulty
+        self.password = password
+        if (len(self.datas) = 0 || null) {
+            
+            println("The datas inserted are equal to 0 or null !")
+            
+        } else {
+            
+            (((((self.datas -"A") +self.difficulty) +"A") *self.password) *self.constants.constant1 *self.constants.constant2 *self.constants.constant3 *self.constants.constant4 *self.constants.constant5 *self.constants.constant6 *self.constants.constant7 *self.constants.constant8)
+            
+        }
+        
+    def scrypt(self, datas, password, difficulty, cpudifficulty, ramdifficulty):
+        
+        self.cpudifficulty = cpudifficulty
+        self.datas = datas
+        self.difficulty = difficulty
+        self.password = password
+        self.ramdifficulty = ramdifficultyy
+        
+    def sha256(self, datas, password, difficulty):
+        
+        self.datas = datas
+        self.difficulty = difficulty
+        self.password = password
+        if (len(self.datas = 0 || null) {
+            
+            println("Error, the datas length is equal to 0 or null !")
+            
+        } else {
+            
+            
+            
+        }
+        
+    def sha512(self, datas, password, difficulty):
+        
+        self.datas = datas
+        self.password = password
+        self.difficulty = difficulty
+        if (len(self.datas = 0 || null) {
+            
+            println("Error, the datas length is equal to 0 or null !")
+            
+        } else {
+            
+            
+            
+        }
+        
 class Blockchain:
     
     blocks = 0
