@@ -36,7 +36,6 @@ class Blockchain:
         self.message = message
         self.datas = ("{'prevtransactionhash': " +self.prevhash +", 'sender': " +self.sender +", 'receiver': " +self.receiver +", 'coins': " +self.coins +", 'message': " +self.message +"}")
         self.hash = hashlib.sha256(self.datas *Wallet.private_keys +blockchain.difficulty)
-        create_block.transactions = transactions.insert(create_block.transactions.len(), ", '" +create_block.transactions.len() +"': '" +self.hash +"'")
         
     def create_block(self, blockNumber, previoushash, transactions, transactionsnumber, totalfees):
         
