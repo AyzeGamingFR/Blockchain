@@ -76,8 +76,9 @@ class Blockchain:
         self.receiver = receiver
         self.coins = coins
         self.message = message
-        self.datas = (self.prevhash + self.sender + self.receiver + self.coins + self.message)
-        self.hash = (self.datas ^ Wallet.private_keys + blockchain.difficulty) %36
+        self.datas = ("{'prevtransactionhash': " +self.prevhash +", 'sender': " +self.sender +", 'receiver': " +self.receiver +", 'coins': " +self.coins +", 'message': " +self.message +"}")
+        self.hash = hashlib.sha256(self.datas *Wallet.private_keys +blockchain.difficulty) %36
+        create_block.transactions = transactions.insert(create_block.transactions.len(), ", '" +create_block.transactions.len() +"': '" +self.hash +"'")
         
     def create_block(self, previoushash, transactions, transactionsnumber, totalfees):
         
@@ -86,8 +87,8 @@ class Blockchain:
         self.txs = transactions
         self.txsnumber = transactionsnumber
         self.fees = totalfees
-        self.hash = hashlib.sha256(self.prevhash, self.txs, self.txsnumber, self.fees).hexdigest()
-        self.hash = (((self.hash -"A") + blockchain.difficulty) +"A") %36
+        self.hash = hashlib.sha256("{'prevhash': " +self.prevhash +", 'transactions': " +self.txs +", 'transactionsnumber': " +self.txsnumber +", 'blockfees': " +self.fees +"}").hexdigest()
+        self.hash = (((self.hash -"A") +blockchain.difficulty) +"A") %52
         blockchain.insert(len(blockchain), self.hash)
         self.prevhash = self.hash, self.txs = {}, self.txsnumber = 0, self.fees = 0
         
@@ -95,11 +96,16 @@ class Blockchain:
         
         self.hash = ((())) 
     
-class node:
+class Node:
     
-    def addPeer(self):
+    def addPeer(self, peerAddress):
         
+        self.addPeer(peerAddress)
         
+    def datas(self, nodeDatas):
+        
+        self.datas = nodeDatas
         
 blockchain = Blockchain
-wallet = wallet
+node = Node
+wallet = Wallet
