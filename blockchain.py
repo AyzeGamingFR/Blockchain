@@ -7,7 +7,7 @@ class Blockchain:
     blockNumber = 0
     blockReward = 32
     constants = {"constant1": "blockchain", "constant2": "cryptocurrency", "constant3": "testchain", "constant4": "nfcs", "constant5": "tokens", "constant6": "proofofwork"}
-    nextHalving = ""
+    nextHalving = 31556926.08
     previousBlockHash = "0000000000000000000000000000000000000000000000000000000000000000"
     previousTransactionHash = "0000000000000000000000000000000000000000000000000000000000000000"
     
