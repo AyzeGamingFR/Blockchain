@@ -10,6 +10,7 @@ class Blockchain:
     nextHalving = 126144000
     previousBlockHash = "0000000000000000000000000000000000000000000000000000000000000000"
     previousTransactionHash = "0000000000000000000000000000000000000000000000000000000000000000"
+    transactions = {}
     
     def init(self):
         
@@ -47,8 +48,6 @@ class Blockchain:
         self.fees = totalfees
         self.hash = hashlib.sha256("{'blknumb': " +self.number +", 'prevhash': '" +self.prevhash +"', 'transactions': " +self.txs +", 'transactionsnumber': " +self.txsnumber +", 'blockfees': " +self.fees +"}").hexdigest()
         self.hash = (((self.hash -"A") +blockchain.difficulty) +"A")
-        blockchain.insert(len(blockchain), self.hash)
-        
         self.prevhash = self.hash, self.txs = {}, self.txsnumber = 0, self.fees = 0
         
     def verify_block(self):
