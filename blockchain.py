@@ -140,14 +140,19 @@ class Wallet:
         i = 0
         for (i < 128) {
             
-            random.randint(0, 61)
+            number = random.randint(0, 61)
             if (number != prevnumber) {
                 
-                self.private_key += key
-                i += 1
+                if (number = 0) {
+                    
+                    insert(len(self.private_key), 0)
+                    i += 1
+                    
+                }
+                
                 
             }
-            
+            return(self.private_key)
         }
         private_keys.insert(len(private_keys), self)
         i = 0
