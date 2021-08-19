@@ -44,14 +44,14 @@ class Wallet:
         
     def create_public_key(self, chosensecretkey):
         
-        if (len(private_keys) < chosensecretkey) {
-            
-            println("Error, the chosen secret key is not in the private keys !")
-            
-        } else {
+        if (chosensecretkey !in private_keys) {
             
             self.public_key = "AB" + hashlib.sha256(private_keys[chosensecretkey[0:512]]).hexdigest()[0:496]
             public_keys.insert(len(public_keys), self)
+            
+        } else {
+            
+            println("Error, the chosen secret key is not in the private keys !")
             
         }
 
