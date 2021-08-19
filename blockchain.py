@@ -64,7 +64,7 @@ class Wallet:
     
     def create_wallet(self, password):
         
-        self.name = "wallet" +walletNumber +".abdat"
+        self.filename = "wallet" +walletNumber +".abdat"
         self.password = password
         self.private_keys = private_keys
         self.public_keys = public_keys
