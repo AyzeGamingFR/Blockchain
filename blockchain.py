@@ -110,9 +110,13 @@ class Wallet:
     
 class Node:
     
-    def addPeer(self, peerAddress):
+    def peers(self):
         
-        self.addPeer(peerAddress)
+        self.nodePeers = set([])
+        
+    def addPeer(peerAddress):
+        
+        peers.nodePeers.insert(len(peers.nodePeers), peerAddress)
         
     def sendDatas(self, nodeDatas):
         
