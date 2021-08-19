@@ -4,7 +4,7 @@ import random
 
 class Blockchain:
     
-    blockNumber = 0
+    blocks = 0
     blockReward = 32
     constants = {"constant1": "blockchain", "constant2": "cryptocurrency", "constant3": "testchain", "constant4": "nfcs", "constant5": "tokens", "constant6": "proofofwork"}
     nextHalving = 2102400
@@ -38,15 +38,16 @@ class Blockchain:
         self.hash = hashlib.sha256(self.datas *Wallet.private_keys +blockchain.difficulty)
         transactions.insert(transactions.len(), (", " +transactions.len() +" : " +self.hash))
         
-    def create_block(self, blockNumber, previoushash, transactions, transactionsnumber, totalfees):
+    def create_block(self, previoushash, transactionsNumber, totalfees, message):
         
-        self.number = blockNummber
+        self.number = (blocks+1)
         self.hash = "0000000000000000000000000000000000000000000000000000000000000000"
         self.prevhash = self.hash
         self.txs = transactions
         self.txsnumber = transactionsnumber
         self.fees = totalfees
-        self.hash = hashlib.sha256("{'blknumb': " +self.number +", 'prevhash': '" +self.prevhash +"', 'transactions': " +self.txs +", 'transactionsnumber': " +self.txsnumber +", 'blockfees': " +self.fees +"}").hexdigest()
+        self.message = message
+        self.hash = hashlib.sha256("{'blknumb': " +self.number +", 'prevhash': '" +self.prevhash +"', 'transactions': " +self.txs +", 'transactionsnumber': " +self.txsnumber +", 'blockfees': " +self.fees +", 'message': '" +self.message +"'}").hexdigest()
         self.hash = (((self.hash -"A") +blockchain.difficulty) +"A")
         self.prevhash = self.hash, self.txs = {}, self.txsnumber = 0, self.fees = 0
         
