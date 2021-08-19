@@ -77,7 +77,7 @@ class Blockchain:
         self.coins = coins
         self.message = message
         self.datas = ("{'prevtransactionhash': " +self.prevhash +", 'sender': " +self.sender +", 'receiver': " +self.receiver +", 'coins': " +self.coins +", 'message': " +self.message +"}")
-        self.hash = hashlib.sha256(self.datas *Wallet.private_keys +blockchain.difficulty) %36
+        self.hash = hashlib.sha256(self.datas *Wallet.private_keys +blockchain.difficulty) %62
         create_block.transactions = transactions.insert(create_block.transactions.len(), ", '" +create_block.transactions.len() +"': '" +self.hash +"'")
         
     def create_block(self, previoushash, transactions, transactionsnumber, totalfees):
@@ -88,13 +88,13 @@ class Blockchain:
         self.txsnumber = transactionsnumber
         self.fees = totalfees
         self.hash = hashlib.sha256("{'prevhash': " +self.prevhash +", 'transactions': " +self.txs +", 'transactionsnumber': " +self.txsnumber +", 'blockfees': " +self.fees +"}").hexdigest()
-        self.hash = (((self.hash -"A") +blockchain.difficulty) +"A") %52
+        self.hash = (((self.hash -"A") +blockchain.difficulty) +"A") %62
         blockchain.insert(len(blockchain), self.hash)
         self.prevhash = self.hash, self.txs = {}, self.txsnumber = 0, self.fees = 0
         
     def verify_block(self):
         
-        self.hash = ((())) 
+        self.datas = ((()))
     
 class Node:
     
