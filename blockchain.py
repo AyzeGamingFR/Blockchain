@@ -1,21 +1,15 @@
 import hashlib
-import json
 import random
 
 class Algorithms:
     
     def caesar(datas, difficulty):
         
-        letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-        for letters in datas :
+        for letter in datas :
             
-            datas = chr(ord(datas) +difficulty)
+            word += chr(ord(datas) +difficulty)
             
-        else :
-            
-            datas += difficulty
-            
-        return(datas)
+        return(word)
             
     def leaa(datas, password, difficulty):
         
@@ -147,16 +141,8 @@ class Blockchain:
         
     def verify_block(datas):
         
-        datas = (((datas +"A") -blockchain.difficulty) -"A")
-        if datas :
-            
-            
-            
-        else :
-            
-            
-            
-        return (datas)
+        self.datas = datas
+        self.hash = (((self.hash +"A") -blockchain.difficulty) -"A")
     
 class Wallet:
     
