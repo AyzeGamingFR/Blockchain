@@ -11,13 +11,13 @@ class algorithms:
         self.datas = datas
         self.difficulty = difficulty
         self.password = password
-        if (len(self.datas) = 0 || null) {
+        if (len(self.datas) = 0 or null) {
             
             println("The datas inserted are equal to 0 or null !")
             
         } else {
             
-            (((((self.datas -"A") +self.difficulty) +"A") *self.password) *self.constants.constant1 *self.constants.constant2 *self.constants.constant3 *self.constants.constant4 *self.constants.constant5 *self.constants.constant6 *self.constants.constant7 *self.constants.constant8)
+            return (((((self.datas -"A") +self.difficulty) +"A") *self.password) *self.constants.constant1 *self.constants.constant2 *self.constants.constant3 *self.constants.constant4 *self.constants.constant5 *self.constants.constant6 *self.constants.constant7 *self.constants.constant8)
             
         }
         
@@ -27,20 +27,20 @@ class algorithms:
         self.datas = datas
         self.difficulty = difficulty
         self.password = password
-        self.ramdifficulty = ramdifficultyy
+        self.ramdifficulty = ramdifficulty
         
     def sha256(self, datas, password, difficulty):
         
         self.datas = datas
         self.difficulty = difficulty
         self.password = password
-        if (len(self.datas = 0 || null) {
+        if (len(self.datas = 0 or null)) {
             
             println("Error, the datas length is equal to 0 or null !")
             
         } else {
             
-            
+            if (password)
             
         }
         
@@ -49,19 +49,44 @@ class algorithms:
         self.datas = datas
         self.password = password
         self.difficulty = difficulty
-        if (len(self.datas = 0 || null) {
+        if (len(self.datas = 0 or null) {
             
             println("Error, the datas length is equal to 0 or null !")
             
         } else {
             
-            
+            if (password = 0 or null) {
+                
+                if (difficulty = 0 or null) {
+                    
+                    return (hashlib.sha512(self.datas))
+                    
+                } else {
+                    
+                    
+                    
+                }
+                
+            } else {
+                
+                if (difficulty = 0 or null) {
+                    
+                    
+                    
+                } else {
+                    
+                    
+                    
+                }
+                
+            }
             
         }
         
 class Blockchain:
     
     blocks = 0
+    blockChain = {}
     blockReward = 32
     constants = {"constant1": "blockchain", "constant2": "cryptocurrency", "constant3": "testchain", "constant4": "nfcs", "constant5": "tokens", "constant6": "proofofwork"}
     nextHalving = 2102400
@@ -77,7 +102,7 @@ class Blockchain:
         self.block = {}
         self.blocksnumber = 0
         self.peers = set()
-        if (blocksNumber = 0) {
+        if (blocks == 0) {
             
             create_block("", (previousBlockHash, "{'1': {'from': '" +coinsCreationAddress +"', 'to': '" +wallet.public_keys[1] +"', 'coins': '" +blockReward +"'}}"), "'transactionsNumber': 1", "'totalFees': 0")
             
@@ -145,14 +170,20 @@ class Wallet:
                 
                 if (number = 0) {
                     
-                    insert(len(self.private_key), 0)
+                    self.private_key += 0
+                    i += 1
+                    
+                }
+                if (number == 1) {
+                    
+                    self.private_key += 1
                     i += 1
                     
                 }
                 
                 
             }
-            return(self.private_key)
+            
         }
         private_keys.insert(len(private_keys), self)
         i = 0
