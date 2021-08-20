@@ -6,12 +6,16 @@ class Algorithms:
     
     def caesar(datas, difficulty):
         
-        for word in datas :
+        letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+        for letters in datas :
             
-            encrypted_word = ord(datas) +difficulty
-            encrypted_word = chr(datas)
+            datas = chr(ord(datas) +difficulty)
             
-        return(encrypted_word)
+        else :
+            
+            datas += difficulty
+            
+        return(datas)
             
     def leaa(datas, password, difficulty):
         
@@ -143,8 +147,16 @@ class Blockchain:
         
     def verify_block(datas):
         
-        self.datas = datas
-        self.hash = (((self.hash +"A") -blockchain.difficulty) -"A")
+        datas = (((datas +"A") -blockchain.difficulty) -"A")
+        if datas :
+            
+            
+            
+        else :
+            
+            
+            
+        return (datas)
     
 class Wallet:
     
