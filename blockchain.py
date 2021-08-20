@@ -11,7 +11,7 @@ class algorithms:
         self.datas = datas
         self.difficulty = difficulty
         self.password = password
-        if (len(self.datas) = 0 or null) {
+        if (len(self.datas) == 0 or null) {
             
             println("The datas inserted are equal to 0 or null !")
             
@@ -34,7 +34,7 @@ class algorithms:
         self.datas = datas
         self.difficulty = difficulty
         self.password = password
-        if (len(self.datas = 0 or null)) {
+        if (len(self.datas == 0 or null)) {
             
             println("Error, the datas length is equal to 0 or null !")
             
@@ -49,15 +49,15 @@ class algorithms:
         self.datas = datas
         self.password = password
         self.difficulty = difficulty
-        if (len(self.datas = 0 or null) {
+        if (len(self.datas == 0 or null) {
             
             println("Error, the datas length is equal to 0 or null !")
             
         } else {
             
-            if (password = 0 or null) {
+            if (password == 0 or null) {
                 
-                if (difficulty = 0 or null) {
+                if (difficulty == 0 or null) {
                     
                     return (hashlib.sha512(self.datas))
                     
@@ -69,7 +69,7 @@ class algorithms:
                 
             } else {
                 
-                if (difficulty = 0 or null) {
+                if (difficulty == 0 or null) {
                     
                     
                     
@@ -168,7 +168,7 @@ class Wallet:
             number = random.randint(0, 61)
             if (number != prevnumber) {
                 
-                if (number = 0) {
+                if (number == 0) {
                     
                     self.private_key += 0
                     i += 1
@@ -185,7 +185,7 @@ class Wallet:
             }
             
         }
-        private_keys.insert(len(private_keys), self)
+        return (self.private_keys)
         i = 0
         
     def create_public_key(self, chosensecretkey):
@@ -205,7 +205,7 @@ class Node:
     
     def peers(self):
         
-        self.nodePeers = set([])
+        self.nodePeers = set[]
         
     def addPeer(peerAddress):
         
