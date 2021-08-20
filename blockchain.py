@@ -11,16 +11,14 @@ class algorithms:
         self.datas = datas
         self.difficulty = difficulty
         self.password = password
-        if (len(self.datas) == 0 or null) {
+        if len(self.datas) == 0 or null :
             
             println("The datas inserted are equal to 0 or null !")
             
-        } else {
+        else :
             
             return (((((self.datas -"A") +self.difficulty) +"A") *self.password) *self.constants.constant1 *self.constants.constant2 *self.constants.constant3 *self.constants.constant4 *self.constants.constant5 *self.constants.constant6 *self.constants.constant7 *self.constants.constant8)
             
-        }
-        
     def scrypt(self, datas, password, difficulty, cpudifficulty, ramdifficulty):
         
         self.cpudifficulty = cpudifficulty
@@ -34,55 +32,45 @@ class algorithms:
         self.datas = datas
         self.difficulty = difficulty
         self.password = password
-        if (len(self.datas == 0 or null)) {
+        if len(self.datas == 0 or null :
             
             println("Error, the datas length is equal to 0 or null !")
             
-        } else {
+        else :
             
-            if (password)
             
-        }
-        
+            
     def sha512(self, datas, password, difficulty):
         
         self.datas = datas
         self.password = password
         self.difficulty = difficulty
-        if (len(self.datas == 0 or null) {
+        if len(self.datas == 0 or null) :
             
-            println("Error, the datas length is equal to 0 or null !")
+            print("Error, the datas length is equal to 0 or null !")
             
-        } else {
+        else:
             
-            if (password == 0 or null) {
+            if password == 0 or null :
                 
-                if (difficulty == 0 or null) {
+                if difficulty == 0 or null :
                     
                     return (hashlib.sha512(self.datas))
                     
-                } else {
+                else :
                     
                     
                     
-                }
+            else :
                 
-            } else {
-                
-                if (difficulty == 0 or null) {
+                if difficulty == 0 or null :
                     
                     
                     
-                } else {
+                else :
                     
+                   
                     
-                    
-                }
-                
-            }
-            
-        }
-        
 class Blockchain:
     
     blocks = 0
@@ -102,12 +90,10 @@ class Blockchain:
         self.block = {}
         self.blocksnumber = 0
         self.peers = set()
-        if (blocks == 0) {
+        if (blocks == 0 :
             
             create_block("", (previousBlockHash, "{'1': {'from': '" +coinsCreationAddress +"', 'to': '" +wallet.public_keys[1] +"', 'coins': '" +blockReward +"'}}"), "'transactionsNumber': 1", "'totalFees': 0")
             
-        }
-    
     def create_transaction(self, sender, receiver, coins, message):
         
         self.hash = "0000000000000000000000000000000000000000000000000000000000000000"
@@ -166,41 +152,32 @@ class Wallet:
         for (i < 128) {
             
             number = random.randint(0, 61)
-            if (number != prevnumber) {
+            if number != prevnumber :
                 
-                if (number == 0) {
+                if number == 0 :
                     
                     self.private_key += 0
                     i += 1
                     
-                }
-                if (number == 1) {
+                if number == 1 :
                     
                     self.private_key += 1
                     i += 1
                     
-                }
-                
-                
-            }
-            
-        }
         return (self.private_keys)
         i = 0
         
     def create_public_key(self, chosensecretkey):
         
-        if (chosensecretkey in private_keys) {
+        if chosensecretkey in private_keys :
             
             self.public_key = "AB" + hashlib.sha256(private_keys[chosensecretkey[0:512]]).hexdigest()[0:496]
             public_keys.insert(len(public_keys), self)
             
-        } else {
+        else :
             
             println("Error, the chosen secret key is not in the private keys !")
             
-        }
-    
 class Node:
     
     def peers(self):
