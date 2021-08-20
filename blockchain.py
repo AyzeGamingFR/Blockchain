@@ -10,6 +10,7 @@ class Algorithms:
             word += chr(ord(datas) +difficulty)
             
         return(word)
+        word = none
             
     def leaa(datas, password, difficulty):
         
