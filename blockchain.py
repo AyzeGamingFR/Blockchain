@@ -2,7 +2,7 @@ import hashlib
 import json
 import random
 
-class algorithms:
+class Algorithms:
     
     def caesar(datas, difficulty):
         
@@ -203,7 +203,7 @@ class Wallet:
             
 class Node:
     
-    def peers(self):
+    def peers():
         
         self.nodePeers = set[]
         
@@ -211,11 +211,6 @@ class Node:
         
         peers.nodePeers.insert(len(peers.nodePeers), peerAddress)
         
-    def sendDatas(self, nodeDatas):
+    def sendDatas(nodeDatas):
         
-        self.datas = nodeDatas
-        self.peers = blockchain.init.peers
-        
-blockchain = Blockchain
-node = Node
-wallet = Wallet
+        (blockchain.init.peers, nodeDatas)
