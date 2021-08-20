@@ -4,22 +4,28 @@ import random
 
 class algorithms:
     
+    def caesar(datas, difficulty):
+        
+        for word in datas :
+            
+            encrypted_word = ord(datas) +difficulty
+            encrypted_word = chr(datas)
+            
+        return(encrypted_word)
+            
     def leaa(datas, password, difficulty):
         
-        self = null
         self.constants = "'constant1': 'leaalgorithm', 'constant2': 'leacoin', 'constant3': 'blockchain', 'constant4': 'crypto', 'constant5': 'algorithm', 'constant6': 'chain', 'constant7': 'hashed', 'constant8': 'wallets'"
-        self.datas = datas
-        self.difficulty = difficulty
-        self.password = password
-        if len(self.datas) == 0 or null :
+        if len(self.datas) == 0 :
             
             println("The datas inserted are equal to 0 or null !")
             
         else :
             
-            return (((((self.datas -"A") +self.difficulty) +"A") *self.password) *self.constants.constant1 *self.constants.constant2 *self.constants.constant3 *self.constants.constant4 *self.constants.constant5 *self.constants.constant6 *self.constants.constant7 *self.constants.constant8)
+            constantsresult = (self.constants["constant1"] *self.constants["constant2"] *self.constants["constant3"] *self.constants["constant4"] *self.constants["constant5"] *self.constants["constant6"] *self.constants["constant7"] *self.constants["constant8"])
+            return (((datas -"A") +difficulty +"A") *password *self.constants)
             
-    def scrypt(self, datas, password, difficulty, cpudifficulty, ramdifficulty):
+    def scrypt(datas, password, difficulty, cpudifficulty, ramdifficulty):
         
         self.cpudifficulty = cpudifficulty
         self.datas = datas
@@ -27,25 +33,38 @@ class algorithms:
         self.password = password
         self.ramdifficulty = ramdifficulty
         
-    def sha256(self, datas, password, difficulty):
+    def sha256(datas, password, difficulty):
         
-        self.datas = datas
-        self.difficulty = difficulty
-        self.password = password
-        if len(self.datas == 0 or null :
+        if len(datas == 0) :
             
             println("Error, the datas length is equal to 0 or null !")
             
         else :
             
-            
-            
-    def sha512(self, datas, password, difficulty):
+            if password == 0 or null :
+                
+                if difficulty == 0 :
+                    
+                    """ sha256 algorith to do here """
+                    return (hashlib.sha256(datas))
+                
+                else :
+                    
+                    
+                    
+            else :
+                
+                if difficulty == 0 :
+                    
+                    
+                    
+                else :
+                    
+                    
+                    
+    def sha512(datas, password, difficulty):
         
-        self.datas = datas
-        self.password = password
-        self.difficulty = difficulty
-        if len(self.datas == 0 or null) :
+        if len(datas == 0) :
             
             print("Error, the datas length is equal to 0 or null !")
             
@@ -53,23 +72,26 @@ class algorithms:
             
             if password == 0 or null :
                 
-                if difficulty == 0 or null :
+                if difficulty == 0 or < 0 :
                     
-                    return (hashlib.sha512(self.datas))
+                    """ sha512 algorithm to do here """
+                    return (hashlib.sha512(datas))
                     
                 else :
                     
-                    
+                    return (hashlib.sha512(caesar(datas, difficulty)))
                     
             else :
                 
-                if difficulty == 0 or null :
+                if difficulty == 0 or < 0 :
                     
-                    
+                    datas *= password
+                    return (hashlib.sha512(datas))
                     
                 else :
                     
-                   
+                    datas *= password
+                    return (hashlib.sha512(caesar(datas, difficulty)))
                     
 class Blockchain:
     
@@ -82,7 +104,7 @@ class Blockchain:
     previousTransactionHash = "0000000000000000000000000000000000000000000000000000000000000000"
     transactions = {}
     
-    def init(self):
+    def init():
         
         self.actual_transactions = {}
         self.blockchain = {}
@@ -94,7 +116,7 @@ class Blockchain:
             
             create_block("", (previousBlockHash, "{'1': {'from': '" +coinsCreationAddress +"', 'to': '" +wallet.public_keys[1] +"', 'coins': '" +blockReward +"'}}"), "'transactionsNumber': 1", "'totalFees': 0")
             
-    def create_transaction(self, sender, receiver, coins, message):
+    def create_transaction(sender, receiver, coins, message):
         
         self.hash = "0000000000000000000000000000000000000000000000000000000000000000"
         self.prevhash = self.hash
@@ -106,7 +128,7 @@ class Blockchain:
         self.hash = hashlib.sha256(self.datas *Wallet.private_keys +blockchain.difficulty)
         transactions.insert(transactions.len(), (", " +transactions.len() +" : " +self.hash))
         
-    def create_block(self, previoushash, transactionsNumber, totalfees, message):
+    def create_block(previoushash, transactionsNumber, totalfees, message):
         
         self.number = (blocks+1)
         self.hash = "0000000000000000000000000000000000000000000000000000000000000000"
@@ -119,9 +141,10 @@ class Blockchain:
         self.hash = (((self.hash -"A") +blockchain.difficulty) +"A")
         self.prevhash = self.hash, self.txs = {}, self.txsnumber = 0, self.fees = 0
         
-    def verify_block(self):
+    def verify_block(datas):
         
-        self.datas = (((self.hash +"A") -blockchain.difficulty) -"A")
+        self.datas = datas
+        self.hash = (((self.hash +"A") -blockchain.difficulty) -"A")
     
 class Wallet:
     
@@ -130,7 +153,7 @@ class Wallet:
     private_keys = []
     public_keys = []
     
-    def create_wallet(self, password):
+    def create_wallet(password):
         
         self.filename = "wallet" +walletNumber +".abdat"
         self.password = password
