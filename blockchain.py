@@ -3,15 +3,38 @@ import random
 
 class Algorithms :
     
-    def caesar(datas, difficulty):
+    def caesar():
         
-        encrypted_datas = ""
-        for characters in datas :
+        def encrypt(datas, difficulty) :
             
-            encrypted_datas += chr(ord(datas) +difficulty)
+            encrypted_datas = ""
+            if len(datas) == 0 :
+                
+                print ("The datas who are being encrypted in the caesar algorithm get a size of 0 bits, they can't be encrypted !")
+                
+            else :
+                
+                for characters in datas :
+                    
+                    encrypted_datas += chr(ord(datas) +difficulty)
+                    
+                return (encrypted_datas)
+                
+        def decrypt(datas, difficulty) :
             
-        return (encrypted_datas)
-            
+            decrypted_datas = ""
+            if len(datas) == 0 :
+                
+                print ("The datas who are being encrypted in the caesar algorithm get a size of 0 bits, they can't be decrypted !")
+                
+            else :
+                
+                for characters in datas :
+                    
+                    decrypted_datas += chr(ord(datas) -difficulty)
+                    
+                return (decrypted_datas)
+                
     def leaa() :
         
         self.constants = "'constant1': 'leaalgorithm', 'constant2': 'leacoin', 'constant3': 'blockchain', 'constant4': 'crypto', 'constant5': 'algorithm', 'constant6': 'chain', 'constant7': 'hashed', 'constant8': 'wallets'"
