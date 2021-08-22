@@ -169,7 +169,12 @@ class Blockchain:
         self.hash = (((self.hash -"A") +blockchain.difficulty) +"A")
         self.prevhash = self.hash, self.txs = {}, self.txsnumber = 0, self.fees = 0
         
-    def verify_block(datas):
+    def getBinaryDate() :
+        
+        binaryDate = (ord() +ord() +ord() +ord() +ord())
+        return (binaryDate)
+        
+    def verify_block(datas) :
         
         self.datas = datas
         self.hash = (((self.hash +"A") -blockchain.difficulty) -"A")
@@ -200,12 +205,13 @@ class Wallet:
         number = null
         prevnumber = null
         i = 0
-        for (i < 240) {
+        for (i < 400) {
             
             number = random.randint(0, 1)
             self.private_key += number
             i += 1
-                    
+            
+        self.privateKey += getBinaryDate
         return (self.private_keys)
         
     def create_public_key(self, chosensecretkey) :
