@@ -200,23 +200,13 @@ class Wallet:
         number = null
         prevnumber = null
         i = 0
-        for (i < 256) {
+        for (i < 240) {
             
-            number = random.randint(0, 61)
-            if number != prevnumber :
-                
-                if number == 0 :
-                    
-                    self.private_key += 0
-                    i += 1
-                    
-                if number == 1 :
-                    
-                    self.private_key += 1
-                    i += 1
+            number = random.randint(0, 1)
+            self.private_key += number
+            i += 1
                     
         return (self.private_keys)
-        i = 0
         
     def create_public_key(self, chosensecretkey) :
         
