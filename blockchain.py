@@ -5,12 +5,12 @@ class Algorithms:
     
     def caesar(datas, difficulty):
         
-        for letter in datas :
+        encrypted_datas = ""
+        for characters in datas :
             
-            word += chr(ord(datas) +difficulty)
+            encrypted_datas += chr(ord(datas) +difficulty)
             
-        return(word)
-        word = none
+        return (encrypted_datas)
             
     def leaa(datas, password, difficulty):
         
@@ -22,7 +22,7 @@ class Algorithms:
         else :
             
             constantsresult = (self.constants["constant1"] *self.constants["constant2"] *self.constants["constant3"] *self.constants["constant4"] *self.constants["constant5"] *self.constants["constant6"] *self.constants["constant7"] *self.constants["constant8"])
-            return (((datas -"A") +difficulty +"A") *password *self.constants)
+            return (((datas -"A") +difficulty +"A") *password *constantsresult)
             
     def scrypt(datas, password, difficulty, cpudifficulty, ramdifficulty):
         
@@ -31,6 +31,7 @@ class Algorithms:
         self.difficulty = difficulty
         self.password = password
         self.ramdifficulty = ramdifficulty
+        hashlib.scrypt(datas)
         
     def sha256(datas, password, difficulty):
         
@@ -100,7 +101,9 @@ class Blockchain:
     constants = {"constant1": "blockchain", "constant2": "cryptocurrency", "constant3": "testchain", "constant4": "nfcs", "constant5": "tokens", "constant6": "proofofwork"}
     nextHalving = 2102400
     previousBlockHash = "0000000000000000000000000000000000000000000000000000000000000000"
-    previousTransactionHash = "0000000000000000000000000000000000000000000000000000000000000000"
+    previousCoinTransactionHash = "0000000000000000000000000000000000000000000000000000000000000000"
+    previousTokenTransactionHash = "0000000000000000000000000000000000000000000000000000000000000000"
+    previousNfcTransactionHash = "0000000000000000000000000000000000000000000000000000000000000000"
     transactions = {}
     
     def init():
@@ -115,18 +118,29 @@ class Blockchain:
             
             create_block("", (previousBlockHash, "{'1': {'from': '" +coinsCreationAddress +"', 'to': '" +wallet.public_keys[1] +"', 'coins': '" +blockReward +"'}}"), "'transactionsNumber': 1", "'totalFees': 0")
             
-    def create_transaction(sender, receiver, coins, message):
+    def create_transaction(transactionType, sender, receiver, coins, message):
         
-        self.hash = "0000000000000000000000000000000000000000000000000000000000000000"
-        self.prevhash = self.hash
-        self.sender = sender
-        self.receiver = receiver
-        self.coins = coins
-        self.message = message
-        self.datas = ("{'prevtransactionhash': " +self.prevhash +", 'sender': " +self.sender +", 'receiver': " +self.receiver +", 'coins': " +self.coins +", 'message': " +self.message +"}")
-        self.hash = hashlib.sha256(self.datas *Wallet.private_keys +blockchain.difficulty)
-        transactions.insert(transactions.len(), (", " +transactions.len() +" : " +self.hash))
+        self.hash = previousTransactionHash
+        if transactionType = 0 :""" if the transaction is sending some coins """
+            
+            self.hash = previousCoinTransactionHash
+            self.prevhash = self.hash
+            self.sender = sender
+            self.receiver = receiver
+            self.coins = coins
+            self.message = message
+            self.datas = ("{'prevtransactionhash': " +self.prevhash +", 'sender': " +self.sender +", 'receiver': " +self.receiver +", 'coins': " +self.coins +", 'message': " +self.message +"}")
+            self.hash = hashlib.sha256(self.datas *Wallet.private_keys +blockchain.difficulty)
+            transactions.insert(transactions.len(), (", " +transactions.len() +" : " +self.hash))
         
+        elif transactionType = 1 :
+            
+            
+            
+        elif transactionType = 2 :
+            
+            self.hash = self.prevhash
+            
     def create_block(previoushash, transactionsNumber, totalfees, message):
         
         self.number = (blocks+1)
@@ -171,7 +185,7 @@ class Wallet:
         number = null
         prevnumber = null
         i = 0
-        for (i < 128) {
+        for (i < 256) {
             
             number = random.randint(0, 61)
             if number != prevnumber :
@@ -193,8 +207,8 @@ class Wallet:
         
         if chosensecretkey in private_keys :
             
-            self.public_key = "AB" + hashlib.sha256(private_keys[chosensecretkey[0:512]]).hexdigest()[0:496]
-            public_keys.insert(len(public_keys), self)
+            self.public_key = "AB" + hashlib.sha256(private_keys[chosensecretkey[0:512]]).hexdigest()
+            public_keys.insert(len(public_keys), self.public-key[0:496])
             
         else :
             
