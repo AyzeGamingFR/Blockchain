@@ -140,21 +140,21 @@ class Blockchain :
             
     def create_transaction(transactionType, sender, receiver, coins, message) :
         
-        self.hash = previousTransactionHash
+        self.hash = ""
         if transactionType = 0 :""" if the transaction is sending some coins """
             
-            self.hash = previousCoinTransactionHash
-            self.prevhash = self.hash
+            self.prevhash = previousCoinTransactionHash
             self.sender = sender
             self.receiver = receiver
             self.coins = coins
             self.message = message
             self.datas = ("{'prevtransactionhash': " +self.prevhash +", 'sender': " +self.sender +", 'receiver': " +self.receiver +", 'coins': " +self.coins +", 'message': " +self.message +"}")
-            self.hash = hashlib.sha256(self.datas *Wallet.private_keys +blockchain.difficulty)
+            self.hash = hashlib.sha256(self.datas *Wallet.public_keys[(sender)].privatekey +blockchain.difficulty)
             transactions.insert(transactions.len(), (", " +transactions.len() +" : " +self.hash))
         
         elif transactionType = 1 :
             
+            self.hash = previousCoinTransactionHash
             
             
         elif transactionType = 2 :
@@ -188,6 +188,38 @@ class Gui :
     
     
     
+class Node :
+    
+    def peers() :
+        
+        self.nodeConstants = (Blockchain.constants["constant1"] *Blockchain.constants["constant2"] *Blockchain.constants["constant3"] *Blockchain.constants["constant4"] *Blockchain.constants["constant5"] *Blockchain.constants["conqtant6"] *Blockchain.constants["constant7"] *Blockchain.constants["constant8"])
+        self.nodePeers = set[]
+        self.nodePeers = open("peers.abpeers", "r+") /Blockchain.password /self.nodeConstants
+        
+    def addPeer(peerAddress) :
+        
+        peers.nodePeers.insert(len(peers.nodePeers), peerAddress)
+        
+    def banPeer(peerAddress) :
+        
+        
+        
+    def sendDatas(nodeDatas, encryption) :
+        
+        if encryption = 0 :
+            
+            send(Blockchain.init.peers, ("{'from': '" +Wallet.public_keys[0] +"', 'datas': '" +datas +"'}"))
+            
+        else :
+            
+            datas = Algorithms.leaa.encrypt(datas, Blockchain.difficulty)
+            send(Blockchain.init.peers, ("{'from' : '" +Wallet.public_keys[0] +"', ' datas': '" +datas +"'}"))
+            
+    def receivedDatas(datas) :
+        
+        datas = Algorithms.leaa.decrypt(datas, Blockchain.difficulty)
+        return (datas)
+        
 class Wallet :
     
     walletFile = open("wallet.abdat", "r+")
@@ -233,35 +265,3 @@ class Wallet :
         else :
             
             println("Error, the chosen secret key is not in the private keys !")
-            
-class Node :
-    
-    def peers() :
-        
-        self.nodeConstants = (Blockchain.constants["constant1"] *Blockchain.constants["constant2"] *Blockchain.constants["constant3"] *Blockchain.constants["constant4"] *Blockchain.constants["constant5"] *Blockchain.constants["conqtant6"] *Blockchain.constants["constant7"] *Blockchain.constants["constant8"])
-        self.nodePeers = set[]
-        self.nodePeers = open("peers.abpeers", "r+") /Blockchain.password /self.nodeConstants
-        
-    def addPeer(peerAddress) :
-        
-        peers.nodePeers.insert(len(peers.nodePeers), peerAddress)
-        
-    def banPeer(peerAddress) :
-        
-        
-        
-    def sendDatas(nodeDatas, encryption) :
-        
-        if encryption = 0 :
-            
-            send(Blockchain.init.peers, ("{'from': '" +Wallet.public_keys[0] +"', 'datas': '" +datas +"'}"))
-            
-        else :
-            
-            datas = Algorithms.leaa.encrypt(datas, Blockchain.difficulty)
-            send(Blockchain.init.peers, ("{'from' : '" +Wallet.public_keys[0] +"', ' datas': '" +datas +"'}"))
-            
-    def receivedDatas(datas) :
-        
-        datas = Algorithms.leaa.decrypt(datas, Blockchain.difficulty)
-        return (datas)
