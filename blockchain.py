@@ -3,7 +3,7 @@ import random
 
 class Algorithms :
     
-    def caesar():
+    def caesar() :
         
         def encrypt(datas, difficulty) :
             
@@ -76,7 +76,7 @@ class Algorithms :
             
     def sha256(datas, password, difficulty) :
         
-        if len(datas) == 0:
+        if len(datas) == 0 :
             
             println("Error, the datas length is equal to 0 or null !")
             
@@ -171,14 +171,20 @@ class Blockchain :
             self.receiver = receiver
             self.coins = coins
             self.message = message
-            self.datas = ("{'prevtransactionhash': " +self.prevhash +", 'sender': " +self.sender +", 'receiver': " +self.receiver +", 'coins': " +self.coins +", 'message': " +self.message +"}")
-            self.hash = hashlib.sha256(self.datas *Wallet.public_keys[(sender)].privatekey +blockchain.difficulty)
-            transactions.insert(transactions.len(), (", " +transactions.len() +" : " +self.hash))
+            self.datas = ("{'prevtransactionhash': " +self.prevhash +", 'sender': '" +self.sender +"', 'receiver': '" +self.receiver +"', 'coins': " +self.coins +", 'message': '" +self.message +"'}")
+            self.hash = ord(self.datas *Wallet.public_keys[(sender)].privatekey +difficulty)
+            return (self.hash)
         
         elif transactionType = 1 :
             
-            self.hash = previousCoinTransactionHash
-            
+            self.prevhash = previousCoinTransactionHash
+            self.sender = sender
+            self.receiver = receiver
+            self.coins = minTransactionFees
+            self.message = ""
+            self.datas = ("{'prevtransactionhash': '" +self.prevhash +"', 'sender': '" +self.sender +"', 'receiver': '" +self.receiver +"', 'coins': " +self.coins +", 'message': '" +self.message +"'}")
+            self.hash = ord(self.datas *Wallet.public_keys[(sender)].privatekey +difficulty)
+            return (self.hash)
             
         elif transactionType = 2 :
             
@@ -287,4 +293,4 @@ class Wallet :
             
         else :
             
-            println("Error, the chosen secret key is not in the private keys !")
+            print("Error, the chosen secret key is not in the private keys !")
