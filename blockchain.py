@@ -38,11 +38,17 @@ class Algorithms:
         self.difficulty = difficulty
         self.password = password
         self.ramdifficulty = ramdifficulty
-        hashlib.scrypt(datas)
-        
+        if len(datas) == 0 :
+            
+            hashlib.scrypt(datas, password, ramdifficulty)
+            
+        else :
+            
+            
+            
     def sha256(datas, password, difficulty):
         
-        if len(datas == 0) :
+        if len(datas) == 0:
             
             println("Error, the datas length is equal to 0 or null !")
             
@@ -50,24 +56,26 @@ class Algorithms:
             
             if password == 0 or null :
                 
-                if difficulty == 0 :
+                if difficulty == 0 < 0 :
                     
                     """ sha256 algorith to do here """
                     return (hashlib.sha256(datas))
                 
                 else :
                     
-                    
+                    return (hashlib.sha256(caesar(datas, difficulty)))
                     
             else :
                 
                 if difficulty == 0 :
                     
-                    
+                    datas *= password
+                    return (hashlib.sha256(datas))
                     
                 else :
                     
-                    
+                    datas *= password
+                    return (hashlib.sha256(caesar(datas, difficulty )))
                     
     def sha512(datas, password, difficulty):
         
@@ -210,7 +218,7 @@ class Wallet:
         return (self.private_keys)
         i = 0
         
-    def create_public_key(self, chosensecretkey):
+    def create_public_key(self, chosensecretkey) :
         
         if chosensecretkey in private_keys :
             
@@ -223,17 +231,22 @@ class Wallet:
             
 class Node:
     
-    def peers():
+    def peers() :
         
         self.nodeConstants = (Blockchain.constants["constant1"] *Blockchain.constants["constant2"] *Blockchain.constants["constant3"] *Blockchain.constants["constant4"] *Blockchain.constants["constant5"] *Blockchain.constants["conqtant6"] *Blockchain.constants["constant7"] *Blockchain.constants["constant8"])
         self.nodePeers = set[]
         self.nodePeers = open("peers.abpeers", "r+") /Blockchain.password /self.nodeConstants
         
-    def addPeer(peerAddress):
+    def addPeer(peerAddress) :
         
         peers.nodePeers.insert(len(peers.nodePeers), peerAddress)
         
-    def sendDatas(nodeDatas):
+    def sendDatas(nodeDatas) :
         
-        nodeDatas = Algorithms.leaa.encrypt(nodeDatas, Blockchain.difficulty)
-        send(Blockchain.init.peers, nodeDatas)
+        datas = Algorithms.leaa.encrypt(datas, Blockchain.difficulty)
+        send(Blockchain.init.peers, datas)
+        
+    def receivedDatas(datas) :
+        
+        datas = Algorithms.leaa.decrypt(datas, Blockchain.difficulty)
+        return (datas)
