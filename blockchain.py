@@ -12,18 +12,25 @@ class Algorithms:
             
         return (encrypted_datas)
             
-    def leaa(datas, password, difficulty):
+    def leaa():
         
         self.constants = "'constant1': 'leaalgorithm', 'constant2': 'leacoin', 'constant3': 'blockchain', 'constant4': 'crypto', 'constant5': 'algorithm', 'constant6': 'chain', 'constant7': 'hashed', 'constant8': 'wallets'"
-        if len(self.datas) == 0 :
+        def encrypt(datas, password, difficulty) :
+            if len(datas) == 0 :
+                
+                print("The datas inserted are equal to 0 or null !")
+                
+            else :
+                
+                constantsresult = (self.constants["constant1"] *self.constants["constant2"] *self.constants["constant3"] *self.constants["constant4"] *self.constants["constant5"] *self.constants["constant6"] *self.constants["constant7"] *self.constants["constant8"])
+                return ("'datas': '" +(((datas -"A") +difficulty +"A") *password *constantsresult) +"'")
+                
+        def decrypt(datas, password, difficulty) :
             
-            println("The datas inserted are equal to 0 or null !")
-            
-        else :
-            
-            constantsresult = (self.constants["constant1"] *self.constants["constant2"] *self.constants["constant3"] *self.constants["constant4"] *self.constants["constant5"] *self.constants["constant6"] *self.constants["constant7"] *self.constants["constant8"])
-            return (((datas -"A") +difficulty +"A") *password *constantsresult)
-            
+            if len(datas) == 0 :
+                
+                print("")
+                
     def scrypt(datas, password, difficulty, cpudifficulty, ramdifficulty):
         
         self.cpudifficulty = cpudifficulty
@@ -218,7 +225,9 @@ class Node:
     
     def peers():
         
+        self.nodeConstants = (Blockchain.constants["constant1"] *Blockchain.constants["constant2"] *Blockchain.constants["constant3"] *Blockchain.constants["constant4"] *Blockchain.constants["constant5"] *Blockchain.constants["conqtant6"] *Blockchain.constants["constant7"] *Blockchain.constants["constant8"])
         self.nodePeers = set[]
+        self.nodePeers = open("peers.abpeers", "r+") /Blockchain.password /self.nodeConstants
         
     def addPeer(peerAddress):
         
@@ -226,4 +235,5 @@ class Node:
         
     def sendDatas(nodeDatas):
         
-        (blockchain.init.peers, nodeDatas)
+        nodeDatas = Algorithms.leaa.encrypt(nodeDatas, Blockchain.difficulty)
+        send(Blockchain.init.peers, nodeDatas)
