@@ -1,7 +1,7 @@
 import hashlib
 import random
 
-class Algorithms:
+class Algorithms :
     
     def caesar(datas, difficulty):
         
@@ -12,13 +12,13 @@ class Algorithms:
             
         return (encrypted_datas)
             
-    def leaa():
+    def leaa() :
         
         self.constants = "'constant1': 'leaalgorithm', 'constant2': 'leacoin', 'constant3': 'blockchain', 'constant4': 'crypto', 'constant5': 'algorithm', 'constant6': 'chain', 'constant7': 'hashed', 'constant8': 'wallets'"
         def encrypt(datas, password, difficulty) :
             if len(datas) == 0 :
                 
-                print("The datas inserted are equal to 0 or null !")
+                print("The bit size of the datas inserted is equal to 0 !")
                 
             else :
                 
@@ -29,9 +29,14 @@ class Algorithms:
             
             if len(datas) == 0 :
                 
-                print("")
+                print("The bit size of the datas inserted is equal to 0 !")
                 
-    def scrypt(datas, password, difficulty, cpudifficulty, ramdifficulty):
+            else :
+                
+                constantsresult = (self.constants['constant1'] /self.constants['constant2'] /self.constants['constant3'] /self.constants['constant4'] /self.constants['constant5'] /self.constants['constant6'] /self.constants['constant7'] /self.constants['constant8'])
+                return ()
+                
+    def scrypt(datas, password, difficulty, cpudifficulty, ramdifficulty) :
         
         self.cpudifficulty = cpudifficulty
         self.datas = datas
@@ -46,7 +51,7 @@ class Algorithms:
             
             
             
-    def sha256(datas, password, difficulty):
+    def sha256(datas, password, difficulty) :
         
         if len(datas) == 0:
             
@@ -77,7 +82,7 @@ class Algorithms:
                     datas *= password
                     return (hashlib.sha256(caesar(datas, difficulty )))
                     
-    def sha512(datas, password, difficulty):
+    def sha512(datas, password, difficulty) :
         
         if len(datas == 0) :
             
@@ -108,7 +113,7 @@ class Algorithms:
                     datas *= password
                     return (hashlib.sha512(caesar(datas, difficulty)))
                     
-class Blockchain:
+class Blockchain :
     
     blocks = 0
     blockChain = {}
@@ -121,7 +126,7 @@ class Blockchain:
     previousNfcTransactionHash = "0000000000000000000000000000000000000000000000000000000000000000"
     transactions = {}
     
-    def init():
+    def init() :
         
         self.actual_transactions = {}
         self.blockchain = {}
@@ -133,7 +138,7 @@ class Blockchain:
             
             create_block("", (previousBlockHash, "{'1': {'from': '" +coinsCreationAddress +"', 'to': '" +wallet.public_keys[1] +"', 'coins': '" +blockReward +"'}}"), "'transactionsNumber': 1", "'totalFees': 0")
             
-    def create_transaction(transactionType, sender, receiver, coins, message):
+    def create_transaction(transactionType, sender, receiver, coins, message) :
         
         self.hash = previousTransactionHash
         if transactionType = 0 :""" if the transaction is sending some coins """
@@ -156,7 +161,7 @@ class Blockchain:
             
             self.hash = self.prevhash
             
-    def create_block(previoushash, transactionsNumber, totalfees, message):
+    def create_block(previoushash, transactionsNumber, totalfees, message) :
         
         self.number = (blocks+1)
         self.hash = "0000000000000000000000000000000000000000000000000000000000000000"
@@ -179,14 +184,18 @@ class Blockchain:
         self.datas = datas
         self.hash = (((self.hash +"A") -blockchain.difficulty) -"A")
     
-class Wallet:
+class Gui :
+    
+    
+    
+class Wallet :
     
     walletFile = open("wallet.abdat", "r+")
     walletNumber = 0
     private_keys = []
     public_keys = []
     
-    def create_wallet(password):
+    def create_wallet(password) :
         
         self.filename = "wallet" +walletNumber +".abdat"
         self.password = password
@@ -195,12 +204,12 @@ class Wallet:
         self.datas = ((("'privkeys': [" +private_keys +", 'pubkeys': [" +public_keys +"]]") *password *blockchain.constants.constant1 *blockchain.constants.constant2 *blockchain.constants.constant3 *blockchain.constants.constant4 *blockchain.constants.constant5 *blockchain.constants.constant6) +62)
         walletNumber += 1
         
-    def unlock_wallet(self, password):
+    def unlock_wallet(self, password) :
         
         private_keys = ((walletFile /password /blockchain.constants.constant1 /blockchain.constants.constant2 /blockchain.constants.constant3 /blockchain.constants.constant4 /blockchain.constants.constant5 /blockchain.constants.constant6).privkeys) - 62)
         public_keys = ((walletFile /password /blockchain.constants.constant1 /blockchain.constants.constant2 /blockchain.constants.constant3 /blockchain.constants.constant4 /blockchain.constants.constant5 /blockchain.constants.constant6).pubkeys) - 62)
         
-    def create_private_key(self, create_wallet.password):
+    def create_private_key(self, create_wallet.password) :
         
         number = null
         prevnumber = null
@@ -225,7 +234,7 @@ class Wallet:
             
             println("Error, the chosen secret key is not in the private keys !")
             
-class Node:
+class Node :
     
     def peers() :
         
@@ -237,11 +246,21 @@ class Node:
         
         peers.nodePeers.insert(len(peers.nodePeers), peerAddress)
         
-    def sendDatas(nodeDatas) :
+    def banPeer(peerAddress) :
         
-        datas = Algorithms.leaa.encrypt(datas, Blockchain.difficulty)
-        send(Blockchain.init.peers, datas)
         
+        
+    def sendDatas(nodeDatas, encryption) :
+        
+        if encryption = 0 :
+            
+            send(Blockchain.init.peers, ("{'from': '" +Wallet.public_keys[0] +"', 'datas': '" +datas +"'}"))
+            
+        else :
+            
+            datas = Algorithms.leaa.encrypt(datas, Blockchain.difficulty)
+            send(Blockchain.init.peers, ("{'from' : '" +Wallet.public_keys[0] +"', ' datas': '" +datas +"'}"))
+            
     def receivedDatas(datas) :
         
         datas = Algorithms.leaa.decrypt(datas, Blockchain.difficulty)
