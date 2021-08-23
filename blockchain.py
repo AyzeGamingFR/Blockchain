@@ -209,17 +209,20 @@ class Blockchain :
     def syncChain() :
         
         i = 0
+        sameChainPeers = []
         for i < len(Network.peers) :
             
             chainId = Network.send.chainId(Network.peers[i])
-            if chainId = walletChainId :
+            if chainId == walletChainId :
                 
                 sameChainPeers.insert(len(sameChainPeers), Network.peers[i])
                 
             else :
                 
-                
-                
+                if len(sameChainPeers) == 0 :
+                    
+                    create_Block()
+                    
     def verify_block(datas) :
         
         self.datas = datas
