@@ -270,6 +270,7 @@ class Node :
     def internetServer() :
         
         isocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        isocket.bind("", 8448)
         
     def receivedDatas(datas) :
         
