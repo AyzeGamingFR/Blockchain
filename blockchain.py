@@ -154,13 +154,20 @@ class Blockchain :
         self.actual_transactions = {}
         self.blockchain = {}
         self.blockchainnumber = 0
-        self.block = {}
+        self.block = []
+        self.blocksnotvalidated = []
         self.blocksnumber = 0
-        self.peers = set()
-        if (blocks == 0 :
+        self.peers = set([])
+        if Node.commands.send.chainidofpeers == Node.chainid :
             
-            create_block("", (previousBlockHash, "{'1': {'from': '" +coinsCreationAddress +"', 'to': '" +wallet.public_keys[1] +"', 'coins': '" +blockReward +"'}}"), "'transactionsNumber': 1", "'totalFees': 0")
+            insert(self.blocksnotvalited, Node.commands.send.blockchainsync)
             
+        else :
+            
+            if blocks == 0 :
+                
+                create_block("", (previousBlockHash, "{'1': {'from': '" +coinsCreationAddress +"', 'to': '" +wallet.public_keys[1] +"', 'coins': '" +blockReward +"'}}"), "'transactionsNumber': 1", "'totalFees': 0")
+                
     def create_transaction(transactionType, sender, receiver, coins, message) :
         
         self.hash = ""
@@ -275,7 +282,7 @@ class Wallet :
         number = null
         prevnumber = null
         i = 0
-        for (i < 400) {
+        for i < 400 :
             
             number = random.randint(0, 1)
             self.private_key += number
