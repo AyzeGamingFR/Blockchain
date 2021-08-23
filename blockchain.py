@@ -267,6 +267,10 @@ class Node :
             datas = Algorithms.leaa.encrypt(datas, Blockchain.difficulty)
             send(Blockchain.init.peers, ("{'from' : '" +Wallet.public_keys[0] +"', ' datas': '" +datas +"'}"))
             
+    def internetServer() :
+        
+        isocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        
     def receivedDatas(datas) :
         
         datas = Algorithms.leaa.decrypt(datas, Blockchain.difficulty)
