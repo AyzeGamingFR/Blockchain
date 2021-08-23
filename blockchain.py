@@ -236,17 +236,20 @@ class Node :
     
     def peers() :
         
-        self.nodeConstants = (Blockchain.constants["constant1"] *Blockchain.constants["constant2"] *Blockchain.constants["constant3"] *Blockchain.constants["constant4"] *Blockchain.constants["constant5"] *Blockchain.constants["conqtant6"] *Blockchain.constants["constant7"] *Blockchain.constants["constant8"])
+        self.nodeConstants = (Blockchain.nodesconstants["constant1"] *Blockchain.nodesConstants["constant2"] *Blockchain.nodesConstants["constant3"] *Blockchain.nodesConstants["constant4"] *Blockchain.nodesConstants["constant5"] *Blockchain.nodesConstants["conqtant6"] *Blockchain.nodesConstants["constant7"] *Blockchain.nodesConstants["constant8"])
         self.nodePeers = set[]
         self.nodePeers = open("peers.abpeers", "r+") /Blockchain.password /self.nodeConstants
+        self.bannedPeers = set[]
+        self.bannedPeees = open("bannedpeers.abpeers") /Blockchain.password /self.nodeConstants
         
     def addPeer(peerAddress) :
         
-        peers.nodePeers.insert(len(peers.nodePeers), peerAddress)
+        peers.self.nodePeers.insert(len(peers.self.nodePeers), peerAddress)
         
     def banPeer(peerAddress) :
         
-        
+        peers.self.nodePeers.remove[peerAddress]
+        peers.self.bannedPeers.insert(len(peers.self.bannedPeers), peerAddress)
         
     def sendDatas(nodeDatas, encryption) :
         
@@ -296,7 +299,7 @@ class Wallet :
             self.private_key += number
             i += 1
             
-        self.privateKey += getBinaryDate
+        self.privateKey += binaryDate
         return (self.private_keys)
         
     def create_public_key(self, chosensecretkey) :
