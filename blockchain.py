@@ -1,5 +1,6 @@
 import hashlib
 import random
+import socket
 
 class Algorithms :
     
@@ -251,7 +252,11 @@ class Node :
         peers.self.nodePeers.remove[peerAddress]
         peers.self.bannedPeers.insert(len(peers.self.bannedPeers), peerAddress)
         
-    def sendDatas(nodeDatas, encryption) :
+    def chainId(nodes) :
+        
+        socket.send(nodes, "chainId")
+        
+    def sendMessage(nodeDatas, encryption) :
         
         if encryption = 0 :
             
