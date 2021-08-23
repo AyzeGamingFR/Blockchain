@@ -158,16 +158,7 @@ class Blockchain :
         self.blocksnotvalidated = []
         self.blocksnumber = 0
         self.peers = set([])
-        if Node.commands.send.chainidofpeers == Node.chainid :
-            
-            insert(self.blocksnotvalited, Node.commands.send.blockchainsync)
-            
-        else :
-            
-            if blocks == 0 :
-                
-                create_block("", (previousBlockHash, "{'1': {'from': '" +coinsCreationAddress +"', 'to': '" +wallet.public_keys[1] +"', 'coins': '" +blockReward +"'}}"), "'transactionsNumber': 1", "'totalFees': 0")
-                
+        Blockchain.syncChain
     def create_transaction(transactionType, sender, receiver, coins, message) :
         
         self.hash = ""
@@ -215,6 +206,20 @@ class Blockchain :
         binaryDate = (ord() +ord() +ord() +ord() +ord())
         return (binaryDate)
         
+    def syncChain() :
+        
+        i = 0
+        for i < len(Network.peers) :
+            
+            chainId = Network.send.chainId(Network.peers[i])
+            if chainId = walletChainId :
+                
+                sameChainPeers.insert(len(sameChainPeers), Network.peers[i])
+                
+            else :
+                
+                
+                
     def verify_block(datas) :
         
         self.datas = datas
