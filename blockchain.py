@@ -47,7 +47,7 @@ class Algorithms :
             else :
                 
                 constantsresult = (self.constants["constant1"] *self.constants["constant2"] *self.constants["constant3"] *self.constants["constant4"] *self.constants["constant5"] *self.constants["constant6"] *self.constants["constant7"] *self.constants["constant8"])
-                return ("'datas': '" +(((datas -"A") +difficulty +"A") *password *constantsresult) +"'")
+                return ("'datas': '" +(chr((ord(datas) +difficulty) *password *constantsresult) +"'")
                 
         def decrypt(datas, password, difficulty) :
             
@@ -58,7 +58,7 @@ class Algorithms :
             else :
                 
                 constantsresult = (self.constants['constant1'] /self.constants['constant2'] /self.constants['constant3'] /self.constants['constant4'] /self.constants['constant5'] /self.constants['constant6'] /self.constants['constant7'] /self.constants['constant8'])
-                return ()
+                return ("'datas': '" +(chr(ord(datas) -difficulty) /password /password) +"'")
                 
     def scrypt(datas, password, difficulty, cpudifficulty, ramdifficulty) :
         
