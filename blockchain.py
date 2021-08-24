@@ -158,8 +158,8 @@ class Blockchain :
         self.block = []
         self.blocksnotvalidated = []
         self.blocksnumber = 0
-        self.peers = set([])
-        Blockchain.syncChain
+        syncChain
+        
     def create_transaction(transactionType, sender, receiver, coins, message) :
         
         self.hash = ""
@@ -211,6 +211,8 @@ class Blockchain :
         
         i = 0
         sameChainPeers = []
+        peersBlocks = []
+        peersBlocksVerifiee = {}
         for i < len(Network.peers) :
             
             chainId = Network.send.chainId(Network.peers[i])
@@ -276,6 +278,10 @@ class Node :
             
             client, address = issocket.accept()
             
+        
+        icsocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        icsocket.connect(peers.self.nodePeers)
+        
     def receivedDatas(datas) :
         
         datas = Algorithms.leaa.decrypt(datas, Blockchain.difficulty)
