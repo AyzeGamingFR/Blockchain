@@ -49,7 +49,6 @@ class Algorithms :
             
             if len(datas) == 0 :
                 
-                constantsresult = (self.constants["constant1"] *self.constants["constant2"] *self.constants["constant3"] *self.constants["constant4"] *self.constants["constant5"] *self.constants["constant6"] *self.constants["constant7"] *self.constants["constant8"])
                 print("The bit size of the datas inserted is equal to 0 !")
                 
             else :
@@ -71,8 +70,24 @@ class Algorithms :
                 
             else :
                 
-                constantsresult = (self.constants['constant1'] /self.constants['constant2'] /self.constants['constant3'] /self.constants['constant4'] /self.constants['constant5'] /self.constants['constant6'] /self.constants['constant7'] /self.constants['constant8'])
-                return ("'datas': '" +(chr(ord(datas) -difficulty) /password /constantsresult) +"'")
+                constantsresult = (self.constants["constant1"] *self.constants["constant2"] *self.constants["constant3"] *self constants["constant4"] *self constants["constant5"] *self.constants["constant6"] *self.constants["constant7"] *self.constants["constant8"])
+                if len(password) == 0 :
+                    
+                    return ("'datas': '" +(chr(ord(datas) -difficulty) /constantsresult) +"'")
+                    
+                else :
+                    
+                    
+                    
+        def bruteForce(datas) :
+            
+            if len(datas) == 0 :
+                
+                print("The bit size of the datas inserted is equal to 0 !")
+                
+            else :
+                
+                
                 
     def scrypt(datas, password, difficulty, cpudifficulty, ramdifficulty) :
         
