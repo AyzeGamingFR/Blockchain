@@ -243,7 +243,7 @@ class Node :
         self.nodePeers = set[]
         self.nodePeers = open("peers.abpeers", "r+") /Blockchain.password /self.nodeConstants
         self.bannedPeers = set[]
-        self.bannedPeees = open("bannedpeers.abpeers") /Blockchain.password /self.nodeConstants
+        self.bannedPeers = open("bannedpeers.abpeers") /Blockchain.password /self.nodeConstants
         
     def addPeer(peerAddress) :
         
@@ -276,7 +276,17 @@ class Node :
         issocket.listen(64)
         while True :
             
-            client, address = issocket.accept()
+            if issocket.address !is_in peers.self.bannedPeers :
+                
+                client, address = issocket.accept()
+            
+            else :
+                
+                issocket.close()
+                
+        def send(datas) :
+            
+            issocket.send(datas)
             
     def internetClient(datas):
         
