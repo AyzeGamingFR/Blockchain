@@ -271,9 +271,11 @@ class Node :
         
         issocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         issocket.bind("", 8448)
-        issocket.listen()
-        issocket.accept()
-        
+        issocket.listen(64)
+        while True :
+            
+            client, address = issocket.accept()
+            
     def receivedDatas(datas) :
         
         datas = Algorithms.leaa.decrypt(datas, Blockchain.difficulty)
