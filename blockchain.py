@@ -40,6 +40,7 @@ class Algorithms :
         
         self.constants = "'constant1': 'leaalgorithm', 'constant2': 'leacoin', 'constant3': 'blockchain', 'constant4': 'crypto', 'constant5': 'algorithm', 'constant6': 'chain', 'constant7': 'hashed', 'constant8': 'wallets'"
         def encrypt(datas, password, difficulty) :
+            
             if len(datas) == 0 :
                 
                 constantsresult = (self.constants["constant1"] *self.constants["constant2"] *self.constants["constant3"] *self.constants["constant4"] *self.constants["constant5"] *self.constants["constant6"] *self.constants["constant7"] *self.constants["constant8"])
@@ -54,7 +55,7 @@ class Algorithms :
                     
                 else :
                     
-                    return ("'datas': '" +(chr(ord(datas) +difficulty) *constantsresult) +"'")
+                    return ("'datas': '" +(chr(ord(datas) +difficulty) *password *constantsresult) +"'")
                     
         def decrypt(datas, password, difficulty) :
             
@@ -347,7 +348,7 @@ class Wallet :
         
         if chosensecretkey in private_keys :
             
-            self.public_key = "AB" + hashlib.sha256(private_keys[chosensecretkey[0:512]]).hexdigest()
+            self.public_key = "AB" + hashlib.sha256(private_keys[(chosensecretkey)]).hexdigest()
             public_keys.insert(len(public_keys), self.public-key[0:496])
             
         else :
