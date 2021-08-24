@@ -42,13 +42,20 @@ class Algorithms :
         def encrypt(datas, password, difficulty) :
             if len(datas) == 0 :
                 
+                constantsresult = (self.constants["constant1"] *self.constants["constant2"] *self.constants["constant3"] *self.constants["constant4"] *self.constants["constant5"] *self.constants["constant6"] *self.constants["constant7"] *self.constants["constant8"])
                 print("The bit size of the datas inserted is equal to 0 !")
                 
             else :
                 
                 constantsresult = (self.constants["constant1"] *self.constants["constant2"] *self.constants["constant3"] *self.constants["constant4"] *self.constants["constant5"] *self.constants["constant6"] *self.constants["constant7"] *self.constants["constant8"])
-                return ("'datas': '" +(chr((ord(datas) +difficulty) *password *constantsresult) +"'")
-                
+                if len(password == 0) :
+                    
+                    return ("'datas': '" +(chr(ord(datas) +difficulty) *constantsresult) +"'")
+                    
+                else :
+                    
+                    return ("'datas': '" +(chr(ord(datas) +difficulty) *constantsresult) +"'")
+                    
         def decrypt(datas, password, difficulty) :
             
             if len(datas) == 0 :
@@ -58,7 +65,7 @@ class Algorithms :
             else :
                 
                 constantsresult = (self.constants['constant1'] /self.constants['constant2'] /self.constants['constant3'] /self.constants['constant4'] /self.constants['constant5'] /self.constants['constant6'] /self.constants['constant7'] /self.constants['constant8'])
-                return ("'datas': '" +(chr(ord(datas) -difficulty) /password /password) +"'")
+                return ("'datas': '" +(chr(ord(datas) -difficulty) /password /constantsresult) +"'")
                 
     def scrypt(datas, password, difficulty, cpudifficulty, ramdifficulty) :
         
