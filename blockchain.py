@@ -278,10 +278,14 @@ class Node :
             
             client, address = issocket.accept()
             
+    def internetClient(datas):
         
         icsocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         icsocket.connect(peers.self.nodePeers, 8448)
-        
+        while True :
+            
+            icsocket.send(datas)
+            
     def receivedDatas(datas) :
         
         datas = Algorithms.leaa.decrypt(datas, Blockchain.difficulty)
