@@ -22,7 +22,7 @@ class Algorithms :
                     encrypted_datas += chr(ord(datas[i]) +difficulty)
                     i += 1
                     
-                return (encrypted_datas)
+                return ("{'datas': '" +encrypted_datas +"'}")
                 
         def decrypt(datas, difficulty) :
             
@@ -40,7 +40,7 @@ class Algorithms :
                     decrypted_datas += chr(ord(datas[i]) -difficulty)
                     i += 1
                     
-                return (decrypted_datas)
+                return ("{'datas': '" +decrypted_datas +"'}")
                 
     def leaa() :
         
@@ -56,11 +56,11 @@ class Algorithms :
                 constantsresult = (self.constants["constant1"] *self.constants["constant2"] *self.constants["constant3"] *self.constants["constant4"] *self.constants["constant5"] *self.constants["constant6"] *self.constants["constant7"] *self.constants["constant8"])
                 if len(password == 0) :
                     
-                    return ("'datas': '" +(chr(ord(datas) +difficulty) *constantsresult) +"'")
+                    return ("{'datas': '" +chr(ord(datas) +difficulty) *constantsresult +"'}")
                     
                 else :
                     
-                    return ("'datas': '" +(chr(ord(datas) +difficulty) *password *constantsresult) +"'")
+                    return ("{'datas': '" +chr(ord(datas) +difficulty) *password *constantsresult +"'}")
                     
         def decrypt(datas, password, difficulty) :
             
@@ -73,11 +73,11 @@ class Algorithms :
                 constantsresult = (self.constants["constant1"] *self.constants["constant2"] *self.constants["constant3"] *self constants["constant4"] *self constants["constant5"] *self.constants["constant6"] *self.constants["constant7"] *self.constants["constant8"])
                 if len(password) == 0 :
                     
-                    return ("'datas': '" +(chr(ord(datas) -difficulty) /constantsresult) +"'")
+                    return ("{'datas': '" +chr(ord(datas) -difficulty) /constantsresult +"'}")
                     
                 else :
                     
-                    
+                    return ("{'datas': '" +chr(ord(datas) -difficulty ) /password /constantsresult)+"'}")
                     
         def bruteForce(datas) :
             
@@ -87,8 +87,16 @@ class Algorithms :
                 
             else :
                 
-                
-                
+                i = 0
+                if !datas2.startWith("{'datas':") :""" doesn't start by {'datas'
+                    
+                    datas2 = datas /chr(i) /constantsresult
+                    i += 0
+                    
+                else :
+                    
+                    return ("{'datas': '" +datas +"'}")
+                    
     def scrypt(datas, password, difficulty, cpudifficulty, ramdifficulty) :
         
         self.cpudifficulty = cpudifficulty
