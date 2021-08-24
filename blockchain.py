@@ -15,9 +15,12 @@ class Algorithms :
                 
             else :
                 
-                for characters in datas :
+                datasSize = len(datas)
+                i = 0
+                for i < datasSize :
                     
-                    encrypted_datas += chr(ord(datas) +difficulty)
+                    encrypted_datas += chr(ord(datas[i]) +difficulty)
+                    i += 1
                     
                 return (encrypted_datas)
                 
@@ -30,9 +33,12 @@ class Algorithms :
                 
             else :
                 
-                for characters in datas :
+                datasSize = len(datas)
+                i = 0
+                for i < datasSize :
                     
-                    decrypted_datas += chr(ord(datas) -difficulty)
+                    decrypted_datas += chr(ord(datas[i]) -difficulty)
+                    i += 1
                     
                 return (decrypted_datas)
                 
