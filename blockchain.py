@@ -280,7 +280,7 @@ class Node :
             
         
         icsocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        icsocket.connect(peers.self.nodePeers)
+        icsocket.connect(peers.self.nodePeers, 8448)
         
     def receivedDatas(datas) :
         
