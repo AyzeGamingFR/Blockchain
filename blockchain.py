@@ -295,17 +295,6 @@ class Node :
         
         socket.send(nodes, "chainId")
         
-    def sendMessage(nodeDatas, encryption) :
-        
-        if encryption = 0 :
-            
-            send(Blockchain.init.peers, ("{'from': '" +Wallet.public_keys[0] +"', 'datas': '" +datas +"'}"))
-            
-        else :
-            
-            datas = Algorithms.leaa.encrypt(datas, Blockchain.difficulty)
-            send(Blockchain.init.peers, ("{'from' : '" +Wallet.public_keys[0] +"', ' datas': '" +datas +"'}"))
-            
     def internetServer() :
         
         issocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
