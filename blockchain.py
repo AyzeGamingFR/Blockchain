@@ -401,7 +401,7 @@ class Wallet :
         
         if chosensecretkey in private_keys :
             
-            self.public_key = "AB" + hashlib.sha256(private_keys[(chosensecretkey)]).hexdigest()
+            self.public_key = "AB" + hashlib.sha256(private_keys[(chosensecretkey)]).hexdigest()[0 : 498]
             public_keys.insert(len(public_keys), self.public_key)
             
         else :
