@@ -180,6 +180,7 @@ class Blockchain :
     blockChain = {}
     blockReward = 32
     constants = {"constant1": "blockchain", "constant2": "cryptocurrency", "constant3": "testchain", "constant4": "nfcs", "constant5": "tokens", "constant6": "proofofwork"}
+    minimumTransactionFees = 0.000001
     nextHalving = 2102400
     previousBlockHash = "0000000000000000000000000000000000000000000000000000000000000000"
     previousCoinTransactionHash = "0000000000000000000000000000000000000000000000000000000000000000"
@@ -197,7 +198,7 @@ class Blockchain :
         self.blocksnumber = 0
         syncChain
         
-    def create_transaction(transactionType, sender, receiver, coins, message) :
+    def create_transaction(transactionType, sender, receiver, coins, fees, message) :
         
         self.hash = ""
         if transactionType = 0 : """ if the transaction is sending some coins """
@@ -205,10 +206,21 @@ class Blockchain :
             self.prevhash = previousCoinTransactionHash
             self.sender = sender
             self.receiver = receiver
-            self.coins = coins
+            if Blockchain.coinsOfAddress(sender) <= coins :
+                
+                
+                
+            else :
+                
+                self.coins = coins
+                
             self.message = message
-            self.datas = ("{'prevtransactionhash': " +self.prevhash +", 'sender': '" +self.sender +"', 'receiver': '" +self.receiver +"', 'coins': " +self.coins +", 'message': '" +self.message +"'}")
-            self.hash = ord(self.datas *Wallet.public_keys[(sender)].privatekey +difficulty)
+            if fees < minimumTransactionFees :
+                
+                return()
+                
+            self.datas = ("{'prevtransactionhash': " +self.prevhash +", 'sender': '" +self.sender +"', 'receiver': '" +self.receiver +"', 'coins': " +self.coins +", 'fees': " +self.fees +"'message': '" +self.message +"'}")
+            self.hash = chr(ord(self.datas *Wallet.public_keys[(sender)].privatekey +difficulty))
             return (self.hash)
         
         elif transactionType = 1 : """ if the transaction is sending some tokens """
