@@ -140,7 +140,6 @@ class Algorithms :
                 
                 if difficulty == 0 < 0 :
                     
-                    """ sha256 algorith to do here """
                     return (hashlib.sha256(datas))
                 
                 else :
@@ -171,7 +170,6 @@ class Algorithms :
                 
                 if difficulty == 0 or < 0 :
                     
-                    """ sha512 algorithm to do here """
                     return (hashlib.sha512(datas))
                     
                 else :
