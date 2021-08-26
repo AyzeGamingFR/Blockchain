@@ -107,7 +107,7 @@ class Algorithms :
                 if !datas2.startWith("{'datas':") :
                     
                     datas2 = datas /chr(i) /constantsresult
-                    i += 0
+                    i += 1
                     
                 else :
                     
