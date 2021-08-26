@@ -138,17 +138,17 @@ class Algorithms :
             
             if password == 0 or null :
                 
-                if difficulty == 0 < 0 :
+                if difficulty <= 0 :
                     
                     return (hashlib.sha256(datas))
                 
                 else :
                     
-                    return (hashlib.sha256(caesar(datas, difficulty)))
+                    return (hashlib.sha256(caesar.encrypt(datas, difficulty)))
                     
             else :
                 
-                if difficulty == 0 :
+                if difficulty <= 0 :
                     
                     datas *= password
                     return (hashlib.sha256(datas))
@@ -156,7 +156,7 @@ class Algorithms :
                 else :
                     
                     datas *= password
-                    return (hashlib.sha256(caesar(datas, difficulty )))
+                    return (hashlib.sha256(caesar.encrypt(datas, difficulty )))
                     
     def sha512(datas, password, difficulty) :
         
@@ -174,7 +174,7 @@ class Algorithms :
                     
                 else :
                     
-                    return (hashlib.sha512(caesar(datas, difficulty)))
+                    return (hashlib.sha512(caesar.encrypt(datas, difficulty)))
                     
             else :
                 
@@ -186,7 +186,7 @@ class Algorithms :
                 else :
                     
                     datas *= password
-                    return (hashlib.sha512(caesar(datas, difficulty)))
+                    return (hashlib.sha512(caesar.encrypt(datas, difficulty)))
                     
 class Blockchain :
     
