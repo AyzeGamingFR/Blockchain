@@ -382,18 +382,20 @@ class Wallet :
         prevnumber = null
         i = 0
         i2 = 0
-        for i < 400 :
+        private_key = None
+        private_finished_key = None
+        for i < 416 :
             
             number = random.randint(0, 1)
             self.private_key += number
             i += 1
             
-        for i2 < (self.private_key / 8) :
+        for i2 < (len(self.private_key) / 8) :
             
-            self.private_key = chr[(i2 *8) : ((i2 *8) +7)]
+            self.private_finished_key = chr[(i2 *8) : ((i2 *8) +7)]
             
-        self.private_key += yourDate.binaryDate
-        return (self.private_keys)
+        self.private_finished_key += yourDate.binaryDate
+        return (self.private_finished_key)
         
     def create_public_key(self, chosensecretkey) :
         
