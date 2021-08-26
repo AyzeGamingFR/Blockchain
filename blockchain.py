@@ -405,5 +405,5 @@ class yourDate() :
     
     def binaryDate() :
         
-        return ("'year': " +ord(time.tm_year) +", 'month': " +ord(time.tm_month) +", 'day': " +ord(time.tm_day))
+        return ("'year': " +ord(time.tm_year) +", 'month': " +ord(time.tm_month) +", 'day': " +ord(time.tm_day) +", 'hour': " +ord(time.tm_hour) +", 'minute': " +ord(time.tm_min))
         
