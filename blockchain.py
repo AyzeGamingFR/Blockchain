@@ -386,7 +386,7 @@ class Wallet :
             self.private_key += number
             i += 1
             
-        self.privateKey += binaryDate
+        self.privateKey += yourDate.binaryDate
         return (self.private_keys)
         
     def create_public_key(self, chosensecretkey) :
@@ -399,3 +399,10 @@ class Wallet :
         else :
             
             print("Error, the chosen secret key is not in the private keys !")
+            
+class yourDate() :
+    
+    def binaryDate() :
+        
+        return (ord())
+        
