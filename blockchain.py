@@ -42,10 +42,10 @@ class Algorithms :
                     
                 return ("{'datas': '" +decrypted_datas +"'}")
                 
-    def leaa() :
+    def leya() :
         
         self.constants = "'constant1': 'leaalgorithm', 'constant2': 'leacoin', 'constant3': 'blockchain', 'constant4': 'crypto', 'constant5': 'algorithm', 'constant6': 'chain', 'constant7': 'hashed', 'constant8': 'wallets'"
-        def encrypt(datas, password, difficulty) :
+        def encrypt(datas, password, difficulty, ramPrice) :
             
             if len(datas) == 0 :
                 
@@ -56,8 +56,23 @@ class Algorithms :
                 constantsresult = (self.constants["constant1"] *self.constants["constant2"] *self.constants["constant3"] *self.constants["constant4"] *self.constants["constant5"] *self.constants["constant6"] *self.constants["constant7"] *self.constants["constant8"])
                 if len(password == 0) :
                     
-                    return ("{'datas': '" +chr(ord(datas) +difficulty) *constantsresult +"'}")
+                    if ramPrice <= 0 :
                     
+                        print ("Error during the usage of the leya algorithm !")
+                        
+                    elif ramPrice == 1
+                        
+                        return ("'datas': '" +(chr(ord(datas) +difficulty) *constantsresult) +"'")
+                        
+                    elif ramPrice > 1 :
+                        
+                        i = 0
+                        for i < len(datas) :
+                            
+                            ramDatas += datas[i] +datas[i]
+                            
+                        return ("'datas': '" +chr(ord(ramDatas) +difficulty) *constantsresult +"', 'ramPrice': " +ramPrice)
+                        
                 else :
                     
                     return ("{'datas': '" +chr(ord(datas) +difficulty) *password *constantsresult +"'}")
