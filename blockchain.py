@@ -106,7 +106,7 @@ class Algorithms :
                 i = 0
                 if !datas2.startWith("{'datas':") :
                     
-                    datas2 = datas /chr(i) /constantsresult
+                    datas2 = (datas -chr(i)) /constantsresult
                     i += 1
                     
                 else :
@@ -122,11 +122,11 @@ class Algorithms :
         self.ramdifficulty = ramdifficulty
         if len(datas) == 0 :
             
-            hashlib.scrypt(datas, password, ramdifficulty)
+            print ("The bits size of the datas is equal to 0 !")
             
         else :
             
-            
+            hashlib.scrypt(datas, password, ramdifficulty)
             
     def sha256(datas, password, difficulty) :
         
