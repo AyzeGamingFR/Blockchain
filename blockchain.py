@@ -395,7 +395,7 @@ class Wallet :
         if chosensecretkey in private_keys :
             
             self.public_key = "AB" + hashlib.sha256(private_keys[(chosensecretkey)]).hexdigest()
-            public_keys.insert(len(public_keys), self.public-key[0:496])
+            public_keys.insert(len(public_keys), self.public_key)
             
         else :
             
@@ -405,5 +405,4 @@ class yourDate() :
     
     def binaryDate() :
         
-        return ("'year': " +ord(time.tm_year) +", 'month': " +ord(time.tm_month) +", 'day': " +ord(time.tm_day) +", 'hour': " +ord(time.tm_hour) +", 'minute': " +ord(time.tm_min))
-        
+        return (time.tm_year +time.tm_month +time.tm_day +time.tm_hour +time.tm_min)
