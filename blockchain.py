@@ -88,7 +88,7 @@ class Algorithms :
             else :
                 
                 i = 0
-                if !datas2.startWith("{'datas':") :""" doesn't start by {'datas'
+                if !datas2.startWith("{'datas':") :
                     
                     datas2 = datas /chr(i) /constantsresult
                     i += 0
@@ -200,7 +200,7 @@ class Blockchain :
     def create_transaction(transactionType, sender, receiver, coins, message) :
         
         self.hash = ""
-        if transactionType = 0 :""" if the transaction is sending some coins """
+        if transactionType = 0 : """ if the transaction is sending some coins """
             
             self.prevhash = previousCoinTransactionHash
             self.sender = sender
@@ -211,7 +211,7 @@ class Blockchain :
             self.hash = ord(self.datas *Wallet.public_keys[(sender)].privatekey +difficulty)
             return (self.hash)
         
-        elif transactionType = 1 :
+        elif transactionType = 1 : """ if the transaction is sending some tokens """
             
             self.prevhash = previousCoinTransactionHash
             self.sender = sender
@@ -222,7 +222,7 @@ class Blockchain :
             self.hash = ord(self.datas *Wallet.public_keys[(sender)].privatekey +difficulty)
             return (self.hash)
             
-        elif transactionType = 2 :
+        elif transactionType = 2 : """ if the transaction is sending an nfc """
             
             self.hash = self.prevhash
             
