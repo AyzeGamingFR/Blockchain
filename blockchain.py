@@ -53,12 +53,13 @@ class Algorithms :
             else :
                 
                 constantsresult = (self.constants["constant1"] *self.constants["constant2"] *self.constants["constant3"] *self.constants["constant4"] *self.constants["constant5"] *self.constants["constant6"] *self.constants["constant7"] *self.constants["constant8"])
+                ramDatas = None
                 i = 0
                 if len(password) == 0 :
                     
                     if ramPrice <= 0 :
                     
-                        print ("Error during the usage of the leya algorithm !")
+                        print ("An error has appeard during the usage of the leya algorithm !")
                         
                     elif ramPrice == 1
                         
@@ -76,6 +77,7 @@ class Algorithms :
                     
                     if ramPrice <= 0 :
                         
+                        print("An error has occured during the usage of the leya algorithm !")
                         
                     elif ramPrice == 1 :
                         
@@ -89,7 +91,7 @@ class Algorithms :
                             
                         return ("{'datas': '" +(chr(ord(ramDatas) +difficulty) *password *constantsresult) +"'}")
                         
-        def decrypt(datas, password, difficulty) :
+        def decrypt(datas, password, difficulty, ramPrice) :
             
             if len(datas) == 0 :
                 
@@ -98,14 +100,43 @@ class Algorithms :
             else :
                 
                 constantsresult = (self.constants["constant1"] *self.constants["constant2"] *self.constants["constant3"] *self constants["constant4"] *self constants["constant5"] *self.constants["constant6"] *self.constants["constant7"] *self.constants["constant8"])
+                ramDatas = None
+                i = 0
                 if len(password) == 0 :
                     
-                    return ("{'datas': '" +chr(ord(datas) -difficulty) /constantsresult +"'}")
-                    
+                    if ramPrice <= 0:
+                        
+                        print ("An error has occured during the usage of the ley algorithm")
+                        
+                    elif ramPrice == 1 :
+                        
+                        return ("{'datas': '" +chr(ord(datas) -difficulty) /constantsresult +"'}")
+                        
+                    elif ramPrice < 1 :
+                        
+                        for i < len(datas) :
+                            
+                            ramDatas += datas[1[i]] +datas[1[i]]
+                            
+                        return (ramDatas)
                 else :
                     
-                    return ("{'datas': '" +chr(ord(datas) -difficulty ) /password /constantsresult)+"'}")
-                    
+                    if ramPrice <= 0 :
+                        
+                        print ("An error has occured during the usage of the ley algorithm !")
+                        
+                    elif ramPrice == 1 :
+                        
+                        return ("{'datas': '" +chr(ord(datas) -difficulty ) /password /constantsresult) +"'}")
+                        
+                    elif ramPrice < 1 :
+                        
+                        for i < len(datas) :
+                            
+                            ramDatas += datas[1[i]] +datas[1[i]]
+                            
+                        return ("{'datas': '" +(chr(ord(ramDatas) -difficulty) /password /constantsresult) +"'}")
+                        
         def bruteForce(datas) :
             
             if len(datas) == 0 :
