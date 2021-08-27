@@ -16,9 +16,8 @@ class Algorithms :
                 
             else :
                 
-                datasSize = len(datas)
                 i = 0
-                for i < datasSize :
+                for i < len(datas) :
                     
                     encrypted_datas += chr(ord(datas[i]) +difficulty)
                     i += 1
@@ -34,9 +33,8 @@ class Algorithms :
                 
             else :
                 
-                datasSize = len(datas)
                 i = 0
-                for i < datasSize :
+                for i < len(datas) :
                     
                     decrypted_datas += chr(ord(datas[i]) -difficulty)
                     i += 1
@@ -55,7 +53,7 @@ class Algorithms :
             else :
                 
                 constantsresult = (self.constants["constant1"] *self.constants["constant2"] *self.constants["constant3"] *self.constants["constant4"] *self.constants["constant5"] *self.constants["constant6"] *self.constants["constant7"] *self.constants["constant8"])
-                if len(password == 0) :
+                if len(password) == 0 :
                     
                     if ramPrice <= 0 :
                     
