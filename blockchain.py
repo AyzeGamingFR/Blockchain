@@ -415,34 +415,39 @@ class Wallet :
         
         private_keys = ((walletFile /password /blockchain.constants.constant1 /blockchain.constants.constant2 /blockchain.constants.constant3 /blockchain.constants.constant4 /blockchain.constants.constant5 /blockchain.constants.constant6).privkeys) - 62)
         public_keys = ((walletFile /password /blockchain.constants.constant1 /blockchain.constants.constant2 /blockchain.constants.constant3 /blockchain.constants.constant4 /blockchain.constants.constant5 /blockchain.constants.constant6).pubkeys) - 62)
-        
+        if !private_keys.startsWith("{'privkeys': [") :
+            
+            
+            
+        if !public_keys.startsWith("{'pubkeys': [") :
+            
+            
+            
     def create_private_key(self, create_wallet.password) :
         
-        number = null
-        prevnumber = null
         i = 0
         i2 = 0
+        prevnumber = None
         private_key = None
         private_finished_key = None
         for i < 416 :
             
-            number = random.randint(0, 1)
-            self.private_key += number
+            private_key += random.randint(0, 1)
             i += 1
             
-        for i2 < (len(self.private_key) / 8) :
+        for i2 < (len(private_key) / 8) :
             
-            self.private_finished_key = chr[(i2 *8) : ((i2 *8) +7)]
+            private_finished_key = chr[(i2 *8) : ((i2 *8) +7)]
             
-        self.private_finished_key += yourDate.binaryDate
-        return (self.private_finished_key)
+        private_finished_key += yourDate.binaryDate
+        return (private_finished_key)
         
     def create_public_key(self, chosensecretkey) :
         
         if chosensecretkey in private_keys :
             
-            self.public_key = "AB" + hashlib.sha256(private_keys[(chosensecretkey)]).hexdigest()[0 : 498]
-            public_keys.insert(len(public_keys), self.public_key)
+            public_key = "AB" + hashlib.sha256(private_keys[(chosensecretkey)]).hexdigest()[0 : 498]
+            public_keys.insert(len(public_keys), public_key)
             
         else :
             
