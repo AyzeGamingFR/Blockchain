@@ -44,6 +44,8 @@ class Algorithms :
     def leya() :
         
         self.constants = "'constant1': 'leaalgorithm', 'constant2': 'leacoin', 'constant3': 'blockchain', 'constant4': 'crypto', 'constant5': 'algorithm', 'constant6': 'chain', 'constant7': 'hashed', 'constant8': 'wallets'"
+        constantsresult = (self.constants["constant1"] *self.constants["constant2"] *self.constants["constant3"] *self.constants[] *self.constants[] *self.constants[] *self.constants[] *self.constants[])
+        
         def encrypt(datas, password, difficulty, ramPrice) :
             
             if len(datas) == 0 :
@@ -52,46 +54,15 @@ class Algorithms :
                 
             else :
                 
-                constantsresult = (self.constants["constant1"] *self.constants["constant2"] *self.constants["constant3"] *self.constants["constant4"] *self.constants["constant5"] *self.constants["constant6"] *self.constants["constant7"] *self.constants["constant8"])
-                ramDatas = None
-                i = 0
                 if len(password) == 0 :
                     
-                    if ramPrice <= 0 :
-                    
-                        print ("An error has appeard during the usage of the leya algorithm !")
-                        
-                    elif ramPrice == 1
-                        
-                        return ("'datas': '" +(chr(ord(datas) +difficulty) *constantsresult) +"'")
-                        
-                    elif ramPrice > 1 :
-                        
-                        for i < len(datas) :
-                            
-                            ramDatas += datas[i] +datas[i]
-                            
-                        return ("'datas': '" +(chr(ord(ramDatas) +difficulty) *constantsresult) +"', 'ramPrice': " +ramPrice)
+                    return ("'datas': '" +(chr(ord(datas) +difficulty) *constantsresult) +"'")
                         
                 else :
                     
-                    if ramPrice <= 0 :
-                        
-                        print("An error has occured during the usage of the leya algorithm !")
-                        
-                    elif ramPrice == 1 :
-                        
-                        return ("{'datas': '" +(chr(ord(datas) +difficulty) *password *constantsresult) +"'}")
-                        
-                    elif ramPrice > 1 :
-                        
-                        for i < len(datas) :
-                            
-                            ramDatas += datas[i] +datas[i]
-                            
-                        return ("{'datas': '" +(chr(ord(ramDatas) +difficulty) *password *constantsresult) +"'}")
-                        
-        def decrypt(datas, password, difficulty, ramPrice) :
+                    return ("{'datas': '" +(chr(ord(datas) +difficulty) *password *constantsresult) +"'}")
+                    
+        def decrypt(datas, password, difficulty) :
             
             if len(datas) == 0 :
                 
@@ -100,45 +71,21 @@ class Algorithms :
             else :
                 
                 constantsresult = (self.constants["constant1"] *self.constants["constant2"] *self.constants["constant3"] *self constants["constant4"] *self constants["constant5"] *self.constants["constant6"] *self.constants["constant7"] *self.constants["constant8"])
-                ramDatas = None
-                i = 0
                 if len(password) == 0 :
                     
-                    if ramPrice <= 0:
-                        
-                        print ("An error has occured during the usage of the ley algorithm")
-                        
-                    elif ramPrice == 1 :
-                        
-                        return ("{'datas': '" +chr(ord(datas) -difficulty) /constantsresult +"'}")
-                        
-                    elif ramPrice < 1 :
-                        
-                        for i < len(datas) :
-                            
-                            ramDatas += datas[1[i]] +datas[1[i]]
-                            
-                        return (ramDatas)
-                else :
+                    return ("{'datas': '" +chr(ord(datas) -difficulty) /constantsresult +"'}")
                     
-                    if ramPrice <= 0 :
-                        
-                        print ("An error has occured during the usage of the ley algorithm !")
-                        
-                    elif ramPrice == 1 :
-                        
-                        return ("{'datas': '" +chr(ord(datas) -difficulty ) /password /constantsresult) +"'}")
-                        
-                    elif ramPrice < 1 :
-                        
-                        for i < len(datas) :
-                            
-                            ramDatas += datas[1[i]] +datas[1[i]]
-                            
-                        return ("{'datas': '" +(chr(ord(ramDatas) -difficulty) /password /constantsresult) +"'}")
-                        
-        def bruteForce(datas) :
+                elif password == "unknown" :
+                    
+                    bruteForce(datas, difficulty)
+                    
+                elif len(password) > 0 AND password != "unknown" :
+                    
+                    return ("{'datas': '" +chr(ord(datas) -difficulty) /constantsresult +"'}")
+                    
+        def bruteForce(datas, difficulty) :
             
+            constantsresult = ()
             if len(datas) == 0 :
                 
                 print("The bit size of the datas inserted is equal to 0 !")
@@ -146,10 +93,11 @@ class Algorithms :
             else :
                 
                 i = 0
-                if !datas2.startWith("{'datas':") :
+                if !datas.startWith("{'datas':") :
                     
-                    datas2 = (datas -chr(i)) /constantsresult
+                    datas2 = ((datas -chr(i)) /constantsresult)
                     i += 1
+                    datas2 = ((datas *constantsresult) +chr(i))
                     
                 else :
                     
