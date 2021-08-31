@@ -244,18 +244,17 @@ class Blockchain :
             
             self.hash = self.prevhash
             
-    def create_block(previoushash, transactionsNumber, totalfees, message) :
+    def create_block(message) :
         
         self.number = (blocks+1)
-        self.hash = "0000000000000000000000000000000000000000000000000000000000000000"
-        self.prevhash = self.hash
-        self.txs = transactions
-        self.txsnumber = transactionsnumber
-        self.fees = totalfees
+        self.prevhash = previousBlockHash
+        self.txs = blockTransactions
+        self.txsnumber = blockTransactionsNumber
+        self.fees = totalFees
         self.message = message
         self.hash = hashlib.sha256("{'blknumb': " +self.number +", 'prevhash': '" +self.prevhash +"', 'transactions': " +self.txs +", 'transactionsnumber': " +self.txsnumber +", 'blockfees': " +self.fees +", 'message': '" +self.message +"'}").hexdigest()
         self.hash = (((self.hash -"A") +blockchain.difficulty) +"A")
-        self.prevhash = self.hash, self.txs = {}, self.txsnumber = 0, self.fees = 0
+        internet.issocket.send()
         
     def getBinaryDate() :
         
@@ -311,7 +310,7 @@ class Node :
         
     def chainId(nodes) :
         
-        socket.send(nodes, "chainId")
+        internetClient.send(nodes, "chainId")
         
     def internetServer() :
         
@@ -338,12 +337,16 @@ class Node :
         icsocket.connect(peers.self.nodePeers, 8448)
         while True :
             
+            icsocket.send()
+            
+        def send(datas) :
+            
             icsocket.send(datas)
             
     def receivedDatas(datas) :
         
-        datas = Algorithms.leaa.decrypt(datas, Blockchain.difficulty)
-        return (datas)
+        self.datas = Algorithms.leya.decrypt(datas, Blockchain.difficulty)
+        return (self.datas)
         
 class Wallet :
     
@@ -367,37 +370,39 @@ class Wallet :
         public_keys = ((walletFile /password /blockchain.constants.constant1 /blockchain.constants.constant2 /blockchain.constants.constant3 /blockchain.constants.constant4 /blockchain.constants.constant5 /blockchain.constants.constant6).pubkeys) - 62)
         if !private_keys.startsWith("{'privkeys': [") :
             
+            print("Error during the decryption of the private keys of the wallet !")
             
             
         if !public_keys.startsWith("{'pubkeys': [") :
             
+            print ("Error during the decryption of the public keys of the wallet !")
             
             
     def create_private_key(self, create_wallet.password) :
         
-        i = 0
-        i2 = 0
-        prevnumber = None
-        private_key = None
-        private_finished_key = None
-        for i < 416 :
+        self.i = 0
+        self.private_key = None
+        self.private_finished_key = None
+        for self.i < 416 :
             
-            private_key += random.randint(0, 1)
-            i += 1
+            self.private_key += random.randint(0, 1)
+            self.i += 1
             
-        for i2 < (len(private_key) / 8) :
+        for self.i2 < (len(private_key) / 8) :
             
-            private_finished_key = chr[(i2 *8) : ((i2 *8) +7)]
+            self.private_finished_key = chr[(i2 *8) : ((i2 *8) +7)]
+            self.i2 += 1
             
-        private_finished_key += yourDate.binaryDate
-        return (private_finished_key)
+        self.private_finished_key += yourDate.binaryDate
+        return (self.private_finished_key)
         
     def create_public_key(self, chosensecretkey) :
         
+        self.public_key = None
         if chosensecretkey in private_keys :
             
-            public_key = "AB" + hashlib.sha256(private_keys[(chosensecretkey)]).hexdigest()[0 : 498]
-            public_keys.insert(len(public_keys), public_key)
+            self.public_key = "AB" + hashlib.sha256(private_keys[(chosensecretkey)]).hexdigest()[0 : 498]
+            public_keys.insert(len(public_keys), self.public_key)
             
         else :
             
