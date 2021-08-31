@@ -249,11 +249,9 @@ class Blockchain :
         self.number = (blocks+1)
         self.prevhash = previousBlockHash
         self.txs = blockTransactions
-        self.txsnumber = blockTransactionsNumber
         self.fees = totalFees
         self.message = message
-        self.hash = hashlib.sha256("{'blknumb': " +self.number +", 'prevhash': '" +self.prevhash +"', 'transactions': " +self.txs +", 'transactionsnumber': " +self.txsnumber +", 'blockfees': " +self.fees +", 'message': '" +self.message +"'}").hexdigest()
-        self.hash = (((self.hash -"A") +blockchain.difficulty) +"A")
+        self.hash = Algorithms.sha256(Algorithms.caesar.encrypt("{'prevblknumb': " +self.number +", 'prevblkhash': '" +self.prevhash +", 'txs': " +self.txs +", 'blkfees': " +self.fees +", 'blkmsg': '" +self.message +"'}", difficulty))
         internet.issocket.send()
         
     def getBinaryDate() :
@@ -350,10 +348,11 @@ class Node :
         
 class Wallet :
     
-    walletFile = open("wallet.abdat", "r+")
-    walletNumber = 0
+    blockchainConstants = Blockchain.constants["constant1"] *Blockchain.constants["constant2"] *Blockchain.constants["constant3"] *Blockchain.constants["constant4"] *Blockchain.constants["constant5"] *Blockchain.constants["constant6"] *Blockchain.constants["constant7"] *Blockchain.constants["constant8"]
     private_keys = []
     public_keys = []
+    walletFile = open("wallet.abdat", "r+")
+    walletNumber = 0
     
     def create_wallet(password) :
         
@@ -361,17 +360,16 @@ class Wallet :
         self.password = password
         self.private_keys = private_keys
         self.public_keys = public_keys
-        self.datas = ((("'privkeys': [" +private_keys +", 'pubkeys': [" +public_keys +"]]") *password *blockchain.constants.constant1 *blockchain.constants.constant2 *blockchain.constants.constant3 *blockchain.constants.constant4 *blockchain.constants.constant5 *blockchain.constants.constant6) +62)
+        self.datas = ((("'privkeys': [" +private_keys +", 'pubkeys': [" +public_keys +"]]") *chr(ord(password) *ord(blockchainConstants)) *blockchainConstants) +62)
         walletNumber += 1
         
     def unlock_wallet(self, password) :
         
-        private_keys = ((walletFile /password /blockchain.constants.constant1 /blockchain.constants.constant2 /blockchain.constants.constant3 /blockchain.constants.constant4 /blockchain.constants.constant5 /blockchain.constants.constant6).privkeys) - 62)
-        public_keys = ((walletFile /password /blockchain.constants.constant1 /blockchain.constants.constant2 /blockchain.constants.constant3 /blockchain.constants.constant4 /blockchain.constants.constant5 /blockchain.constants.constant6).pubkeys) - 62)
+        private_keys = Algorithms.caesar.decrypt(chr(walletFile /(ord(password) *ord(blockchainConstants)) /ord(blockchainConstants)), 62)[privkeys]
+        public_keys =  Algorithms.caesar.decrypt(chr(walletFile /(ord(password) *ord(blockchainConstants)) /ord(blockchainConstants)), 62)[pubkeys]
         if !private_keys.startsWith("{'privkeys': [") :
             
             print("Error during the decryption of the private keys of the wallet !")
-            
             
         if !public_keys.startsWith("{'pubkeys': [") :
             
