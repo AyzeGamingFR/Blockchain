@@ -180,11 +180,13 @@ class Algorithms :
                     
 class Blockchain :
     
-    blocks = 0
     blockChain = {}
     blockReward = 32
+    blocks = 0
+    blockTime = 60
     constants = {"constant1": "blockchain", "constant2": "cryptocurrency", "constant3": "testchain", "constant4": "nfcs", "constant5": "tokens", "constant6": "proofofwork"}
-    minimumTransactionFees = 0.000001
+    minimumTransactionCoins = 0.0000000001
+    minimumTransactionFees = 0.0000000001
     nextHalving = 2102400
     previousBlockHash = "0000000000000000000000000000000000000000000000000000000000000000"
     previousCoinTransactionHash = "0000000000000000000000000000000000000000000000000000000000000000"
