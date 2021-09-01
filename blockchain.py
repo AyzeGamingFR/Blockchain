@@ -16,11 +16,10 @@ class Algorithms :
                 
             else :
                 
-                i = 0
-                for i < len(datas) :
+                enrypted_datas = ""
+                for char in datas :
                     
-                    encrypted_datas += chr(ord(datas[i]) +difficulty)
-                    i += 1
+                    encrypted_datas += chr(ord(char) +difficulty)
                     
                 return ("{'datas': '" +encrypted_datas +"'}")
                 
@@ -33,14 +32,13 @@ class Algorithms :
                 
             else :
                 
-                i = 0
-                for i < len(datas) :
+                encrypted_datas = ""
+                for char in datas :
                     
-                    decrypted_datas += chr(ord(datas[i]) -difficulty)
-                    i += 1
+                    encrypted_datas += chr(ord(chr) -difficulty)
                     
-                return ("{'datas': '" +decrypted_datas +"'}")
-                
+                return ("{'datas': '" +encrypted_datas +"'}")
+                    
     def leya() :
         
         self.constants = "'constant1': 'leaalgorithm', 'constant2': 'leacoin', 'constant3': 'blockchain', 'constant4': 'crypto', 'constant5': 'algorithm', 'constant6': 'chain', 'constant7': 'hashed', 'constant8': 'wallets'"
@@ -56,11 +54,17 @@ class Algorithms :
                 
                 if len(password) == 0 :
                     
-                    return ("'datas': '" +(chr(ord(datas) +difficulty) *constantsresult) +"'")
+                    if difficulty <= 0 :
+                        
+                        return ("'datas': '" +chr(ord(datas) *constantsresult) +"'")
+                        
+                    else :
+                        
+                        return ("{'datas': '" +chr((ord(datas) +difficulty) *ord(password) *ord(constantsresult)) +"'}")
                         
                 else :
                     
-                    return ("{'datas': '" +(chr(ord(datas) +difficulty) *password *constantsresult) +"'}")
+                    return ("{'datas': '" +(chr((ord(datas) +difficulty) *ord(password) *ord(constantsresult)) +"'}")
                     
         def decrypt(datas, password, difficulty) :
             
