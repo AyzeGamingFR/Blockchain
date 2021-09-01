@@ -189,9 +189,9 @@ class Blockchain :
     
     blockChain = {}
     blockChainId = 0
-    blockReward = 32
-    blocks = 0
     blockTime = 60
+    blocksNumber = 0
+    blocksReward = 32
     constants = {"constant1": "blockchain", "constant2": "cryptocurrency", "constant3": "testchain", "constant4": "nfcs", "constant5": "tokens", "constant6": "proofofwork"}
     minimumTransactionCoins = 0.0000000001
     minimumTransactionFees = 0.0000000001
@@ -200,7 +200,7 @@ class Blockchain :
     previousCoinTransactionHash = "0000000000000000000000000000000000000000000000000000000000000000"
     previousTokenTransactionHash = "0000000000000000000000000000000000000000000000000000000000000000"
     previousNfcTransactionHash = "0000000000000000000000000000000000000000000000000000000000000000"
-    transactions = {}
+    waitingTransactions = {}
     
     def init() :
         
@@ -264,7 +264,7 @@ class Blockchain :
         
     def getBinaryDate() :
         
-        binaryDate = (ord() +ord() +ord() +ord() +ord())
+        binaryDate = (ord(time.tm_year) +ord(time.tm_month) +ord(time.tm_day) +ord(time.tm_hour) +ord(time.tm_minute))
         return (binaryDate)
         
     def syncChain() :
@@ -288,9 +288,15 @@ class Blockchain :
                     
     def verify_block(datas) :
         
-        self.datas = datas
-        self.hash = (((self.hash +"A") -blockchain.difficulty) -"A")
-    
+        if datas["blknumb"] == blockchainSize +1 :
+            
+            self.datas = datas
+            self.hash = Algorithms.caesar.decrypt(self.datas, blockchainDifficulty)
+            
+        else :
+            
+            
+            
 class Gui :
     
     
