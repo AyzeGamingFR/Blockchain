@@ -123,38 +123,56 @@ class Algorithms :
             
         else :
             
-            return ("{'datas': '" +hashlib.scrypt(chr(ord(datas) +difficulty), password, ramdifficulty) +"'}")
+            return ("{'datas': '" +hashlib.scrypt(chr(ord(datas) +difficulty), password, ramdifficulty).hexdigest() +"'}")
             
-    def sha256(datas, password, difficulty) :
+    def sha256() :
         
-        if len(datas) == 0 :
+        def encrypt(datas, password, difficulty) :
             
-            print ("Error, the datas length is equal to 0 or null !")
-            
-        else :
-            
-            if password == 0 or null :
+            if len(datas) == 0 :
                 
-                if difficulty <= 0 :
-                    
-                    return (hashlib.sha256(datas))
+                print ("Error, the datas length is equal to 0 or null !")
                 
-                else :
-                    
-                    return (hashlib.sha256(caesar.encrypt(datas, difficulty)))
-                    
             else :
                 
-                if difficulty <= 0 :
+                if password == 0 or null :
                     
-                    datas *= password
-                    return (hashlib.sha256(datas))
-                    
+                    if difficulty <= 0 :
+                        
+                        return (hashlib.sha256(datas).hexdigest())
+                        
+                    else :
+                        
+                        return (hashlib.sha256(caesar.encrypt(datas, difficulty)).hexdigest())
+                        
                 else :
                     
-                    datas *= password
-                    return (hashlib.sha256(caesar.encrypt(datas, difficulty )))
-                    
+                    if difficulty <= 0 :
+                        
+                        datas *= password
+                        return (hashlib.sha256(datas).hexdigest())
+                        
+                    else :
+                        
+                        datas *= password
+                        return (hashlib.sha256(caesar.encrypt(datas, difficulty )).hexdigest())
+                        
+        def bruteForce(hash) :
+            
+            self.hash = hash
+            i = 0
+            datas = ""
+            hashedDatas = ""
+            if hashedDatas != self.hash :
+                
+                datas == chr(i)
+                hashedDatas = hashlib.sha256(datas).hexdigest()
+                i += 1
+                
+            else :
+                
+                return (datas)
+                
     def sha512(datas, password, difficulty) :
         
         if len(datas == 0) :
@@ -167,24 +185,28 @@ class Algorithms :
                 
                 if difficulty == 0 or < 0 :
                     
-                    return (hashlib.sha512(datas))
+                    return (hashlib.sha512(datas).hexdigest())
                     
                 else :
                     
-                    return (hashlib.sha512(caesar.encrypt(datas, difficulty)))
+                    return (hashlib.sha512(caesar.encrypt(datas, difficulty)).hexdigest())
                     
             else :
                 
                 if difficulty == 0 or < 0 :
                     
                     datas *= password
-                    return (hashlib.sha512(datas))
+                    return (hashlib.sha512(datas).hexdigest())
                     
                 else :
                     
                     datas *= password
-                    return (hashlib.sha512(caesar.encrypt(datas, difficulty)))
+                    return (hashlib.sha512(caesar.encrypt(datas, difficulty)).hexdigest())
                     
+        def bruteForce(hash) :
+            
+            
+            
 class Blockchain :
     
     blockChain = {}
