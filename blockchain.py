@@ -99,17 +99,20 @@ class Algorithms :
                 i = 0
                 if !datas.startWith("{'datas':") :
                     
-                    datas2 = ((datas -chr(i)) /constantsresult)
+                    datas2 = chr((ord(datas) *constantsresult) +ord(i))
                     i += 1
-                    datas2 = ((datas *constantsresult) +chr(i))
+                    datas2 = chr((ord(datas) -ord(i)) /ord(constantsresult)
                     
                 else :
                     
                     return ("{'datas': '" +datas +"'}")
                     
-    def scrypt(datas, password, difficulty, cpudifficulty, ramdifficulty) :
+    def leya2(datas, password, difficulty, ramdifficulty) :
         
-        self.cpudifficulty = cpudifficulty
+        
+        
+    def scrypt(datas, password, difficulty, ramdifficulty) :
+        
         self.datas = datas
         self.difficulty = difficulty
         self.password = password
@@ -120,13 +123,13 @@ class Algorithms :
             
         else :
             
-            hashlib.scrypt(datas, password, ramdifficulty)
+            return ("{'datas': '" +hashlib.scrypt(chr(ord(datas) +difficulty), password, ramdifficulty) +"'}")
             
     def sha256(datas, password, difficulty) :
         
         if len(datas) == 0 :
             
-            println("Error, the datas length is equal to 0 or null !")
+            print ("Error, the datas length is equal to 0 or null !")
             
         else :
             
@@ -156,7 +159,7 @@ class Algorithms :
         
         if len(datas == 0) :
             
-            print("Error, the datas length is equal to 0 or null !")
+            print ("Error, the datas length is equal to 0 or null !")
             
         else:
             
@@ -185,6 +188,7 @@ class Algorithms :
 class Blockchain :
     
     blockChain = {}
+    blockChainId = 0
     blockReward = 32
     blocks = 0
     blockTime = 60
