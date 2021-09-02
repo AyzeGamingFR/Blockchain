@@ -52,26 +52,22 @@ class Algorithms :
                 
             else :
                 
-                if len(password) == 0 :
+                if len(password) == 0  AND difficulty <= 0 :
                     
-                    if difficulty <= 0 :
-                        
-                        return ("'datas': '" +chr(ord(datas) *constantsresult) +"'")
-                        
-                    else :
-                        
-                        return ("{'datas': '" +chr((ord(datas) +difficulty) *ord(constantsresult)) +"'}")
-                        
-                else :
+                    return ("'datas': '" +chr(ord(datas) *ord(constantsresult)) +"'")
                     
-                    if difficulty <= 0 :
-                        
-                        return ("{'datas': '" +chr(ord(datas) *ord(password) *ord(constantsresult)) +"'}")
-                        
-                    else :
-                        
-                        return ("{'datas': '" +chr((ord(datas) +difficulty) *ord(password) *ord(constantsresult)) +"'}")
-                        
+                elif len(passsword) == 0 AND difficulty >= 1 :
+                    
+                    return ("{'datas': '" +chr((ord(datas) +difficulty) *ord(constantsresult)) +"'}")
+                    
+                elif len(password) != 0 AND difficulty == 0 :
+                    
+                    return ("{'datas': '" +chr(ord(datas) *ord(password) *ord(constantsresult)) +"'}")
+                    
+                elif len(password) != 0 AND difficulty <= 1 :
+                    
+                    return ("{'datas': '" +chr((ord(datas) +difficulty) *ord(password) *ord(constantsresult)) +"'}")
+                    
         def decrypt(datas, password, difficulty) :
             
             if len(datas) == 0 :
@@ -81,26 +77,22 @@ class Algorithms :
             else :
                 
                 constantsresult = (self.constants["constant1"] *self.constants["constant2"] *self.constants["constant3"] *self constants["constant4"] *self constants["constant5"] *self.constants["constant6"] *self.constants["constant7"] *self.constants["constant8"])
-                if len(password) == 0 :
+                if len(password) == 0 AND difficulty <= 0 :
                     
-                    if difficulty <= 0 :
-                        
-                        return ("{'datas': '" +chr(ord(datas) /ord(constantsresult)) +"'}")
-                        
-                    else :
-                        
-                        return("{'datas': '" +chr(ord(datas) /ord(constantsresult) -difficulty) +"'}")
-                        
-                else :
+                    return ("{'datas': '" +chr(ord(datas) /ord(constantsresult)) +"'}")
                     
-                    if difficulty <= 0 :
-                        
-                        return ("{'datas': '" +chr(ord(datas) /ord(constantsresult) /ord(password) +"'}")
-                        
-                    else :
-                        
-                        return ("{'datas': '" +chr(ord(datas) /ord(constantsresult) /ord(password) -difficulty) +"'}")
-                        
+                elif len(password) == 0 AND difficulty >= 1 :
+                    
+                    return("{'datas': '" +chr(ord(datas) /ord(constantsresult) -difficulty) +"'}")
+                    
+                elif len(password) != 0 AND difficulty <= 0 :
+                    
+                    return ("{'datas': '" +chr(ord(datas) /ord(constantsresult) /ord(password)) +"'}")
+                    
+                elif len(password) != 0 AND difficulty >= 1 :
+                    
+                    return ("{'datas': '" +chr(ord(datas) /ord(constantsresult) /ord(password) -difficulty) +"'}")
+                    
         def bruteForce(datas, difficulty) :
             
             constantsresult = ()
@@ -272,6 +264,7 @@ class Blockchain :
                 
             self.datas = ("{'prevtransactionhash': " +self.prevhash +", 'sender': '" +self.sender +"', 'receiver': '" +self.receiver +"', 'coins': " +self.coins +", 'fees': " +self.fees +"'message': '" +self.message +"'}")
             self.hash = chr(ord(self.datas *Wallet.public_keys[(sender)].privatekey +difficulty))
+            
             return (self.hash)
         
         elif transactionType = 1 : """ if the transaction is sending some tokens """
