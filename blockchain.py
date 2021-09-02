@@ -60,12 +60,18 @@ class Algorithms :
                         
                     else :
                         
-                        return ("{'datas': '" +chr((ord(datas) +difficulty) *ord(password) *ord(constantsresult)) +"'}")
+                        return ("{'datas': '" +chr((ord(datas) +difficulty) *ord(constantsresult)) +"'}")
                         
                 else :
                     
-                    return ("{'datas': '" +(chr((ord(datas) +difficulty) *ord(password) *ord(constantsresult)) +"'}")
-                    
+                    if difficulty <= 0 :
+                        
+                        return ("{'datas': '" +chr(ord(datas) *ord(password) *ord(constantsresult)) +"'}")
+                        
+                    else :
+                        
+                        return ("{'datas': '" +chr((ord(datas) +difficulty) *ord(password) *ord(constantsresult)) +"'}")
+                        
         def decrypt(datas, password, difficulty) :
             
             if len(datas) == 0 :
@@ -77,16 +83,24 @@ class Algorithms :
                 constantsresult = (self.constants["constant1"] *self.constants["constant2"] *self.constants["constant3"] *self constants["constant4"] *self constants["constant5"] *self.constants["constant6"] *self.constants["constant7"] *self.constants["constant8"])
                 if len(password) == 0 :
                     
-                    return ("{'datas': '" +chr(ord(datas) -difficulty) /constantsresult +"'}")
+                    if difficulty <= 0 :
+                        
+                        return ("{'datas': '" +chr(ord(datas) /ord(constantsresult)) +"'}")
+                        
+                    else :
+                        
+                        return("{'datas': '" +chr(ord(datas) /ord(constantsresult) -difficulty) +"'}")
+                        
+                else :
                     
-                elif password == "unknown" :
-                    
-                    bruteForce(datas, difficulty)
-                    
-                elif len(password) > 0 AND password != "unknown" :
-                    
-                    return ("{'datas': '" +chr(ord(datas) -difficulty) /constantsresult +"'}")
-                    
+                    if difficulty <= 0 :
+                        
+                        return ("{'datas': '" +chr(ord(datas) /ord(c)) +"'}")
+                        
+                    else :
+                        
+                        
+                        
         def bruteForce(datas, difficulty) :
             
             constantsresult = ()
@@ -209,7 +223,7 @@ class Algorithms :
             
 class Blockchain :
     
-    blockChain = {}
+    blockChain = set({})
     blockChainId = 0
     blockTime = 60
     blocksNumber = 0
@@ -225,6 +239,7 @@ class Blockchain :
     waitingTransactions = {}
     
     def init() :
+        
         
         self.actual_transactions = {}
         self.blockchain = {}
@@ -282,6 +297,7 @@ class Blockchain :
         self.fees = totalFees
         self.message = message
         self.hash = Algorithms.sha256(Algorithms.caesar.encrypt("{'prevblknumb': " +self.number +", 'prevblkhash': '" +self.prevhash +", 'txs': " +self.txs +", 'blkfees': " +self.fees +", 'blkmsg': '" +self.message +"'}", difficulty))
+        blockChain.insert(len(blockChain), self.hash)
         internet.issocket.send()
         
     def getBinaryDate() :
