@@ -95,11 +95,11 @@ class Algorithms :
                     
                     if difficulty <= 0 :
                         
-                        return ("{'datas': '" +chr(ord(datas) /ord(c)) +"'}")
+                        return ("{'datas': '" +chr(ord(datas) /ord(constantsresult) /ord(password) +"'}")
                         
                     else :
                         
-                        
+                        return ("{'datas': '" +chr(ord(datas) /ord(constantsresult) /ord(password) -difficulty) +"'}")
                         
         def bruteForce(datas, difficulty) :
             
