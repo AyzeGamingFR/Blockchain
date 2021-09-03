@@ -211,32 +211,42 @@ class Algorithms :
                 
 class Blockchain :
     
-    blockChain = set([])
-    blockChainId = 0
-    blockTime = 60
-    blocksNumber = 0
-    blocksReward = 32
-    constants = {"constant1": "blockchain", "constant2": "cryptocurrency", "constant3": "testchain", "constant4": "nfcs", "constant5": "tokens", "constant6": "proofofwork"}
-    minimumTransactionCoins = 0.0000000001
-    minimumTransactionFees = 0.0000000001
-    nextHalving = 2102400
-    previousBlockHash = "0000000000000000000000000000000000000000000000000000000000000000"
-    previousCoinTransactionHash = "0000000000000000000000000000000000000000000000000000000000000000"
-    previousTokenTransactionHash = "0000000000000000000000000000000000000000000000000000000000000000"
-    previousNfcTransactionHash = "0000000000000000000000000000000000000000000000000000000000000000"
-    waitingTransactions = {}
+    def blockchainDatas :
+        
+        blockChain = set([])
+        blockChainId = 0
+        blockTime = 60
+        blocksNumber = 0
+        blockChainPeers = set([])
+        blocksReward = 32
+        constants = {"constant1": "blockchain", "constant2": "cryptocurrency", "constant3": "testchain", "constant4": "nfcs", "constant5": "tokens", "constant6": "proofofwork"}
+        minimumTransactionCoins = 0.0000000001
+        minimumTransactionFees = 0.0000000001
+        nextHalving = 2102400
+        nodeDatas = {"name": "ABlockchain v1.0", "version": 1.0, "address": "127.0.0.1", "port": 15000, "maxcons": 32}
+        previousBlockHash = "0000000000000000000000000000000000000000000000000000000000000000"
+        previousCoinTransactionHash = "0000000000000000000000000000000000000000000000000000000000000000"
+        previousTokenTransactionHash = "0000000000000000000000000000000000000000000000000000000000000000"
+        previousNfcTransactionHash = "0000000000000000000000000000000000000000000000000000000000000000"
+        waitingTransactions = {}
     
     def init() :
         
-        
-        self.actual_transactions = {}
-        self.blockchain = {}
-        self.blockchainnumber = 0
-        self.block = []
-        self.blocksnotvalidated = []
-        self.blocksnumber = 0
-        syncChain
-        
+        self.actual_transactions = set({})
+        self.blockchain = set({})
+        self.chainId = 0
+        self.block = set({})
+        self.blocksNotValidated = set([])
+        self.blocksNumber = 0
+        Node.internetServer.start(blockchainDatas.nodeDatas{"maxcons"}, blockchainDatas.nodeDatas{"address"}, blockchainDatas.nodeDatas{"port"})
+        if len(blockchainDatas.blockChainPeers) == 0 :
+            
+            print ("There are not peers ")
+            
+        else :
+            
+            Node.internetClient.connect(blockchainDatas.blockchainPeers[0 : 15])
+            
     def create_transaction(transactionType, sender, receiver, coins, fees, message) :
         
         self.hash = ""
@@ -287,7 +297,7 @@ class Blockchain :
         self.message = message
         self.hash = Algorithms.leya.encrypt("{'prevblknumb': " +self.number +", 'prevblkhash': '" +self.prevhash +", 'txs': " +self.txs +", 'blkfees': " +self.fees +", 'blkmsg': '" +self.message +"'}", difficulty))
         blockChain.append(self.hash)
-        internet.issocket.send(self.hash)
+        node.internet.issocket.send(self.hash)
         
     def getBinaryDate() :
         
@@ -371,23 +381,16 @@ class Node :
             
             issocket.send(datas)
             
-    def internetClient(datas):
+    def internetClient():
         
         icsocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         icsocket.connect(peers.self.nodePeers, 8448)
-        while True :
+        def sendDatas(datasSent) :
             
-            icsocket.send()
+            icsocket.send(datasSent)
+            recv(datasReceived)
+            return (datasReceived)
             
-        def send(datas) :
-            
-            icsocket.send(datas)
-            
-    def receivedDatas(datas) :
-        
-        self.datas = Algorithms.leya.decrypt(datas, Blockchain.difficulty)
-        return (self.datas)
-        
 class Wallet :
     
     blockchainConstants = Blockchain.constants["constant1"] *Blockchain.constants["constant2"] *Blockchain.constants["constant3"] *Blockchain.constants["constant4"] *Blockchain.constants["constant5"] *Blockchain.constants["constant6"] *Blockchain.constants["constant7"] *Blockchain.constants["constant8"]
