@@ -21,7 +21,7 @@ class Algorithms :
                     
                     encrypted_datas += chr(ord(char) +difficulty)
                     
-                return ("{'datas': '" +encrypted_datas +"'}")
+                return (encrypted_datas)
                 
         def decrypt(datas, difficulty) :
             
@@ -37,7 +37,7 @@ class Algorithms :
                     
                     encrypted_datas += chr(ord(chr) -difficulty)
                     
-                return ("{'datas': '" +encrypted_datas +"'}")
+                return (encrypted_datas)
                     
     def leya() :
         
@@ -48,25 +48,25 @@ class Algorithms :
             
             if len(datas) == 0 :
                 
-                print("The bit size of the datas inserted is equal to 0 !")
+                print ("The bit size of the datas inserted is equal to 0 !")
                 
             else :
                 
                 if len(password) == 0  AND difficulty <= 0 :
                     
-                    return ("'datas': '" +chr(ord(datas) *ord(constantsresult)) +"'")
+                    return (chr(ord(datas) *ord(constantsresult)))
                     
                 elif len(passsword) == 0 AND difficulty >= 1 :
                     
-                    return ("{'datas': '" +chr((ord(datas) +difficulty) *ord(constantsresult)) +"'}")
+                    return (chr((ord(datas) +difficulty) *ord(constantsresult)))
                     
                 elif len(password) != 0 AND difficulty == 0 :
                     
-                    return ("{'datas': '" +chr(ord(datas) *ord(password) *ord(constantsresult)) +"'}")
+                    return (chr(ord(datas) *ord(password) *ord(constantsresult)))
                     
-                elif len(password) != 0 AND difficulty <= 1 :
+                elif len(password) != 0 AND difficulty >= 1 :
                     
-                    return ("{'datas': '" +chr((ord(datas) +difficulty) *ord(password) *ord(constantsresult)) +"'}")
+                    return (chr((ord(datas) +difficulty) *ord(password) *ord(constantsresult)))
                     
         def decrypt(datas, password, difficulty) :
             
@@ -79,19 +79,19 @@ class Algorithms :
                 constantsresult = (self.constants["constant1"] *self.constants["constant2"] *self.constants["constant3"] *self constants["constant4"] *self constants["constant5"] *self.constants["constant6"] *self.constants["constant7"] *self.constants["constant8"])
                 if len(password) == 0 AND difficulty <= 0 :
                     
-                    return ("{'datas': '" +chr(ord(datas) /ord(constantsresult)) +"'}")
+                    return (chr(ord(datas) /ord(constantsresult)))
                     
                 elif len(password) == 0 AND difficulty >= 1 :
                     
-                    return("{'datas': '" +chr(ord(datas) /ord(constantsresult) -difficulty) +"'}")
+                    return (chr(ord(datas) /ord(constantsresult) -difficulty))
                     
                 elif len(password) != 0 AND difficulty <= 0 :
                     
-                    return ("{'datas': '" +chr(ord(datas) /ord(constantsresult) /ord(password)) +"'}")
+                    return (chr(ord(datas) /ord(constantsresult) /ord(password)))
                     
                 elif len(password) != 0 AND difficulty >= 1 :
                     
-                    return ("{'datas': '" +chr(ord(datas) /ord(constantsresult) /ord(password) -difficulty) +"'}")
+                    return (chr(ord(datas) /ord(constantsresult) /ord(password) -difficulty))
                     
         def bruteForce(datas, difficulty) :
             
@@ -105,13 +105,13 @@ class Algorithms :
                 i = 0
                 if !datas.startWith("{'datas':") :
                     
-                    datas2 = chr((ord(datas) *constantsresult) +ord(i))
+                    datas2 = chr((ord(datas) *ord(constantsresult)) *ord(i) +ord(i))
                     i += 1
-                    datas2 = chr((ord(datas) -ord(i)) /ord(constantsresult)
+                    datas2 = chr((ord(datas) -ord(i)) /ord(constantsresult))
                     
                 else :
                     
-                    return ("{'datas': '" +datas +"'}")
+                    return (datas)
                     
     def leya2(datas, password, difficulty, ramdifficulty) :
         
@@ -129,7 +129,7 @@ class Algorithms :
             
         else :
             
-            return ("{'datas': '" +hashlib.scrypt(chr(ord(datas) +difficulty), password, ramdifficulty).hexdigest() +"'}")
+            return (hashlib.scrypt(datas, password, ramdifficulty).hexdigest())
             
     def sha256() :
         
@@ -171,7 +171,7 @@ class Algorithms :
             hashedDatas = ""
             if hashedDatas != self.hash :
                 
-                datas == chr(i)
+                datas = chr(i)
                 hashedDatas = hashlib.sha256(datas).hexdigest()
                 i += 1
                 
@@ -187,32 +187,36 @@ class Algorithms :
             
         else:
             
-            if password == 0 or null :
+            if password == 0 or null and difficulty <= 0 :
                 
-                if difficulty == 0 or < 0 :
-                    
-                    return (hashlib.sha512(datas).hexdigest())
-                    
-                else :
-                    
-                    return (hashlib.sha512(caesar.encrypt(datas, difficulty)).hexdigest())
-                    
-            else :
+                return (hashlib.sha512(datas).hexdigest())
+            elif password == 0 or null and difficulty >= 1 :
                 
-                if difficulty == 0 or < 0 :
-                    
-                    datas *= password
-                    return (hashlib.sha512(datas).hexdigest())
-                    
-                else :
-                    
-                    datas *= password
-                    return (hashlib.sha512(caesar.encrypt(datas, difficulty)).hexdigest())
-                    
+                return (hashlib.sha512(caesar.encrypt(datas, difficulty)).hexdigest())
+                
+            elif password != 0 and null and difficulty <= 0 :
+                
+                return (hashlib.sha512(chr(ord(datas) *ord(password))).hexdigest())
+                
+            elif password != 0 and null and difficulty >= 1 :
+                
+                return (hashlib.sha512(chr(ord(caesar.encrypt(datas, difficulty)) *ord(password))).hexdigest())
+                
         def bruteForce(hash) :
             
-            
-            
+            self.hash = hash
+            datas = ""
+            hashedDatas = ""
+            if hashedDatas != self.hash :
+                
+                datas = chr(i)
+                hashedDatas = hashliv.sha512(datas).hexdigest()
+                i += 1
+                
+            else :
+                
+                return ("{'datas': '" +datas +"', 'difficulty': " +datas['difficulty'] +", 'password': '" +chr(i) +"'")
+                
 class Blockchain :
     
     blockChain = set({})
