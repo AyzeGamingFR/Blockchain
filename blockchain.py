@@ -1,6 +1,7 @@
 import hashlib
 import random
 import socket
+import threading
 import time
 
 class Algorithms :
@@ -228,7 +229,7 @@ class Blockchain :
         previousCoinTransactionHash = "0000000000000000000000000000000000000000000000000000000000000000"
         previousTokenTransactionHash = "0000000000000000000000000000000000000000000000000000000000000000"
         previousNfcTransactionHash = "0000000000000000000000000000000000000000000000000000000000000000"
-        waitingTransactions = {}
+        waitingTransactions = set({})
     
     def init() :
         
@@ -323,40 +324,60 @@ class Blockchain :
                     
                     create_Block()
                     
-    def verify_block(datas) :
+    def verify_block(hash, diff) :
         
-        if datas["blknumb"] == blockchainSize +1 :
+        if hash["blknumb"] == blockchainSize +1 :
             
-            self.datas = datas
-            self.hash = Algorithms.caesar.decrypt(self.datas, blockchainDifficulty)
+            self.hash = hash
+            self.datas = Algorithms.leya.decode(Algorithms.caesar.decrypt(self.hash, blockchainDatas.blockchainDifficulty), blockchainDatas.blockchainDifficulty)
+            
+        else :
+            
+            self.hash = hash
+            self.datas = Algorithms.leya.decode(Algorithms.caesar.decrypt(self.hash, diff), diff)
+            
+class Gui :
+    
+    def guiDatas() :
+        
+        guiButtons = { "buttons": { "home": { "xSize": 100, "ySize": 100, "image": "" }, "discord": { "xSize": 50, "ySize": 50, "image": "" }, "instagram": { "xSize": 50, "ySize": 50, "image": "" }, "twitter": { "xSize": 50, "ySize": 50, "image": "" } } }
+        guiTexts = { "texts": { "de": { "home": "" }, "en": { "home": "Home" }, "fr": { "home": "Menu" }, "it": { "home": "" }, "sp": { "home": "" } } }
+        guiXSize = 100%
+        guiYSize = 100%
+        
+class Node :
+    
+    def nodeDatas() :
+        
+        def peers() :
+            
+            self.nodeConstants = (Blockchain.blockchainDatas.nodesconstants["constant1"] *Blockchain.blockchainDatas.nodesConstants["constant2"] *Blockchain.blockchainDatas.nodesConstants["constant3"] *Blockchain.blockchainDatas.nodesConstants["constant4"] *Blockchain.blockchainDatas.nodesConstants["constant5"] *Blockchain.blockchainDatas.nodesConstants["conqtant6"] *Blockchain.blockchainDatas.nodesConstants["constant7"] *Blockchain.blockchainDatas.nodesConstants["constant8"])
+            self.nodePeers = set([])
+            self.nodePeers = self.bannedPeers.append(chr(ord(open("peers.abpeers", "r+")) /ord(Blockchain.password) /ord(self.nodeConstants)))
+            self.bannedPeers = set([])
+            self.bannedPeers = self.bannedPeers.append(chr(ord(open("bannedpeers.abpeers")) /ord(Blockchain.password) /ord(self.nodeConstants)))
+        
+    def addPeer(peerDatas) :
+        
+        if peerDatas not in nodeDatas.peers.bannedPeers :
+            
+            nodeDatas.peers.nodePeers.append(peerDatas)
             
         else :
             
             
             
-class Gui :
-    
-    
-    
-class Node :
-    
-    def peers() :
+    def banPeer(peerDatas) :
         
-        self.nodeConstants = (Blockchain.nodesconstants["constant1"] *Blockchain.nodesConstants["constant2"] *Blockchain.nodesConstants["constant3"] *Blockchain.nodesConstants["constant4"] *Blockchain.nodesConstants["constant5"] *Blockchain.nodesConstants["conqtant6"] *Blockchain.nodesConstants["constant7"] *Blockchain.nodesConstants["constant8"])
-        self.nodePeers = set([])
-        self.nodePeers = open("peers.abpeers", "r+") /Blockchain.password /self.nodeConstants
-        self.bannedPeers = set[]
-        self.bannedPeers = open("bannedpeers.abpeers") /Blockchain.password /self.nodeConstants
-        
-    def addPeer(peerAddress) :
-        
-        peers.self.nodePeers.insert(len(peers.self.nodePeers), peerAddress)
-        
-    def banPeer(peerAddress) :
-        
-        peers.self.nodePeers.remove[peerAddress]
-        peers.self.bannedPeers.insert(len(peers.self.bannedPeers), peerAddress)
-        
+        if peerDatas in nodeDatas.peers.nodePeers :
+            
+            peers.self.nodePeers.remove(peerDatas)
+            peers.self.bannedPeers.append(peerDatas)
+            
+        else :
+            
+            nodeDatas.peers.bannedPeers.append(peerDatas)
+            
     def chainId() :
         
         internetClient.send(peers.nodePeers, "{'datas': 'request', 'message': 'chainId'}")
