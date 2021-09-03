@@ -223,7 +223,7 @@ class Blockchain :
         minimumTransactionCoins = 0.0000000001
         minimumTransactionFees = 0.0000000001
         nextHalving = 2102400
-        nodeDatas = {"name": "ABlockchain v1.0", "version": 1.0, "address": "127.0.0.1", "port": 15000, "maxcons": 32}
+        nodeDatas = {"name": "ABlockchain v1.0", "version": 1.0, "address": "127.0.0.1", "port": 8448, "maxcons": 32}
         previousBlockHash = "0000000000000000000000000000000000000000000000000000000000000000"
         previousCoinTransactionHash = "0000000000000000000000000000000000000000000000000000000000000000"
         previousTokenTransactionHash = "0000000000000000000000000000000000000000000000000000000000000000"
@@ -365,14 +365,14 @@ class Node :
     def internetServer() :
         
         issocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        issocket.bind("", 8448)
-        issocket.listen(64)
+        issocket.bind(Blockchain.blockchainDatas.nodeDatas["address"], 8448)
+        issocket.listen(Blockchain.blockchainDatas["maxcons"])
         while True :
             
             if issocket.address !is_in peers.self.bannedPeers :
                 
                 client, address = issocket.accept()
-            
+                
             else :
                 
                 issocket.close()
@@ -380,6 +380,7 @@ class Node :
         def send(datas) :
             
             issocket.send(datas)
+            return (recv())
             
     def internetClient():
         
@@ -414,7 +415,7 @@ class Wallet :
         public_keys =  Algorithms.caesar.decrypt(chr(walletFile /(ord(password) *ord(blockchainConstants)) /ord(blockchainConstants)), 62)[pubkeys]
         if !private_keys.startsWith("{'privkeys': [") :
             
-            print("Error during the decryption of the private keys of the wallet !")
+            print ("Error during the decryption of the private keys of the wallet !")
             
         if !public_keys.startsWith("{'pubkeys': [") :
             
@@ -426,12 +427,12 @@ class Wallet :
         self.i = 0
         self.private_key = None
         self.private_finished_key = None
-        for self.i < 416 :
+        for self.i != 416 :
             
             self.private_key += random.randint(0, 1)
             self.i += 1
             
-        for self.i2 < (len(private_key) / 8) :
+        for (len(private_key) / 8) != 52 :
             
             self.private_finished_key = chr[(i2 *8) : ((i2 *8) +7)]
             self.i2 += 1
