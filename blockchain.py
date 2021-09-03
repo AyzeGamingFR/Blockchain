@@ -44,7 +44,7 @@ class Algorithms :
         self.constants = "'constant1': 'leaalgorithm', 'constant2': 'leacoin', 'constant3': 'blockchain', 'constant4': 'crypto', 'constant5': 'algorithm', 'constant6': 'chain', 'constant7': 'hashed', 'constant8': 'wallets'"
         constantsresult = (self.constants["constant1"] *self.constants["constant2"] *self.constants["constant3"] *self.constants[] *self.constants[] *self.constants[] *self.constants[] *self.constants[])
         
-        def encrypt(datas, password, difficulty, ramPrice) :
+        def encrypt(datas, difficulty) :
             
             if len(datas) == 0 :
                 
@@ -52,21 +52,13 @@ class Algorithms :
                 
             else :
                 
-                if len(password) == 0  AND difficulty <= 0 :
+                if difficulty <= 0 :
                     
                     return (chr(ord(datas) *ord(constantsresult)))
                     
-                elif len(passsword) == 0 AND difficulty >= 1 :
+                elif difficulty >= 1 :
                     
-                    return (chr((ord(datas) +difficulty) *ord(constantsresult)))
-                    
-                elif len(password) != 0 AND difficulty == 0 :
-                    
-                    return (chr(ord(datas) *ord(password) *ord(constantsresult)))
-                    
-                elif len(password) != 0 AND difficulty >= 1 :
-                    
-                    return (chr((ord(datas) +difficulty) *ord(password) *ord(constantsresult)))
+                    return (chr((ord(datas) +difficulty) *ord(constantsresult) *ord(difficulty)))
                     
         def decrypt(datas, password, difficulty) :
             
@@ -219,7 +211,7 @@ class Algorithms :
                 
 class Blockchain :
     
-    blockChain = set({})
+    blockChain = set([])
     blockChainId = 0
     blockTime = 60
     blocksNumber = 0
@@ -293,9 +285,9 @@ class Blockchain :
         self.txs = blockTransactions
         self.fees = totalFees
         self.message = message
-        self.hash = Algorithms.sha256(Algorithms.caesar.encrypt("{'prevblknumb': " +self.number +", 'prevblkhash': '" +self.prevhash +", 'txs': " +self.txs +", 'blkfees': " +self.fees +", 'blkmsg': '" +self.message +"'}", difficulty))
-        blockChain.insert(len(blockChain), self.hash)
-        internet.issocket.send()
+        self.hash = Algorithms.leya.encrypt("{'prevblknumb': " +self.number +", 'prevblkhash': '" +self.prevhash +", 'txs': " +self.txs +", 'blkfees': " +self.fees +", 'blkmsg': '" +self.message +"'}", difficulty))
+        blockChain.append(self.hash)
+        internet.issocket.send(self.hash)
         
     def getBinaryDate() :
         
