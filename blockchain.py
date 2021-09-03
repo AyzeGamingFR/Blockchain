@@ -333,7 +333,7 @@ class Node :
     def peers() :
         
         self.nodeConstants = (Blockchain.nodesconstants["constant1"] *Blockchain.nodesConstants["constant2"] *Blockchain.nodesConstants["constant3"] *Blockchain.nodesConstants["constant4"] *Blockchain.nodesConstants["constant5"] *Blockchain.nodesConstants["conqtant6"] *Blockchain.nodesConstants["constant7"] *Blockchain.nodesConstants["constant8"])
-        self.nodePeers = set[]
+        self.nodePeers = set([])
         self.nodePeers = open("peers.abpeers", "r+") /Blockchain.password /self.nodeConstants
         self.bannedPeers = set[]
         self.bannedPeers = open("bannedpeers.abpeers") /Blockchain.password /self.nodeConstants
@@ -347,9 +347,10 @@ class Node :
         peers.self.nodePeers.remove[peerAddress]
         peers.self.bannedPeers.insert(len(peers.self.bannedPeers), peerAddress)
         
-    def chainId(nodes) :
+    def chainId() :
         
-        internetClient.send(nodes, "chainId")
+        internetClient.send(peers.nodePeers, "{'datas': 'request', 'message': 'chainId'}")
+        
         
     def internetServer() :
         
