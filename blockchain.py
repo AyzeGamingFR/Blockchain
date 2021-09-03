@@ -60,9 +60,9 @@ class Algorithms :
                     
                 elif difficulty >= 1 :
                     
-                    return (chr((ord(datas) +difficulty) *ord(constantsresult) *ord(difficulty)))
+                    return (chr((ord(datas) +difficulty) *ord(difficulty) *ord(constantsresult)))
                     
-        def decrypt(datas, password, difficulty) :
+        def decrypt(datas, difficulty) :
             
             if len(datas) == 0 :
                 
@@ -71,21 +71,13 @@ class Algorithms :
             else :
                 
                 constantsresult = (self.constants["constant1"] *self.constants["constant2"] *self.constants["constant3"] *self constants["constant4"] *self constants["constant5"] *self.constants["constant6"] *self.constants["constant7"] *self.constants["constant8"])
-                if len(password) == 0 AND difficulty <= 0 :
+                if difficulty <= 0 :
                     
                     return (chr(ord(datas) /ord(constantsresult)))
                     
-                elif len(password) == 0 AND difficulty >= 1 :
+                elif difficulty >= 1 :
                     
-                    return (chr(ord(datas) /ord(constantsresult) -difficulty))
-                    
-                elif len(password) != 0 AND difficulty <= 0 :
-                    
-                    return (chr(ord(datas) /ord(constantsresult) /ord(password)))
-                    
-                elif len(password) != 0 AND difficulty >= 1 :
-                    
-                    return (chr(ord(datas) /ord(constantsresult) /ord(password) -difficulty))
+                    return (chr(ord(datas) /ord(constantsresult) /difficulty -difficulty))
                     
         def bruteForce(datas, difficulty) :
             
@@ -99,18 +91,24 @@ class Algorithms :
                 i = 0
                 if !datas.startWith("{'datas':") :
                     
-                    datas2 = chr((ord(datas) *ord(constantsresult)) *ord(i) +ord(i))
+                    datas2 = chr(ord(datas) /ord(constantsresult) /i -i)
                     i += 1
-                    datas2 = chr((ord(datas) -ord(i)) /ord(constantsresult))
+                    datas2 = chr((ord(datas) +i) *i *ord(constantsresult))
                     
                 else :
                     
                     return (datas)
                     
-    def leya2(datas, password, difficulty, ramdifficulty) :
+    def leya2() :
         
-        
-        
+        def encrypt(datas, difficulty, password) :
+            
+            return (chr((ord(datas) *ord(password)) +difficulty))
+            
+        def decrypt(datas, difficulty, password) :
+            
+            return (chr((ord(datas) -difficulty) /ord(password)))
+            
     def scrypt(datas, password, difficulty, ramdifficulty) :
         
         self.datas = datas
@@ -249,44 +247,45 @@ class Blockchain :
             
             Node.internetClient.connect(blockchainDatas.blockchainPeers[0 : 15])
             
-    def create_transaction(transactionType, sender, receiver, coins, fees, message) :
+    def create_transaction(transactionType, sender, receiver, number, fees, message) :
         
         self.hash = ""
-        if transactionType = 0 : """ if the transaction is sending some coins """
+        self.fees = fees
+        if transactionType == 0 : """ if the transaction is sending some coins """
             
-            self.prevhash = previousCoinTransactionHash
-            self.sender = sender
-            self.receiver = receiver
-            if Blockchain.coinsOfAddress(sender) <= coins :
+            if Blockchain.coinsOfAddress(sender) <= (coins +self.fees) :
                 
-                
+                print ("Error during the usage of the create_transaction function, you don't have enough coins to send the transaction !")
                 
             else :
                 
-                self.coins = coins
-                
-            self.message = message
-            if fees < minimumTransactionFees :
-                
-                return()
-                
-            self.datas = ("{'prevtransactionhash': " +self.prevhash +", 'sender': '" +self.sender +"', 'receiver': '" +self.receiver +"', 'coins': " +self.coins +", 'fees': " +self.fees +"'message': '" +self.message +"'}")
-            self.hash = chr(ord(self.datas *Wallet.public_keys[(sender)].privatekey +difficulty))
+                if len(receiver) != (blockchainDatas.pubKeysBytesSize *8) :
+                    
+                    
+                    
+                else :
+                    
+                    self.sender = sender
+                    self.receiver = receiver
+                    self.coins = number
+                    self.message = message
+                    
+                    self.datas = "{'prevtxhash': '" +blockchainDatas.previousCoinTransactionHash +"', 'sender': '" +self.sender +"', 'receiver': '" +self.receiver +"', 'coins': " +self.coins +", 'message': '" +self.message +"'}")
+                    self.hash = Algorithms.leya.encode(chr(ord(self.datas) *ord(Wallet.public_keys[(sender)["privatekey"]])), difficulty)
+                    return (self.hash)
+                    
+        elif transactionType == 1 : """ if the transaction is sending some tokens """
             
-            return (self.hash)
-        
-        elif transactionType = 1 : """ if the transaction is sending some tokens """
-            
-            self.prevhash = previousCoinTransactionHash
+            self.prevhash = blockchainDatas.previousCoinTransactionHash
             self.sender = sender
             self.receiver = receiver
-            self.coins = minTransactionFees
-            self.message = ""
+            self.coins = number
+            self.message = message
             self.datas = ("{'prevtransactionhash': '" +self.prevhash +"', 'sender': '" +self.sender +"', 'receiver': '" +self.receiver +"', 'coins': " +self.coins +", 'message': '" +self.message +"'}")
             self.hash = ord(self.datas *Wallet.public_keys[(sender)].privatekey +difficulty)
             return (self.hash)
             
-        elif transactionType = 2 : """ if the transaction is sending an nfc """
+        elif transactionType == 2 : """ if the transaction is sending an nfc """
             
             self.hash = self.prevhash
             
