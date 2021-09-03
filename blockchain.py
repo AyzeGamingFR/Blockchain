@@ -1,4 +1,5 @@
 import hashlib
+import keyboard
 import random
 import socket
 import threading
