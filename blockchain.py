@@ -478,3 +478,12 @@ class yourDate() :
     def binaryDate() :
         
         return (time.tm_year +time.tm_month +time.tm_day +time.tm_hour +time.tm_min)
+    
+if keyboard.on_press_key("ctrl+alt+s") :
+    
+    Blockchain.blockchainDatas.verifyingBlocks = 0
+    Blockchain.blockchainDatas.miningBlocks = 0
+    Gui.stop
+    Node.threading.stopAll
+    Internet.internetClient.icsocket.stop
+    Internet.internetServer.issocket.stop
