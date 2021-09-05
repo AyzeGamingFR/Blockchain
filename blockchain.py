@@ -1,5 +1,6 @@
 import hashlib
 import keyboard
+import PySide6.QtCore
 import random
 import socket
 import threading
@@ -340,10 +341,14 @@ class Gui :
     
     def guiDatas() :
         
-        guiButtons = { "buttons": { "home": { "xSize": 100, "ySize": 100, "image": "" }, "discord": { "xSize": 50, "ySize": 50, "image": "" }, "instagram": { "xSize": 50, "ySize": 50, "image": "" }, "twitter": { "xSize": 50, "ySize": 50, "image": "" } } }
+        guiButtons = { "buttons": { "home": { "xSize": 100, "ySize": 100, "image": "" }, "addresses": { "xSize": 50, "ySize": 50, "image": "" }, "discord": { "xSize": 50, "ySize": 50, "image": "" }, "instagram": { "xSize": 50, "ySize": 50, "image": "" }, "twitter": { "xSize": 50, "ySize": 50, "image": "" } } }
         guiTexts = { "texts": { "de": { "home": "" }, "en": { "home": "Home" }, "fr": { "home": "Menu" }, "it": { "home": "" }, "sp": { "home": "" } } }
         guiXSize = 100%
         guiYSize = 100%
+        
+    def addresses() :
+        
+        
         
 class Node :
     
