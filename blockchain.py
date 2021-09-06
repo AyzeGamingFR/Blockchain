@@ -290,7 +290,7 @@ class Blockchain :
             
             self.hash = self.prevhash
             
-    def create_block(message) :
+    def create_block(authorAddress, message) :
         
         self.number = (blocks+1)
         self.prevhash = previousBlockHash
@@ -298,8 +298,22 @@ class Blockchain :
         self.fees = totalFees
         self.message = message
         self.hash = Algorithms.leya.encrypt("{'prevblknumb': " +self.number +", 'prevblkhash': '" +self.prevhash +", 'txs': " +self.txs +", 'blkfees': " +self.fees +", 'blkmsg': '" +self.message +"'}", difficulty))
-        blockChain.append(self.hash)
-        node.internet.issocket.send(self.hash)
+        Algorithms.leya.bruteForce(self.hash)
+        
+    def create_nfc(authorAddress, fileType, file) :
+        
+        self.author = authorAddress
+        self.fileType = fileType
+        self.fileDatas = file
+        
+    def create_token(authorAddress, tokenDescription, tokenStartingNumber, tokenGlobal, tokenSystem, tokenMaxNumber) :
+        
+        self.author = authorAddress """ the ayzelyc blockchain address of the token author """
+        self.tkDescription = tokenDescription """ the description of the token """
+        self.tkStartNumb = tokenStartingNumber """ the number of tokens when he's created """
+        self.tkGlob = tokenGlobal """ if the token is gived after each transaction / each block mined ... """
+        self.tkSystem = tokenSystem """ if the token is under a POW / POS / other rewarding system """
+        self.tkMaxNumb = tokenMaxNumber """ the maximal number of tokens """
         
     def getBinaryDate() :
         
