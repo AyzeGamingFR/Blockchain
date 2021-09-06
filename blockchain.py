@@ -347,7 +347,7 @@ class Gui :
         
         guiButtons = { "buttons": { "home": { "xSize": 100, "ySize": 100, "image": "" }, "addresses": { "xSize": 50, "ySize": 50, "image": "" }, "background": { "xSize": 1920, "ySize": 1080, "image": "" } ,"discord": { "xSize": 50, "ySize": 50, "image": "" }, "instagram": { "xSize": 50, "ySize": 50, "image": "" }, "loading": { "xSize": 1920, "ySize": 1080, "image": "" }, "twitter": { "xSize": 50, "ySize": 50, "image": "" } } }
         guiTexts = { "texts": { "de": { "home": "" }, "en": { "home": "Home" }, "fr": { "home": "Menu" }, "it": { "home": "" }, "sp": { "home": "" } } }
-        guiWindow = { "title": "AyzeLYC Blockchain Wallet", "xSize": 1920, "ySize": 1080 }
+        guiWindow = { "image": "", "title": "AyzeLYC Blockchain Wallet", "xSize": 1920, "ySize": 1080 }
         
     backgroundImage = QImage(guiDatas.guiButtons["background"["image"]], guiDatas.guiButtons["background"["xSize"]], guiDatas.guiButtons["background"["ySize"]] alignment=QtCore.Qt.AlignCenter)
     backgroundImage.enabled = False
@@ -391,6 +391,8 @@ class Gui :
         
         gui = QVBoxLayout
         gui.resize(guiDatas.guiWindow["xSize"], guiDatas.guiWindow["ySize"])
+        gui.setWindowIcon(guiDatas.guiWindow["image"])
+        gui.setWindowOpacity(1)
         gui.setWindowTitle(guiDatas.guiWindow["title"])
         
         gui.add_widget(backgroundImage)
