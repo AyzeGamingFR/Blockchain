@@ -349,10 +349,12 @@ class Gui :
         guiTexts = { "texts": { "de": { "home": "" }, "en": { "home": "Home" }, "fr": { "home": "Menu" }, "it": { "home": "" }, "sp": { "home": "" } } }
         guiWindow = { "title": "AyzeLYC Blockchain Wallet", "xSize": 1920, "ySize": 1080 }
         
-    backgroundImage = QPushImage("./images/background.jpg")
+    backgroundImage = QPushImage("./images/background.jpg", alignment=QtCore.Qt.AlignCenter)
     backgroundImage.enabled = False
-    loadingImage = QPushImage("./images/loading.jpg")
+    backgroundImage.resize(1920, 1080)
+    loadingImage = QPushImage("./images/loading.jpg", alignment=QtCore.Qt.AlignCenter)
     loadingImage.enabled = True
+    loadingImage.resize(1920, 1080)
     
     homeButton = QPushButton("Home")
     homeButton.enabled = False
