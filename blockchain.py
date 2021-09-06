@@ -19,7 +19,6 @@ class Algorithms :
                 
             else :
                 
-                enrypted_datas = ""
                 for char in datas :
                     
                     encrypted_datas += chr(ord(char) +difficulty)
