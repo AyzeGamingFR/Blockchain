@@ -351,10 +351,8 @@ class Gui :
         
     backgroundImage = QPushImage("./images/background.jpg", alignment=QtCore.Qt.AlignCenter)
     backgroundImage.enabled = False
-    backgroundImage.resize(1920, 1080)
     loadingImage = QPushImage("./images/loading.jpg", alignment=QtCore.Qt.AlignCenter)
     loadingImage.enabled = True
-    loadingImage.resize(1920, 1080)
     
     homeButton = QPushButton("Home")
     homeButton.enabled = False
@@ -392,6 +390,9 @@ class Gui :
         socialNetworksButton.enabled = True
         
         gui = QVBoxLayout
+        gui.resize(1920, 1080)
+        gui.setWindowTitle(guiDatas.guiWindow["title"])
+        
         gui.add_widget(backgroundImage)
         gui.add_widget(loadingImage)
         
@@ -408,6 +409,8 @@ class Gui :
         gui.add_widget(discordButton)
         gui.add_widget(instagramButton)
         gui.add_widget(twitterButton)
+        
+        gui.show()
         
         when filesButton.clicked :
             
