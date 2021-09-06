@@ -8,7 +8,7 @@ import time
 
 class Algorithms :
     
-    def caesar() :
+    class caesar() :
         
         def encrypt(datas, difficulty) :
             
@@ -42,7 +42,7 @@ class Algorithms :
                     
                 return (encrypted_datas)
                     
-    def leya() :
+    class leya() :
         
         self.constants = "'constant1': 'leaalgorithm', 'constant2': 'leacoin', 'constant3': 'blockchain', 'constant4': 'crypto', 'constant5': 'algorithm', 'constant6': 'chain', 'constant7': 'hashed', 'constant8': 'wallets'"
         constantsresult = (self.constants["constant1"] *self.constants["constant2"] *self.constants["constant3"] *self.constants[] *self.constants[] *self.constants[] *self.constants[] *self.constants[])
@@ -100,7 +100,7 @@ class Algorithms :
                     
                     return (datas)
                     
-    def leya2() :
+    class leya2() :
         
         def encrypt(datas, difficulty, password) :
             
@@ -124,7 +124,7 @@ class Algorithms :
             
             return (hashlib.scrypt(datas, password, ramdifficulty).hexdigest())
             
-    def sha256() :
+    class sha256() :
         
         def encrypt(datas, password, difficulty) :
             
@@ -172,7 +172,7 @@ class Algorithms :
                 
                 return (datas)
                 
-    def sha512(datas, password, difficulty) :
+    class sha512(datas, password, difficulty) :
         
         if len(datas == 0) :
             
