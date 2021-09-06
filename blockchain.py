@@ -345,13 +345,13 @@ class Gui :
         
     def guiDatas() :
         
-        guiButtons = { "buttons": { "home": { "xSize": 100, "ySize": 100, "image": "" }, "addresses": { "xSize": 50, "ySize": 50, "image": "" }, "discord": { "xSize": 50, "ySize": 50, "image": "" }, "instagram": { "xSize": 50, "ySize": 50, "image": "" }, "twitter": { "xSize": 50, "ySize": 50, "image": "" } } }
+        guiButtons = { "buttons": { "home": { "xSize": 100, "ySize": 100, "image": "" }, "addresses": { "xSize": 50, "ySize": 50, "image": "" }, "background": { "xSize": 1920, "ySize": 1080, "image": "" } ,"discord": { "xSize": 50, "ySize": 50, "image": "" }, "instagram": { "xSize": 50, "ySize": 50, "image": "" }, "loading": { "xSize": 1920, "ySize": 1080, "image": "" }, "twitter": { "xSize": 50, "ySize": 50, "image": "" } } }
         guiTexts = { "texts": { "de": { "home": "" }, "en": { "home": "Home" }, "fr": { "home": "Menu" }, "it": { "home": "" }, "sp": { "home": "" } } }
         guiWindow = { "title": "AyzeLYC Blockchain Wallet", "xSize": 1920, "ySize": 1080 }
         
-    backgroundImage = QPushImage("./images/background.jpg", alignment=QtCore.Qt.AlignCenter)
+    backgroundImage = QImage(guiDatas.guiButtons["background"["image"]], guiDatas.guiButtons["background"["xSize"]], guiDatas.guiButtons["background"["ySize"]] alignment=QtCore.Qt.AlignCenter)
     backgroundImage.enabled = False
-    loadingImage = QPushImage("./images/loading.jpg", alignment=QtCore.Qt.AlignCenter)
+    loadingImage = QImage(guiDatas.guiButtons["loading"["image"]], guiDatas.guiButtons["loading"["xSize"]], guiDatas.guiButtons["loading"["ySize"]] ,alignment=QtCore.Qt.AlignCenter)
     loadingImage.enabled = True
     
     homeButton = QPushButton("Home")
@@ -390,7 +390,7 @@ class Gui :
         socialNetworksButton.enabled = True
         
         gui = QVBoxLayout
-        gui.resize(1920, 1080)
+        gui.resize(guiDatas.guiWindow["xSize"], guiDatas.guiWindow["ySize"])
         gui.setWindowTitle(guiDatas.guiWindow["title"])
         
         gui.add_widget(backgroundImage)
