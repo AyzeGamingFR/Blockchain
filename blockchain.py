@@ -343,13 +343,148 @@ class Gui :
         
         guiButtons = { "buttons": { "home": { "xSize": 100, "ySize": 100, "image": "" }, "addresses": { "xSize": 50, "ySize": 50, "image": "" }, "discord": { "xSize": 50, "ySize": 50, "image": "" }, "instagram": { "xSize": 50, "ySize": 50, "image": "" }, "twitter": { "xSize": 50, "ySize": 50, "image": "" } } }
         guiTexts = { "texts": { "de": { "home": "" }, "en": { "home": "Home" }, "fr": { "home": "Menu" }, "it": { "home": "" }, "sp": { "home": "" } } }
-        guiXSize = 100%
-        guiYSize = 100%
+        guiWindow = { "title": "AyzeLYC Blockchain Wallet", "xSize": 1920, "ySize": 1080 }
         
-    def addresses() :
+    backgroundImage = QPushImage("./images/background.jpg")
+    backgroundImage.enabled = False
+    loadingImage = QPushImage("./images/loading.jpg")
+    loadingImage.enabled = True
+    
+    homeButton = QPushButton("Home")
+    homeButton.enabled = False
+    addressesButton = QPushButton("Addresses")
+    addressesButton.enabled = False
+    filesButton = QPushButton("Files")
+    filesButton.enabled = False
+    transactionsButton = QPushButton("Transactions")
+    transactionsButton.enabled = False
+    parametersButton = QPushButton("Parameters")
+    parametersButton.enabled = False
+    peersButton = QPushButton("Peers")
+    peersButton.enabled = False
+    
+    socialNetworksButton = QPushButton("Social networks")
+    discordButton = QPushButton("Discord")
+    discordButton.enabled = False
+    instagramButton = QPushButton("Instagram")
+    instagramButton.enabled = False
+    twitterButton = QPushButton("Twitter")
+    twitterButton.enabled = False
+    
+    when Blockchain.blockchainDatas.syncedChain = 1 :
         
+        backgroundImage.enabled = True
+        loadingImage.enabled = False
         
+        homeButton.enabled = True
+        addressesButton.enabled = True
+        filesButton.enabled = True
+        transactionsButton.enabled = True
+        parametersButton.enabled = True
+        peersButton.enabled = True
+        sendButton.enabled = True
+        socialNetworksButton.enabled = True
         
+        gui = QVBoxLayout
+        gui.add_widget(backgroundImage)
+        gui.add_widget(loadingImage)
+        
+        gui.add_widget(homeButton)
+        gui.add_widget(addressesButton)
+        gui.add_widget(commandLineButton)
+        gui.add_widget(commandLineLine)
+        gui.add_widget(commandLineOutputs)
+        gui.add_widget(transactionsButton)
+        gui.add_widget(parametersButton)
+        gui.add_widget(peersButton)
+        gui.add_widget(sendButton)
+        gui.add_widget(socialNetworksButton)
+        gui.add_widget(discordButton)
+        gui.add_widget(instagramButton)
+        gui.add_widget(twitterButton)
+        
+        when filesButton.clicked :
+            
+            if guiDatas.page = 1 :
+                
+                
+                
+            else :
+                
+                guiDatas.page = 1
+                
+        when parametersButton.clicked :
+            
+            if guiDatas.page = 2 :
+                
+                
+                
+            else :
+                
+                guiDatas.page = 2
+                
+        when othersButton.clicked :
+            
+            if guiDatas.page = 3 :
+                
+                
+                
+            else :
+                
+                guiDatas.page = 3
+                commandLineOutputs.enabled = True
+                commandLineLine.enabled = True
+                
+        when homeButton.clicked :
+            
+            if guiDatas.page = 4 :
+                
+                
+                
+            else :
+                
+                guiDatas.page = 4
+                
+        when sendButton.clicked :
+            
+            if guiDatas.page = 5 :
+               
+                
+                
+            else :
+                
+                guiDatas.page = 5
+                
+        when addressesButton.clicked :
+            
+            if guiDatas.page = 6 :
+                
+                
+                
+            else :
+                
+                guiDatas.page = 6
+                
+        when transactionsButton.clicked :
+            
+            if guiDatas.page = 7 :
+                
+                
+                
+            else :
+                
+                guiDatas.page = 7
+                
+        when socialNetworksButton.clicked :
+            
+            if guiDatas.page = 8 :
+                
+                
+                
+            else :
+                
+                guiDatas.page = 8
+                
 class Node :
     
     def nodeDatas() :
