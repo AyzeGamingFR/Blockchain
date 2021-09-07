@@ -213,43 +213,32 @@ class Blockchain :
     
     def blockchainDatas :
         
-        blockChain = set([])
-        blockChainId = 0
-        blockTime = 60
-        blocksNumber = 0
-        blockChainPeers = set([])
-        blocksReward = 32
+        blockchainInfos = { "chainid": 0, "blkNumber": 0, "blkReward": 32, "blkTime": 60, "minTxCoins": 0.00000001, "minTxFees": 0.00000001, "halvEach": 2102400, "prevBlkHash": "0000000000000000000000000000000000000000000000000000000000000000", "prevCoinTxHash": "0000000000000000000000000000000000000000000000000000000000000000", "prevNfcHash": "0000000000000000000000000000000000000000000000000000000000000000", "prevTkHash": "0000000000000000000000000000000000000000000000000000000000000000" }
+        chain = []
+        peers = []
         constants = {"constant1": "blockchain", "constant2": "cryptocurrency", "constant3": "testchain", "constant4": "nfcs", "constant5": "tokens", "constant6": "proofofwork"}
-        minimumTransactionCoins = 0.0000000001
-        minimumTransactionFees = 0.0000000001
-        nextHalving = 2102400
         nodeDatas = {"name": "ABlockchain v1.0", "version": 1.0, "address": "127.0.0.1", "port": 8448, "maxcons": 32}
-        previousBlockHash = "0000000000000000000000000000000000000000000000000000000000000000"
-        previousCoinTransactionHash = "0000000000000000000000000000000000000000000000000000000000000000"
-        previousTokenTransactionHash = "0000000000000000000000000000000000000000000000000000000000000000"
-        previousNfcTransactionHash = "0000000000000000000000000000000000000000000000000000000000000000"
-        waitingTransactions = set({})
+        waitingTransactions = []
     
     def init() :
         
-        self.actual_transactions = set({})
-        self.blockchain = set({})
-        self.chainId = 0
+        self.unspendTxs = set({})
+        self.blkchain = set({})
+        self.chainId = blockchainDatas.blockchainInfos["chainId"]
         self.block = set({})
-        self.blocksNotValidated = set([])
-        self.blocksNumber = 0
-        Node.internetServer.start(blockchainDatas.nodeDatas{"maxcons"}, blockchainDatas.nodeDatas{"address"}, blockchainDatas.nodeDatas{"port"})
-        if len(blockchainDatas.blockChainPeers) == 0 :
+        self.blksNotValidated = set([])
+        self.blksNumber = 0
+        if len(blockchainDatas.peers) == 0 :
             
-            print ("There are not peers ")
+            print ("There are 0 peers available !")
             
         else :
             
-            Node.internetClient.connect(blockchainDatas.blockchainPeers[0 : 15])
+            Node.internetClient.connect(blockchainDatas.blockchainPeers[0 : (blockchainDatas.nodeDatas["maxcons"])])
             
     def create_transaction(transactionType, sender, receiver, number, fees, message) :
         
-        self.hash = ""
+        self.hash = "0000000000000000000000000000000000000000000000000000000000000000"
         self.fees = fees
         if transactionType == 0 : """ if the transaction is sending some coins """
             
@@ -259,7 +248,7 @@ class Blockchain :
                 
             else :
                 
-                if len(receiver) != (blockchainDatas.pubKeysBytesSize *8) :
+                if len(receiver) != blockchainDatas.pubKeysBytesSize :
                     
                     
                     
@@ -269,26 +258,33 @@ class Blockchain :
                     self.receiver = receiver
                     self.coins = number
                     self.message = message
-                    
                     self.datas = "{'prevtxhash': '" +blockchainDatas.previousCoinTransactionHash +"', 'sender': '" +self.sender +"', 'receiver': '" +self.receiver +"', 'coins': " +self.coins +", 'message': '" +self.message +"'}")
                     self.hash = Algorithms.leya.encode(chr(ord(self.datas) *ord(Wallet.public_keys[(sender)["privatekey"]])), difficulty)
                     return (self.hash)
                     
         elif transactionType == 1 : """ if the transaction is sending some tokens """
             
-            self.prevhash = blockchainDatas.previousCoinTransactionHash
-            self.sender = sender
-            self.receiver = receiver
-            self.coins = number
-            self.message = message
-            self.datas = ("{'prevtransactionhash': '" +self.prevhash +"', 'sender': '" +self.sender +"', 'receiver': '" +self.receiver +"', 'coins': " +self.coins +", 'message': '" +self.message +"'}")
-            self.hash = ord(self.datas *Wallet.public_keys[(sender)].privatekey +difficulty)
-            return (self.hash)
-            
+            if len(receiver) != blockchainDatas.blockchainInfos["pubKeySize"] :
+                
+                self.prevhash = blockchainDatas.previousCoinTransactionHash
+                self.sender = sender
+                self.receiver = receiver
+                self.coins = number
+                self.message = message
+                self.datas = ("{'prevtransactionhash': '" +self.prevhash +"', 'sender': '" +self.sender +"', 'receiver': '" +self.receiver +"', 'coins': " +self.coins +", 'message': '" +self.message +"'}")
+                self.hash = ord(self.datas *Wallet.public_keys[(sender)].privatekey +difficulty)
+                return (self.hash)
+                
         elif transactionType == 2 : """ if the transaction is sending an nfc """
             
-            self.hash = self.prevhash
-            
+            if len(receiver) != blockchainDatas.blockchainInfos["pubKeySize"] :
+                
+                
+                
+            else :
+                
+                
+                
     def create_block(authorAddress, message) :
         
         self.number = (blocks+1)
