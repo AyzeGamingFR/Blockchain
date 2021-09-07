@@ -348,10 +348,6 @@ class Blockchain :
             
 class Gui :
     
-    def stop() :
-        
-        
-        
     def guiDatas() :
         
         guiButtons = { "buttons": { "home": { "xSize": 100, "ySize": 100, "image": "" }, "addresses": { "xSize": 50, "ySize": 50, "image": "" }, "background": { "xSize": 1920, "ySize": 1080, "image": "" } ,"discord": { "xSize": 50, "ySize": 50, "image": "" }, "instagram": { "xSize": 50, "ySize": 50, "image": "" }, "loading": { "xSize": 1920, "ySize": 1080, "image": "" }, "twitter": { "xSize": 50, "ySize": 50, "image": "" } } }
@@ -643,7 +639,6 @@ if keyboard.on_press_key("ctrl+alt+s") :
     
     Blockchain.blockchainDatas.verifyingBlocks = 0
     Blockchain.blockchainDatas.miningBlocks = 0
-    Gui.stop
     Node.threading.stopAll
     Internet.internetClient.icsocket.stop
     Internet.internetServer.issocket.stop
