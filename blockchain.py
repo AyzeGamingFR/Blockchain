@@ -6,6 +6,14 @@ import socket
 import threading
 import time
 
+class blkChainDatas :
+    
+    blockchainFile = open("blockchain.abdat", "r+")
+    blockchainDecoded = chr(ord(blockchainFile) /ord(Algorithms.leya.constantsresult) /ord("ayzelyc blockchain"))
+    peersFile = open("peers.abdat", "r+")
+    peersDecoded = chr(ord(peersFile)) /ord(Algorithms.leya.constantsresult) /ord("ayzelyc blockchain"))
+    walletFile = open("wallet.abdat", "r+")
+    
 class Algorithms :
     
     class caesar() :
@@ -215,8 +223,9 @@ class Blockchain :
         
         blockchainInfos = { "chainid": 0, "blkNumber": 0, "blkReward": 32, "blkTime": 60, "minTxCoins": 0.00000001, "minTxFees": 0.00000001, "halvEach": 2102400, "prevBlkHash": "0000000000000000000000000000000000000000000000000000000000000000", "prevCoinTxHash": "0000000000000000000000000000000000000000000000000000000000000000", "prevNfcHash": "0000000000000000000000000000000000000000000000000000000000000000", "prevTkHash": "0000000000000000000000000000000000000000000000000000000000000000" }
         chain = []
-        peers = []
+        chain0Peers = ["176.136.166.254", "2001:861:4480:6fe0:f83c:e6ea:1b93:588f"]
         constants = {"constant1": "blockchain", "constant2": "cryptocurrency", "constant3": "testchain", "constant4": "nfcs", "constant5": "tokens", "constant6": "proofofwork"}
+        mining = 0
         nodeDatas = {"name": "ABlockchain v1.0", "version": 1.0, "address": "127.0.0.1", "port": 8448, "maxcons": 32}
         waitingTransactions = []
     
@@ -231,10 +240,19 @@ class Blockchain :
         if len(blockchainDatas.peers) == 0 :
             
             print ("There are 0 peers available !")
-            
+            if blockchainDatas.mining == 0 :
+                
+                Gui.guiDatas.logs.append("Can't create a block on the chain because the mining system is disabled !")
+                print ("Contacting some peers to see if they can mine a block for us !")
+                Node.internetClient.connect(blockchainDatas.chain0Peers[0 : (blockchainDatas.nodeDatas["maxcons"])])
+                
+            else :
+                
+                Node.internetClient.connect(blockchainDatas.blockchainPeers[0 : (blockchainDatas.nodeDatas["maxcons"])])
+                
         else :
             
-            Node.internetClient.connect(blockchainDatas.blockchainPeers[0 : (blockchainDatas.nodeDatas["maxcons"])])
+            
             
     def create_transaction(transactionType, sender, receiver, number, fees, message) :
         
@@ -292,9 +310,17 @@ class Blockchain :
         self.txs = blockTransactions
         self.fees = totalFees
         self.message = message
-        self.hash = Algorithms.leya.encrypt("{'prevblknumb': " +self.number +", 'prevblkhash': '" +self.prevhash +", 'txs': " +self.txs +", 'blkfees': " +self.fees +", 'blkmsg': '" +self.message +"'}", difficulty))
-        Algorithms.leya.bruteForce(self.hash)
-        
+        self.datas = "{'blknumb': " +self.number +", 'prevblkhash': '" +self.prevhash +"', 'blkfees': " +self.fees +"}"
+        if Blockchain.blockchainDatas.algo == 1 :
+            
+            self.hash = Algorithms.caesar.encode(self.datas)
+            Algorithms.caesar.bruteForce()
+            
+        elif Blockchain.blockchainDatas.algo == 2 :
+            
+            self.hash = Algorithms.leya.encrypt("{'prevblknumb': " +self.number +", 'prevblkhash': '" +self.prevhash +", 'txs': " +self.txs +", 'blkfees': " +self.fees +", 'blkmsg': '" +self.message +"'}", difficulty))
+            Algorithms.leya.bruteForce(self.hash)
+            
     def create_nfc(authorAddress, fileType, file) :
         
         self.author = authorAddress
@@ -353,6 +379,7 @@ class Gui :
         guiButtons = { "buttons": { "home": { "xSize": 100, "ySize": 100, "image": "" }, "addresses": { "xSize": 50, "ySize": 50, "image": "" }, "background": { "xSize": 1920, "ySize": 1080, "image": "" } ,"discord": { "xSize": 50, "ySize": 50, "image": "" }, "instagram": { "xSize": 50, "ySize": 50, "image": "" }, "loading": { "xSize": 1920, "ySize": 1080, "image": "" }, "twitter": { "xSize": 50, "ySize": 50, "image": "" } } }
         guiTexts = { "texts": { "de": { "home": "" }, "en": { "home": "Home" }, "fr": { "home": "Menu" }, "it": { "home": "" }, "sp": { "home": "" } } }
         guiWindow = { "image": "", "title": "AyzeLYC Blockchain Wallet", "xSize": 1920, "ySize": 1080 }
+        logs = []
         
     backgroundImage = QImage(guiDatas.guiButtons["background"["image"]], guiDatas.guiButtons["background"["xSize"]], guiDatas.guiButtons["background"["ySize"]] alignment=QtCore.Qt.AlignCenter)
     backgroundImage.enabled = False
@@ -612,7 +639,6 @@ class Wallet :
         for (len(private_key) / 8) != 52 :
             
             self.private_finished_key = chr[(i2 *8) : ((i2 *8) +7)]
-            self.i2 += 1
             
         self.private_finished_key += yourDate.binaryDate
         return (self.private_finished_key)
@@ -623,7 +649,7 @@ class Wallet :
         if chosensecretkey in private_keys :
             
             self.public_key = "AB" + hashlib.sha256(private_keys[(chosensecretkey)]).hexdigest()[0 : 498]
-            public_keys.insert(len(public_keys), self.public_key)
+            public_keys.append(self.public_key)
             
         else :
             
@@ -638,7 +664,8 @@ class yourDate() :
 if keyboard.on_press_key("ctrl+alt+s") :
     
     Blockchain.blockchainDatas.verifyingBlocks = 0
-    Blockchain.blockchainDatas.miningBlocks = 0
+    Blockchain.blockchainDatas.mining = 0
     Node.threading.stopAll
     Internet.internetClient.icsocket.stop
     Internet.internetServer.issocket.stop
+    Blockchain.
