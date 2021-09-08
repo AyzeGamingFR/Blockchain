@@ -668,4 +668,4 @@ if keyboard.on_press_key("ctrl+alt+s") :
     Node.threading.stopAll
     Internet.internetClient.icsocket.stop
     Internet.internetServer.issocket.stop
-    Blockchain.
+    walletDatas.blockchainFile.write(Blockchain.blockchainDatas.chain[(len(Blockchain.blockchainDatas.chain) -len(walletDatas.blockchainFile)) : len(Blockchain.blockchainDatas.chain)])
