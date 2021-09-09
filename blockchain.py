@@ -256,8 +256,14 @@ class Blockchain :
             
     def create_transaction(transactionType, sender, receiver, number, fees, message) :
         
-        self.hash = "0000000000000000000000000000000000000000000000000000000000000000"
+        self.sender = sender
+        self.receiver = receiver
+        self.coins = number
+        self.message = message
         self.fees = fees
+        
+        self.datas = ""
+        self.hash = "0"
         if transactionType == 0 : """ if the transaction is sending some coins """
             
             if Blockchain.coinsOfAddress(sender) <= (coins +self.fees) :
@@ -268,14 +274,16 @@ class Blockchain :
                 
                 if len(receiver) != blockchainDatas.pubKeysBytesSize :
                     
-                    
-                    
+                    if (receiver = "BURN" or "COINBASE" or "CREATETOKEN" or "CREATENFC") :
+                        
+                        
+                        
+                    else :
+                        
+                        print ("Error during the usage of the create_transaction function, the receiver address size is ")
+                        
                 else :
                     
-                    self.sender = sender
-                    self.receiver = receiver
-                    self.coins = number
-                    self.message = message
                     self.datas = "{'prevtxhash': '" +blockchainDatas.previousCoinTransactionHash +"', 'sender': '" +self.sender +"', 'receiver': '" +self.receiver +"', 'coins': " +self.coins +", 'message': '" +self.message +"'}")
                     self.hash = Algorithms.leya.encode(chr(ord(self.datas) *ord(Wallet.public_keys[(sender)["privatekey"]])), difficulty)
                     return (self.hash)
