@@ -263,7 +263,7 @@ class Blockchain :
         self.hash = 0
         if transactionType == 0 : """ if the transaction is sending some coins """
             
-            if Blockchain.coinsOfAddress(sender) < (coins +self.fees) :
+            if Blockchain.coinsOfAddress(sender) < coins +self.fees :
                 
                 print ("Error during the usage of the create_transaction function, you don't have enough coins to send the transaction !")
                 
@@ -279,31 +279,31 @@ class Blockchain :
                 self.datas = "{'prevtxhash': '" +self.prevCoinTxHash +"', 'blknumb': " +self.number +", 'sender': '" +self.sender +"', 'receiver': [" +self.receiver[0 : (len(self.receiver))] +"], 'coins': " +self.coins +", 'fees': " +self.fees +", 'message': '" +self.message +"'}"
                 if len(receiver) != blockchainDatas.pubKeysBytesSize :
                     
-                    if receiver = "BURN" or "COINBASE" or "CREATETOKEN" or "CREATENFC" :
+                    if receiver == "BURN" or "COINBASE" or "CREATETOKEN" or "CREATENFC" :
                         
                         if Blockchain.blockchainDatas.chainAlgo == "leya" :
                             
-                            self.hash = Algorithms.leya.encode(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)["privatekey"]])), Blockchain.blockchainDatas.chainDifficulty)
+                            self.hash = Algorithms.leya.encrypt(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)["privatekey"]])), Blockchain.blockchainDatas.chainDifficulty)
                             return (self.hash)
                             
                         elif Blockchain.blockchainDatas.chainAlgo == "leya2" :
                             
-                            self.hash = Algorithms.leya2.encode(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)["privatekey"]])), Blockchain.blockchainDatas.chaindifficulty)
+                            self.hash = Algorithms.leya2.encrypt(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)["privatekey"]])), Blockchain.blockchainDatas.chaindifficulty)
                             return (self.hash)
                             
                         elif Blockchain.blockchainDatas.chainAlgo == "scrypt" :
                             
-                            self.hash = Algorithms.scrypt.encode(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)["privatekey"]])))
+                            self.hash = Algorithms.scrypt.encrypt(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)["privatekey"]])))
                             return (self.hash)
                             
                         elif Blockchain.blockchainDatas.chainAlgo == "sha256" :
                             
-                            self.hash = Algorithms.sha256.encode(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)["privatekey"]])))
+                            self.hash = Algorithms.sha256.encrypt(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)["privatekey"]])))
                             return (self.hash)
                             
                         elif Blockchain.blockchainDatas.chainAlgo == "sha512" :
                             
-                            self.hash = Algorithms.sha512.encode(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)["privatekey"]])))
+                            self.hash = Algorithms.sha512.encrypt(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)["privatekey"]])))
                             return (self.hash)
                             
                     else :
@@ -315,47 +315,71 @@ class Blockchain :
                     if Blockchain.blockchainDatas.chainAlgo == "leya" :
                         
                         self.datas = "{'prevtxhash': '" +blockchainDatas.previousCoinTransactionHash +"', 'sender': '" +self.sender +"', 'receiver': '" +self.receiver +"', 'coins': " +self.coins +", 'message': '" +self.message +"'}")
-                        self.hash = Algorithms.leya.encode(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)["publickey"]])), Blockchain.blockchainDatas.chainDifficulty)
+                        self.hash = Algorithms.leya.encrypt(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)["publickey"]])), Blockchain.blockchainDatas.chainDifficulty)
                         return (self.hash)
                         
                     elif Blockchain.blockchainDatas.chainAlgo == "leya2" :
                         
-                        self.hash = Algorithms.leya2.encode(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)["publickey"]])), Blockchain.blockchainDatas.chainDifficulty)
+                        self.hash = Algorithms.leya2.encrypt(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)["publickey"]])), Blockchain.blockchainDatas.chainDifficulty)
                         return (self.hash)
                         
                     elif Blockchain.blockchainDatas.chainAlgo == "scrypt" :
                         
-                        self.hash = Algorithms.scrypt.encode(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)["publickey"]])))
+                        self.hash = Algorithms.scrypt.encrypt(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)["publickey"]])))
                         return (self.hash)
                         
                     elif Blockchain.blockchainDatas.chainAlgo == "sha256" :
                         
-                        self.hash = Algorithms.sha256.encode(chr(ord() *ord(Wallet.public_keys[(self.sender)["publickey"]])))
+                        self.hash = Algorithms.sha256.encrypt(chr(ord() *ord(Wallet.public_keys[(self.sender)["publickey"]])))
                         
                     elif Blockchain.blockchainDatas.chainAlgo == "sha512" :
                         
-                        self.hash = Algorithms.sha512.encode(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)["publickey"]])))
+                        self.hash = Algorithms.sha512.encrypt(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)["publickey"]])))
                         return (self.hash)
                         
         elif transactionType == 1 : """ if the transaction is sending some tokens """
             
             if len(receiver) != blockchainDatas.blockchainInfos["pubKeySize"] :
                 
-                self.prevhash = blockchainDatas.previousCoinTransactionHash
+                self.prevtxhash = blockchainDatas.blockchainInfos["previousCoinTransactionHash"]
+                self.prevtkhash = blockchainDatas.blockchainInfos["previousTokenTransactionHash"]
                 self.sender = sender
                 self.receiver = receiver
                 self.coins = number
+                self.fees = fees
                 self.message = message
-                self.datas = ("{'prevtransactionhash': '" +self.prevhash +"', 'sender': '" +self.sender +"', 'receiver': '" +self.receiver +"', 'coins': " +self.coins +", 'message': '" +self.message +"'}")
-                self.hash = ord(self.datas *Wallet.public_keys[(sender)]["privatekey"] +difficulty)
-                return (self.hash)
+                self.datas = "{'prevtransactionhash': '" +self.prevhash +"', 'sender': '" +self.sender +"', 'receiver': '" +self.receiver +"', 'coins': " +self.coins +", 'message': '" +self.message +"'}"
                 
+                if Blockchain.blockchainDatas.chainAlgo == "" :
+                    
+                    self.hash = chr(ord(self.datas) *ord(Wallet.public_keys[(sender)["privatekey"]]) +difficulty)
+                    return (self.hash)
+                    
+                elif :
+                    
+                    
+                    
         elif transactionType == 2 : """ if the transaction is sending an nfc """
             
-            if len(receiver) != blockchainDatas.blockchainInfos["pubKeySize"] :
+            self.prevtxhash = blockchainDatas.blockchainInfos["previousCoinTransactionHash"]
+            self.prevtkhash = blockchainDatas.blockchainInfos["previousNfcTransactionHash"]
+            self.receiver = receiver
+            self.sender = sender
+            self.coins = number
+            self.fees = fees
+            self.message = message
+            self.datas = "{'prevtransactionhash" +"}"
+            
+            if len(self.receiver) != blockchainDatas.blockchainInfos["pubKeySize"] :
                 
-                
-                
+                if receiver == "BURN" or "COINBASE" or "CREATETOKEN" or "CREATENFC" :
+                    
+                    
+                    
+                else :
+                    
+                    
+                    
             else :
                 
                 
