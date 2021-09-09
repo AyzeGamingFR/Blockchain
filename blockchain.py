@@ -283,27 +283,27 @@ class Blockchain :
                         
                         if Blockchain.blockchainDatas.chainAlgo == "leya" :
                             
-                            self.hash = Algorithms.leya.encode(self.datas, Blockchain.blockchainDatas.chainDifficulty)
+                            self.hash = Algorithms.leya.encode(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)["privatekey"]])), Blockchain.blockchainDatas.chainDifficulty)
                             return (self.hash)
                             
                         elif Blockchain.blockchainDatas.chainAlgo == "leya2" :
                             
-                            self.hash = Algorithms.leya2.encode(self.datas, Blockchain.blockchainDatas.chaindifficulty)
+                            self.hash = Algorithms.leya2.encode(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)["privatekey"]])), Blockchain.blockchainDatas.chaindifficulty)
                             return (self.hash)
                             
                         elif Blockchain.blockchainDatas.chainAlgo == "scrypt" :
                             
-                            self.hash = Algorithms.scrypt.encode(self.datas)
+                            self.hash = Algorithms.scrypt.encode(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)["privatekey"]])))
                             return (self.hash)
                             
                         elif Blockchain.blockchainDatas.chainAlgo == "sha256" :
                             
-                            self.hash = Algorithms.sha256.encode(self.datas)
+                            self.hash = Algorithms.sha256.encode(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)["privatekey"]])))
                             return (self.hash)
                             
                         elif Blockchain.blockchainDatas.chainAlgo == "sha512" :
                             
-                            self.hash = Algorithms.sha512.encode(self.datas)
+                            self.hash = Algorithms.sha512.encode(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)["privatekey"]])))
                             return (self.hash)
                             
                     else :
@@ -315,26 +315,26 @@ class Blockchain :
                     if Blockchain.blockchainDatas.chainAlgo == "leya" :
                         
                         self.datas = "{'prevtxhash': '" +blockchainDatas.previousCoinTransactionHash +"', 'sender': '" +self.sender +"', 'receiver': '" +self.receiver +"', 'coins': " +self.coins +", 'message': '" +self.message +"'}")
-                        self.hash = Algorithms.leya.encode(chr(ord(self.datas) *ord(Wallet.public_keys[(sender)]["publickey"])), Blockchain.blockchainDatas.chainDifficulty)
+                        self.hash = Algorithms.leya.encode(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)["publickey"]])), Blockchain.blockchainDatas.chainDifficulty)
                         return (self.hash)
                         
                     elif Blockchain.blockchainDatas.chainAlgo == "leya2" :
                         
-                        self.hash = Algorithms.leya2.encode(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)]["publickey"])), Blockchain.blockchainDatas.chainDifficulty)
+                        self.hash = Algorithms.leya2.encode(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)["publickey"]])), Blockchain.blockchainDatas.chainDifficulty)
                         return (self.hash)
                         
                     elif Blockchain.blockchainDatas.chainAlgo == "scrypt" :
                         
-                        self.hash = Algorithms.scrypt.encode(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)]["publickey"])))
+                        self.hash = Algorithms.scrypt.encode(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)["publickey"]])))
                         return (self.hash)
                         
                     elif Blockchain.blockchainDatas.chainAlgo == "sha256" :
                         
-                        self.hash = Algorithms.sha256.encode(chr(ord() *ord(Wallet.public_keys[(self.sender)]["publickey"])))
+                        self.hash = Algorithms.sha256.encode(chr(ord() *ord(Wallet.public_keys[(self.sender)["publickey"]])))
                         
                     elif Blockchain.blockchainDatas.chainAlgo == "sha512" :
                         
-                        self.hash = Algorithms.sha512.encode(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)]["publickey"])))
+                        self.hash = Algorithms.sha512.encode(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)["publickey"]])))
                         return (self.hash)
                         
         elif transactionType == 1 : """ if the transaction is sending some tokens """
