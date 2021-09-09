@@ -9,10 +9,11 @@ import time
 class blkChainDatas :
     
     blockchainFile = open("blockchain.abdat", "r+")
-    blockchainDecoded = chr(ord(blockchainFile) /ord(Algorithms.leya.constantsresult) /ord("ayzelyc blockchain"))
+    Blockchain.blockchainDatas.chain = chr(ord(blockchainFile) /ord(Algorithms.leya.constantsresult) /ord("ayzelyc blockchain"))
     peersFile = open("peers.abdat", "r+")
-    peersDecoded = chr(ord(peersFile)) /ord(Algorithms.leya.constantsresult) /ord("ayzelyc blockchain"))
+    Blockchain.blockchainDatas.peers = chr(ord(peersFile) /ord(Algorithms.leya.constantsresult) /ord("ayzelyc blockchain"))
     walletFile = open("wallet.abdat", "r+")
+    Wallet.public_keys = chr(ord(walletFile) /ord(constantsresult))
     
 class Algorithms :
     
@@ -227,6 +228,7 @@ class Blockchain :
         constants = {"constant1": "blockchain", "constant2": "cryptocurrency", "constant3": "testchain", "constant4": "nfcs", "constant5": "tokens", "constant6": "proofofwork"}
         mining = 0
         nodeDatas = {"name": "ABlockchain v1.0", "version": 1.0, "address": "127.0.0.1", "port": 8448, "maxcons": 32}
+        peers = []
         waitingTransactions = []
     
     def init() :
@@ -668,20 +670,7 @@ class Wallet :
         self.datas = ((("'privkeys': [" +private_keys +", 'pubkeys': [" +public_keys +"]]") *chr(ord(password) *ord(blockchainConstants)) *blockchainConstants) +62)
         walletNumber += 1
         
-    def unlock_wallet(self, password) :
-        
-        private_keys = Algorithms.caesar.decrypt(chr(walletFile /(ord(password) *ord(blockchainConstants)) /ord(blockchainConstants)), 62)[privkeys]
-        public_keys =  Algorithms.caesar.decrypt(chr(walletFile /(ord(password) *ord(blockchainConstants)) /ord(blockchainConstants)), 62)[pubkeys]
-        if !private_keys.startsWith("{'privkeys': [") :
-            
-            print ("Error during the decryption of the private keys of the wallet !")
-            
-        if !public_keys.startsWith("{'pubkeys': [") :
-            
-            print ("Error during the decryption of the public keys of the wallet !")
-            
-            
-    def create_private_key(self, create_wallet.password) :
+    def create_private_key(create_wallet.password) :
         
         self.i = 0
         self.private_key = None
@@ -698,7 +687,7 @@ class Wallet :
         self.private_finished_key += yourDate.binaryDate
         return (self.private_finished_key)
         
-    def create_public_key(self, chosensecretkey) :
+    def create_public_key(chosensecretkey) :
         
         self.public_key = None
         if chosensecretkey in private_keys :
@@ -709,6 +698,22 @@ class Wallet :
         else :
             
             print("Error, the chosen secret key is not in the private keys !")
+            
+    def lock_wallet(password) :
+        
+        
+        
+    def unlock_wallet(password) :
+        
+        private_keys = Algorithms.caesar.decrypt(chr(walletFile /(ord(password) *ord(blockchainConstants)) /ord(blockchainConstants)), 62)[privkeys]
+        public_keys =  Algorithms.caesar.decrypt(chr(walletFile /(ord(password) *ord(blockchainConstants)) /ord(blockchainConstants)), 62)[pubkeys]
+        if !private_keys.startsWith("{'privkeys': [") :
+            
+            print ("Error during the decryption of the private keys of the wallet !")
+            
+        if !public_keys.startsWith("{'pubkeys': [") :
+            
+            print ("Error during the decryption of the public keys of the wallet !")
             
 class yourDate() :
     
