@@ -221,7 +221,7 @@ class Blockchain :
     
     def blockchainDatas :
         
-        blockchainInfos = { "chainid": 0, "blkNumber": 0, "blkReward": 32, "blkTime": 60, "minTxCoins": 0.00000001, "minTxFees": 0.00000001, "halvEach": 2102400, "prevBlkHash": "0000000000000000000000000000000000000000000000000000000000000000", "prevCoinTxHash": "0000000000000000000000000000000000000000000000000000000000000000", "prevNfcHash": "0000000000000000000000000000000000000000000000000000000000000000", "prevTkHash": "0000000000000000000000000000000000000000000000000000000000000000" }
+        blockchainInfos = { "chainid": 0, "blkNumber": 0, "blkReward": 32, "blkTime": 60, "minTxCoins": 0.00000001, "minTxFees": 0.00000001, "halvEach": 2102400, "previousBlockHash": "0000000000000000000000000000000000000000000000000000000000000000", "previousCoinTransactionHash": "0000000000000000000000000000000000000000000000000000000000000000", "previousNfcTransactionHash": "0000000000000000000000000000000000000000000000000000000000000000", "previousTokenTransactionHash": "0000000000000000000000000000000000000000000000000000000000000000" }
         chain = []
         chain0Peers = ["176.136.166.254", "2001:861:4480:6fe0:f83c:e6ea:1b93:588f"]
         constants = {"constant1": "blockchain", "constant2": "cryptocurrency", "constant3": "testchain", "constant4": "nfcs", "constant5": "tokens", "constant6": "proofofwork"}
@@ -237,6 +237,7 @@ class Blockchain :
         self.block = set({})
         self.blksNotValidated = set([])
         self.blksNumber = 0
+        
         if len(blockchainDatas.peers) == 0 :
             
             print ("There are 0 peers available !")
@@ -256,38 +257,84 @@ class Blockchain :
             
     def create_transaction(transactionType, sender, receiver, number, fees, message) :
         
-        self.sender = sender
-        self.receiver = receiver
-        self.coins = number
-        self.message = message
-        self.fees = fees
-        
         self.datas = ""
-        self.hash = "0"
+        self.hash = 0
         if transactionType == 0 : """ if the transaction is sending some coins """
             
-            if Blockchain.coinsOfAddress(sender) <= (coins +self.fees) :
+            if Blockchain.coinsOfAddress(sender) < (coins +self.fees) :
                 
                 print ("Error during the usage of the create_transaction function, you don't have enough coins to send the transaction !")
                 
             else :
                 
+                self.prevCoinTxHash = blockchainDatas.previousCoinTransactionHash
+                self.sender = sender
+                self.receiver = receiver
+                self.coins = number
+                self.fees = fees
+                self.message = message
+                
+                self.datas = "{'prevtxhash': '" +self.prevCoinTxHash +"', 'blknumb': " +self.number +", 'sender': '" +self.sender +"', 'receiver': [" +self.receiver[0 : (len(self.receiver))] +"], 'coins': " +self.coins +", 'fees': " +self.fees +", 'message': '" +self.message +"'}"
                 if len(receiver) != blockchainDatas.pubKeysBytesSize :
                     
-                    if (receiver = "BURN" or "COINBASE" or "CREATETOKEN" or "CREATENFC") :
+                    if receiver = "BURN" or "COINBASE" or "CREATETOKEN" or "CREATENFC" :
                         
-                        
-                        
+                        if Blockchain.blockchainDatas.chainAlgo == "leya" :
+                            
+                            self.hash = Algorithms.leya.encode(self.datas, Blockchain.blockchainDatas.chainDifficulty)
+                            return (self.hash)
+                            
+                        elif Blockchain.blockchainDatas.chainAlgo == "leya2" :
+                            
+                            self.hash = Algorithms.leya2.encode(self.datas, Blockchain.blockchainDatas.chaindifficulty)
+                            return (self.hash)
+                            
+                        elif Blockchain.blockchainDatas.chainAlgo == "scrypt" :
+                            
+                            self.hash = Algorithms.scrypt.encode(self.datas)
+                            return (self.hash)
+                            
+                        elif Blockchain.blockchainDatas.chainAlgo == "sha256" :
+                            
+                            self.hash = Algorithms.sha256.encode(self.datas)
+                            return (self.hash)
+                            
+                        elif Blockchain.blockchainDatas.chainAlgo == "sha512" :
+                            
+                            self.hash = Algorithms.sha512.encode(self.datas)
+                            return (self.hash)
+                            
                     else :
                         
                         print ("Error during the usage of the create_transaction function, the receiver address size is ")
                         
                 else :
                     
-                    self.datas = "{'prevtxhash': '" +blockchainDatas.previousCoinTransactionHash +"', 'sender': '" +self.sender +"', 'receiver': '" +self.receiver +"', 'coins': " +self.coins +", 'message': '" +self.message +"'}")
-                    self.hash = Algorithms.leya.encode(chr(ord(self.datas) *ord(Wallet.public_keys[(sender)["privatekey"]])), difficulty)
-                    return (self.hash)
-                    
+                    if Blockchain.blockchainDatas.chainAlgo == "leya" :
+                        
+                        self.datas = "{'prevtxhash': '" +blockchainDatas.previousCoinTransactionHash +"', 'sender': '" +self.sender +"', 'receiver': '" +self.receiver +"', 'coins': " +self.coins +", 'message': '" +self.message +"'}")
+                        self.hash = Algorithms.leya.encode(chr(ord(self.datas) *ord(Wallet.public_keys[(sender)]["publickey"])), Blockchain.blockchainDatas.chainDifficulty)
+                        return (self.hash)
+                        
+                    elif Blockchain.blockchainDatas.chainAlgo == "leya2" :
+                        
+                        self.hash = Algorithms.leya2.encode(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)]["publickey"])), Blockchain.blockchainDatas.chainDifficulty)
+                        return (self.hash)
+                        
+                    elif Blockchain.blockchainDatas.chainAlgo == "scrypt" :
+                        
+                        self.hash = Algorithms.scrypt.encode(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)]["publickey"])))
+                        return (self.hash)
+                        
+                    elif Blockchain.blockchainDatas.chainAlgo == "sha256" :
+                        
+                        self.hash = Algorithms.sha256.encode(chr(ord() *ord(Wallet.public_keys[(self.sender)]["publickey"])))
+                        
+                    elif Blockchain.blockchainDatas.chainAlgo == "sha512" :
+                        
+                        self.hash = Algorithms.sha512.encode(chr(ord(self.datas) *ord(Wallet.public_keys[(self.sender)]["publickey"])))
+                        return (self.hash)
+                        
         elif transactionType == 1 : """ if the transaction is sending some tokens """
             
             if len(receiver) != blockchainDatas.blockchainInfos["pubKeySize"] :
@@ -298,7 +345,7 @@ class Blockchain :
                 self.coins = number
                 self.message = message
                 self.datas = ("{'prevtransactionhash': '" +self.prevhash +"', 'sender': '" +self.sender +"', 'receiver': '" +self.receiver +"', 'coins': " +self.coins +", 'message': '" +self.message +"'}")
-                self.hash = ord(self.datas *Wallet.public_keys[(sender)].privatekey +difficulty)
+                self.hash = ord(self.datas *Wallet.public_keys[(sender)]["privatekey"] +difficulty)
                 return (self.hash)
                 
         elif transactionType == 2 : """ if the transaction is sending an nfc """
