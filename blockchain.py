@@ -701,12 +701,12 @@ class Wallet :
             
     def lock_wallet(password) :
         
-        
+        blkChainDatas.walletFile = Algorithms.caesar.encrypt("{ 'privkeys': [" +chr(ord(self.private_keys) *ord(password) *ord(blockchainConstants)) +"], 'pubkeys': [" +chr(ord() *ord(password) *ord(blockchainConstants) +"] }"), 62)
         
     def unlock_wallet(password) :
         
-        private_keys = Algorithms.caesar.decrypt(chr(walletFile /(ord(password) *ord(blockchainConstants)) /ord(blockchainConstants)), 62)[privkeys]
-        public_keys =  Algorithms.caesar.decrypt(chr(walletFile /(ord(password) *ord(blockchainConstants)) /ord(blockchainConstants)), 62)[pubkeys]
+        private_keys = Algorithms.caesar.decrypt(chr(ord(blkChainDatas.walletFile) /(ord(password) /ord(blockchainConstants)), 62)[privkeys]
+        public_keys = Algorithms.caesar.decrypt(chr(ord(blkChainDatas.walletFile) /(ord(password) /ord(blockchainConstants)), 62)[pubkeys]
         if !private_keys.startsWith("{'privkeys': [") :
             
             print ("Error during the decryption of the private keys of the wallet !")
