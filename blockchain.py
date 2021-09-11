@@ -13,7 +13,7 @@ class blkChainDatas :
     peersFile = open("peers.abdat", "r+")
     Blockchain.blockchainDatas.peers = chr(ord(peersFile) /ord(Algorithms.leya.constantsresult) /ord("ayzelyc blockchain"))
     walletFile = open("wallet.abdat", "r+")
-    Wallet.public_keys = chr(ord(walletFile) /ord(constantsresult))
+    Wallet.public_keys = chr(ord(walletFile) /ord(Blockchain.constantsresult))
     
 class Algorithms :
     
@@ -53,7 +53,7 @@ class Algorithms :
     class leya() :
         
         self.constants = "'constant1': 'leaalgorithm', 'constant2': 'leacoin', 'constant3': 'blockchain', 'constant4': 'crypto', 'constant5': 'algorithm', 'constant6': 'chain', 'constant7': 'hashed', 'constant8': 'wallets'"
-        constantsresult = (self.constants["constant1"] *self.constants["constant2"] *self.constants["constant3"] *self.constants[] *self.constants[] *self.constants[] *self.constants[] *self.constants[])
+        constantsresult = chr(ord(self.constants["constant1"]) *ord(self.constants["constant2"]) *ord(self.constants["constant3"]) *ord(self.constants["constant4"]) *ord(self.constants["constant5"]) *ord(self.constants["constant6"]) *ord(self.constants["constant7"]) *ord(self.constants["constant8"]))
         
         def encrypt(datas, difficulty) :
             
@@ -79,18 +79,16 @@ class Algorithms :
                 
             else :
                 
-                constantsresult = (self.constants["constant1"] *self.constants["constant2"] *self.constants["constant3"] *self constants["constant4"] *self constants["constant5"] *self.constants["constant6"] *self.constants["constant7"] *self.constants["constant8"])
                 if difficulty <= 0 :
                     
-                    return (chr(ord(datas) /ord(constantsresult)))
+                    print ("Error during the usage of the leya algorithm, the difficulty can't be smaller than 1 !")
                     
                 elif difficulty >= 1 :
                     
                     return (chr(ord(datas) /ord(constantsresult) /difficulty -difficulty))
                     
-        def bruteForce(datas, difficulty) :
+        def bruteForce(datas) :
             
-            constantsresult = ()
             if len(datas) == 0 :
                 
                 print("The bit size of the datas inserted is equal to 0 !")
@@ -117,6 +115,10 @@ class Algorithms :
         def decrypt(datas, difficulty, password) :
             
             return (chr((ord(datas) -difficulty) /ord(password)))
+            
+        def bruteForce(datas) :
+            
+            
             
     def scrypt(datas, password, difficulty, ramdifficulty) :
         
