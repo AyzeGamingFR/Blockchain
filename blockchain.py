@@ -241,57 +241,12 @@ class Blockchain :
         self.block = set({})
         self.blksNotValidated = set([])
         self.blksNumber = 0
-        i = 0
         
-        if len(blockchainDatas.peers) == 0 and blockchainDatas.mining == 0 :
-            
-            print ("There are 0 peers available !")
-            Gui.guiDatas.logs.append("Can't create a block on the chain because the mining system is disabled !")
-            print ("Contacting some peers to see if they can mine a block for us !")
-            Node.internetClient.connect(blockchainDatas.chain0Peers[0 : (blockchainDatas.nodeDatas["maxcons"])])
-            
-        elif len(blockchainDatas.peers) == 0 and blockchainDtas.mining != 0 and blockchainDatas.chainAlgo == "leya" :
-            
-            
-            
-        elif len(blockchainDatas.peers) == 0 and blockchainDatas.mining != 0 and blockchainDatas.chainAlgo == "sha256" :
-            
-            peers = findPeers("1.0.0.1", "254.255.255.255", 8448, "leyaBlockchainChain")
-            for i < len(peers) :
-                
-                
-                
-            else :
-                
-                
-                
-        elif len(blockchainDatas.peers) == 0 and blockchainDatas.mining != 0 and blockchainDatas.chainAlgo == "sha512" :
-            
-            peers = findPeers("1.0.0.1", "254.255.255.255", 8448, "leyaBlockchainChain")
-            for i < len(peers) :
-                
-                blockchainDatas.peers.append()
-                
-            else :
-                
-                internet.internetClient.send(peers, 8448, "sendBlocks")
-                
-        elif len(blockchainDatas.peers) != 0 and blockchainDatas.mining == 0 :
-            
-            Node.internetClient.connect(blockchainDatas.blockchainPeers[0 : (blockchainDatas.nodeDatas["maxcons"])], "sendBlocks")
-            
-        elif len(blockchainDatas.peers) != 0 and blockchainDatas.mining != 0 and blockchainDatas.chainAlgo == "leya" :
-            
-            
-            
-        elif len(blockchainDatas.peers) != 0 and blockchainDatas.mining != 0 and blockchainDatas.chainAlgo == "sha256" :
-            
-            
-            
-        elif len(blockchainDatas.peers) != 0 and blockchainDatas.mining != 0 and blockchainDatas.chainAlgo == "sha512" :
-            
-            
-            
+        blockchainDatas.peers = findPeers("1.0.0.0", "254.255.255.255", 8448, "leyaBlockchainChain")
+        Internet.internetClient.connect(blockchainDatas.peers[0 : (blockchainDatas.nodeDatas["maxcons"])])
+        Internet.internetClient.send("syncChain", blockchainDatas.blockchainInfos["chainId"])
+        blocksReceived = Internet.internetClient.receiveDatas()
+        
     def create_transaction(transactionType, sender, receiver, number, fees, message) :
         
         self.datas = ""
