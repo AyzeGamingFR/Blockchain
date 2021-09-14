@@ -17,40 +17,56 @@ class blkChainDatas :
     
 class Algorithms :
     
-    class caesar() :
+    class caesar :
         
         def encrypt(datas, difficulty) :
             
-            encrypted_datas = ""
-            if len(datas) == 0 :
+            self.datas = datas
+            self.difficulty = difficulty
+            self.encrypted_datas = ""
+            if len(self.datas) == 0 :
                 
                 print ("The datas who are being encrypted in the caesar algorithm get a size of 0 bits, they can't be encrypted !")
                 
             else :
                 
-                for char in datas :
+                for char in self.datas :
                     
-                    encrypted_datas += chr(ord(char) +difficulty)
+                    self.encrypted_datas += chr(ord("{ 'datas': '"), ord(char), ord("' }") +self.difficulty)
                     
-                return (encrypted_datas)
+                return (self.encrypted_datas)
                 
         def decrypt(datas, difficulty) :
             
-            decrypted_datas = ""
-            if len(datas) == 0 :
+            self.datas = datas
+            self.decrypted_datas = ""
+            self.difficulty = difficulty
+            if len(self.datas) == 0 :
                 
                 print ("The datas who are being encrypted in the caesar algorithm get a size of 0 bits, they can't be decrypted !")
                 
             else :
                 
-                encrypted_datas = ""
                 for char in datas :
                     
-                    encrypted_datas += chr(ord(chr) -difficulty)
+                    self.decrypted_datas += chr(ord(chr) -self.difficulty)
                     
-                return (encrypted_datas)
+                return (self.decrypted_datas)
                     
-    class leya() :
+        def bruteForce(datas) :
+            
+            self.datas = datas
+            self.decrypted_datas = ""
+            self.i = 0
+            if len(self.datas) == 0 :
+                
+                
+                
+            else :
+                
+                
+                
+    class leya :
         
         self.constants = "'constant1': 'leaalgorithm', 'constant2': 'leacoin', 'constant3': 'blockchain', 'constant4': 'crypto', 'constant5': 'algorithm', 'constant6': 'chain', 'constant7': 'hashed', 'constant8': 'wallets'"
         constantsresult = chr(ord(self.constants["constant1"]) *ord(self.constants["constant2"]) *ord(self.constants["constant3"]) *ord(self.constants["constant4"]) *ord(self.constants["constant5"]) *ord(self.constants["constant6"]) *ord(self.constants["constant7"]) *ord(self.constants["constant8"]))
@@ -63,7 +79,7 @@ class Algorithms :
                 
             else :
                 
-                if difficulty <= 0 :
+                for difficulty <= 0 :
                     
                     return (chr(ord(datas) *ord(constantsresult)))
                     
@@ -79,34 +95,33 @@ class Algorithms :
                 
             else :
                 
-                if difficulty <= 0 :
+                for difficulty <= 0 :
                     
                     print ("Error during the usage of the leya algorithm, the difficulty can't be smaller than 1 !")
                     
                 elif difficulty >= 1 :
                     
-                    return (chr(ord(datas) /ord(constantsresult) /difficulty -difficulty))
+                    return (chr(ord(datas) /ord(constantsresult) /ord(difficulty) -difficulty))
                     
         def bruteForce(datas) :
             
-            if len(datas) == 0 :
+            self.datas = datas
+            self.i = 0
+            if len(self.datas) == 0 :
                 
                 print("The bit size of the datas inserted is equal to 0 !")
                 
+            elif len(self.datas) != 0 datas.startswith("{'datas':") :
+                
+                return (self.datas)
+                
             else :
                 
-                i = 0
-                if !datas.startWith("{'datas':") :
-                    
-                    datas2 = chr(ord(datas) /ord(constantsresult) /i -i)
-                    i += 1
-                    datas2 = chr((ord(datas) +i) *i *ord(constantsresult))
-                    
-                else :
-                    
-                    return (datas)
-                    
-    class leya2() :
+                self.datas = chr(ord(self.datas) /ord(constantsresult) /ord(self.i) -self.i)
+                i += 1
+                self.datas = chr((ord(self.datas) +i) *i *ord(constantsresult))
+                
+    class leya2 :
         
         def encrypt(datas, difficulty, password) :
             
@@ -116,12 +131,9 @@ class Algorithms :
             
             return (chr((ord(datas) -difficulty) /ord(password)))
             
-        def bruteForce(datas) :
-            
-            
-            
-    def scrypt(datas, password, difficulty, ramdifficulty) :
+    class scrypt :
         
+        def hash(datas, password, difficulty, ramdifficulty) :
         self.datas = datas
         self.difficulty = difficulty
         self.password = password
@@ -134,7 +146,7 @@ class Algorithms :
             
             return (hashlib.scrypt(datas, password, ramdifficulty).hexdigest())
             
-    class sha256() :
+    class sha256 :
         
         def encrypt(datas, password, difficulty) :
             
@@ -184,41 +196,45 @@ class Algorithms :
                 
     class sha512(datas, password, difficulty) :
         
-        if len(datas == 0) :
+        def hash(datas, password, difficulty) :
             
-            print ("Error, the datas length is equal to 0 or null !")
-            
-        else:
-            
-            if password == 0 or null and difficulty <= 0 :
+            if len(datas == 0) :
                 
-                return (hashlib.sha512(datas).hexdigest())
-            elif password == 0 or null and difficulty >= 1 :
+                print ("Error, the datas length is equal to 0 or null !")
                 
-                return (hashlib.sha512(caesar.encrypt(datas, difficulty)).hexdigest())
+            else:
                 
-            elif password != 0 and null and difficulty <= 0 :
-                
-                return (hashlib.sha512(chr(ord(datas) *ord(password))).hexdigest())
-                
-            elif password != 0 and null and difficulty >= 1 :
-                
-                return (hashlib.sha512(chr(ord(caesar.encrypt(datas, difficulty)) *ord(password))).hexdigest())
-                
+                if password == 0 or null and difficulty <= 0 :
+                    
+                    return (hashlib.sha512(datas).hexdigest())
+                    
+                elif password == 0 or null and difficulty >= 1 :
+                    
+                    return (hashlib.sha512(caesar.encrypt(datas, difficulty)).hexdigest())
+                    
+                elif password != 0 and null and difficulty <= 0 :
+                    
+                    return (hashlib.sha512(chr(ord(datas) *ord(password))).hexdigest())
+                    
+                elif password != 0 and null and difficulty >= 1 :
+                    
+                    return (hashlib.sha512(chr(ord(caesar.encrypt(datas, difficulty)) *ord(password))).hexdigest())
+                    
         def bruteForce(hash) :
             
             self.hash = hash
-            datas = ""
-            hashedDatas = ""
+            self.datas = ""
+            self.hashedDatas = ""
             if hashedDatas != self.hash :
                 
-                datas = chr(i)
-                hashedDatas = hashliv.sha512(datas).hexdigest()
+                self.datas = chr(i)
+                self.hashedDatas = hashlib.sha512(self.datas).hexdigest()
                 i += 1
                 
             else :
                 
-                return ("{'datas': '" +datas +"', 'difficulty': " +datas['difficulty'] +", 'password': '" +chr(i) +"'")
+                print ("Found the datas after " ,i ," tries !")
+                return (self.datas)
                 
 class Blockchain :
     
@@ -262,15 +278,19 @@ class Blockchain :
             
             
             
-        elif transactionType == 2 and len(self.sender) == blockchainDatas.chain["chainPubKeySize"] and len(self.receiver) == blockchainDatas.chain["chainPubKeySize"] and self.coins >= Wallet.public_keys[(self.sender)["coins"]] +blockchainDatas.chain["chainTransactionFees"] and self.fees >= blockchainDatas.chain["chainMinimumTransactionFees"] :
+        elif self.transactionType == 2 and len(self.sender) == blockchainDatas.chain["chainPubKeySize"] and len(self.receiver) == blockchainDatas.chain["chainPubKeySize"] and self.coins >= Wallet.public_keys[(self.sender)["coins"]] +blockchainDatas.chain["chainTransactionFees"] and self.fees >= blockchainDatas.chain["chainMinimumTransactionFees"] :
             
             
             
-        elif transactionType == 3 and len(self.sender) == blockchainDatas.chain["chainPubKeySize"] and len(self.receiver) == blockchainDatas.chain["chainPubKeySize"] and self.coins >= Wallet.public_keys[(self.sender)["coins"]] +blockchainDatas.chain["chainTransactionFees"] and self.fees >= blockchainDatas.chain["chainMminimumTransactionFees"] :
+        elif self.transactionType == 3 and len(self.sender) == blockchainDatas.chain["chainPubKeySize"] and len(self.receiver) == blockchainDatas.chain["chainPubKeySize"] and self.coins >= Wallet.public_keys[(self.sender)["coins"]] +blockchainDatas.chain["chainTransactionFees"] and self.fees >= blockchainDatas.chain["chainMminimumTransactionFees"] :
             
             
             
         else :
+            
+            print ("Error during the creation of the transaction !")
+            return ("Error")
+            
     def create_block(authorAddress, message) :
         
         self.number = (blocks+1)
