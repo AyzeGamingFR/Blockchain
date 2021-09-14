@@ -119,17 +119,17 @@ class Algorithms :
                 
                 self.datas = chr(ord(self.datas) /ord(constantsresult) /ord(self.i) -self.i)
                 i += 1
-                self.datas = chr((ord(self.datas) +i) *i *ord(constantsresult))
+                self.datas = chr((ord(self.datas) +i) *ord(i) *ord(constantsresult))
                 
     class leya2 :
         
         def encrypt(datas, difficulty, password) :
             
-            return (chr((ord(datas) *ord(password)) +difficulty))
+            return (chr(ord(datas) *ord(password) +difficulty))
             
         def decrypt(datas, difficulty, password) :
             
-            return (chr((ord(datas) -difficulty) /ord(password)))
+            return (chr(ord(datas) -difficulty) /ord(password)))
             
     class scrypt :
         
