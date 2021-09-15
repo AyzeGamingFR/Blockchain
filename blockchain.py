@@ -240,14 +240,13 @@ class Blockchain :
     
     def blockchainDatas :
         
-        blockchainInfos = { "chainid": 0, "blkNumber": 0, "blkReward": 32, "blkTime": 60, "minTxCoins": 0.00000001, "minTxFees": 0.00000001, "halvEach": 2102400, "previousBlockHash": "0000000000000000000000000000000000000000000000000000000000000000", "previousCoinTransactionHash": "0000000000000000000000000000000000000000000000000000000000000000", "previousNfcTransactionHash": "0000000000000000000000000000000000000000000000000000000000000000", "previousTokenTransactionHash": "0000000000000000000000000000000000000000000000000000000000000000" }
-        chain = []
-        chain0Peers = ["176.136.166.254", "2001:861:4480:6fe0:f83c:e6ea:1b93:588f"]
-        constants = {"constant1": "blockchain", "constant2": "cryptocurrency", "constant3": "testchain", "constant4": "nfcs", "constant5": "tokens", "constant6": "proofofwork"}
+        blockchainInfos = { "chainid": 0, "blkNumber": 0, "blkReward": 32, "blkTime": 60, "minTxCoins": 0.00000001, "minTxFees": 0.00000001, "halvEach": 2102400, "previousBlockHash": "0000000000000000000000000000000000000000000000000000000000000000", "previousTransactionHash": "0000000000000000000000000000000000000000000000000000000000000000" }
+        chain = { "difficulty": 1, "chainMinimumTransactionFees": 0.00000001, "transactions": {} }
+        chain0Peers = [ "176.136.166.254", "2001:861:4480:6fe0:f83c:e6ea:1b93:588f" ]
+        constants = { "constant1": "blockchain", "constant2": "cryptocurrency", "constant3": "testchain", "constant4": "nfcs", "constant5": "tokens", "constant6": "proofofwork" }
         mining = 0
-        nodeDatas = {"name": "ABlockchain v1.0", "version": 1.0, "address": "127.0.0.1", "port": 8448, "maxcons": 32}
+        nodeDatas = { "name": "ABlockchain v1.0", "version": 1.0, "address": "127.0.0.1", "port": 8448, "maxcons": 32 }
         peers = []
-        waitingTransactions = []
     
     def init() :
         
@@ -265,26 +264,47 @@ class Blockchain :
         
     def create_transaction(transactionType, sender, receiver, coins, fees, message) :
         
+        self.number = len(blockchainDatas.chain["transactions"])
+        self.prevhash = ""
+        self.datas = ""
+        self.hash = ""
+        self.diff = 0
+        
         self.transactionType = transactionType
         self.sender = sender
         self.receiver = receiver
         self.coins = coins
         self.fees = fees
         self.transactionMessage = message
-        self.datas = ""
-        self.hash = 0
         
-        if self.transactionType == 1 and len(self.sender) == blockchainDatas.chain["chainPubKeySize"] and len(self.receiver) == blockchainDatas.chain["chainPubKeySize"] and self.coins >= Wallet.public_keys[(self.sender)["coins"]] +blockchainDatas.chain["chainTransactionFees"] and self.fees >= blockchainDatas.chain["chainMinimumTransactionFees"] :
+        if self.transactionType == 1 and self.coins >= Wallet.public_keys[(self.sender)["coins"]] +blockchainDatas.chain["chainMinimumTransactionFees"] and self.fees >= blockchainDatas.chain["chainMinimumTransactionFees"] :
             
+            self.prevhash = blockchainDatas.blockchainInfos["previousTransactionHash"]
+            self.datas = "{'': " +self.number +"'txprevhash': '" +self.prevhash +"', 'sender': '" +self.sender +"', 'receiver': '" +self.receiver +"', 'coins': " +self.coins +", 'message': '" +self.message +"'}"
+            self.diff = blockchainDatas.chain["difficulty"] +random.randint(0, 10)
+            blockchainDatas.chain["difficulty"] = self.diff
+            self.hash = Algorithms.leya.encrypt(self.datas, self.diff)
+            return (self.hash)
             
+        elif self.transactionType == 2 and self.coins >= Wallet.public_keys[(self.sender)["coins"]] +blockchainDatas.chain["chainMinimumTransactionFees"] and self.fees >= blockchainDatas.chain["chainMinimumTransactionFees"] :
             
-        elif self.transactionType == 2 and len(self.sender) == blockchainDatas.chain["chainPubKeySize"] and len(self.receiver) == blockchainDatas.chain["chainPubKeySize"] and self.coins >= Wallet.public_keys[(self.sender)["coins"]] +blockchainDatas.chain["chainTransactionFees"] and self.fees >= blockchainDatas.chain["chainMinimumTransactionFees"] :
+            self.prevhash = blockchainDatas.blockchainInfos["previousTransactionHash"]
+            self.datas = "{'txprevhash': '" +self.prevhash +"', 'sender': '" +self.sender +"', 'receiver': '" +self.receiver +"', 'coins': " +self.coins +", 'message': '" +self.message +"'}"
+            self.diff = blockchainDatas.chain["difficulty"] +random.randint(0, 10)
+            blockchainDatas.chain["difficulty"] = self.diff
+            self.hash = Algorithms.leya.encrypt(self.datas, self.diff)
+            return (self.hash)
             
+        elif self.transactionType == 3 and self.coins >= Wallet.public_keys[(self.sender)["coins"]] +blockchainDatas.chain["transactionfees"] and self.fees >= blockchainDatas.chain["chainMinimumTransactionFees"] :
             
+            self.prevhash = blockchainDatas.blockchainInfos["previousTransactionHash"]
+            self.datas = "{'txprevhash': '" +self.prevhash +"', 'sender': '" +self.sender +"', 'receiver': '" +self.receiver +"', 'coins': " +self.coins +", 'message': '" +self.message +"'}"
+            self.diff = blockchainDatas.chain["difficulty"] +random.randint(0, 10)
+            blockchainDatas.chain["difficulty"] = self.diff
+            self.hash = Algorithms.leya.encrypt(self.datas, self.diff)
             
-        elif self.transactionType == 3 and len(self.sender) == blockchainDatas.chain["chainPubKeySize"] and len(self.receiver) == blockchainDatas.chain["chainPubKeySize"] and self.coins >= Wallet.public_keys[(self.sender)["coins"]] +blockchainDatas.chain["chainTransactionFees"] and self.fees >= blockchainDatas.chain["chainMminimumTransactionFees"] :
-            
-            
+            Internet.internetServer.sendDatas(Internet.internetServer.peersConnected, "new diff : " self.diff)
+            return (self.hash)
             
         else :
             
@@ -293,12 +313,14 @@ class Blockchain :
             
     def create_block(authorAddress, message) :
         
+        self.diff = blockchainDatas.chain["difficulty"] +random.randint(0, 100)
+        
         self.number = (blocks+1)
         self.prevhash = previousBlockHash
         self.txs = blockTransactions
         self.fees = totalFees
         self.message = message
-        self.datas = "{'blknumb': " +self.number +", 'prevblkhash': '" +self.prevhash +"', 'blkfees': " +self.fees +"}"
+        self.datas = "{'prevblknumb': " +self.number +", 'prevblkhash': '" +self.prevhash +", 'txs': " +self.txs +", 'blkfees': " +self.fees +", 'blkmsg': '" +self.message +"'}"
         if Blockchain.blockchainDatas.algo == 1 :
             
             self.hash = Algorithms.caesar.encode(self.datas)
@@ -306,7 +328,7 @@ class Blockchain :
             
         elif Blockchain.blockchainDatas.algo == 2 :
             
-            self.hash = Algorithms.leya.encrypt("{'prevblknumb': " +self.number +", 'prevblkhash': '" +self.prevhash +", 'txs': " +self.txs +", 'blkfees': " +self.fees +", 'blkmsg': '" +self.message +"'}", difficulty))
+            self.hash = Algorithms.leya.encrypt(self.datas, self.difficulty)
             Algorithms.leya.bruteForce(self.hash)
             
     def create_nfc(authorAddress, fileType, file) :
