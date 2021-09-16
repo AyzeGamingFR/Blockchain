@@ -241,7 +241,7 @@ class Blockchain :
     def blockchainDatas :
         
         blockchainInfos = { "chainid": 0, "blkNumber": 0, "blkReward": 32, "blkTime": 60, "minTxCoins": 0.00000001, "minTxFees": 0.00000001, "halvEach": 2102400, "previousBlockHash": "0000000000000000000000000000000000000000000000000000000000000000", "previousTransactionHash": "0000000000000000000000000000000000000000000000000000000000000000" }
-        chain = { "difficulty": 1, "chainMinimumTransactionFees": 0.00000001, "transactions": {} }
+        chain = { "difficulty": 1, "chainMinimumTransactionFees": 0.00000001, "transactions": {}, "fees": 0 }
         chain0Peers = [ "176.136.166.254", "2001:861:4480:6fe0:f83c:e6ea:1b93:588f" ]
         constants = { "constant1": "blockchain", "constant2": "cryptocurrency", "constant3": "testchain", "constant4": "nfcs", "constant5": "tokens", "constant6": "proofofwork" }
         mining = 0
@@ -262,71 +262,51 @@ class Blockchain :
         Internet.internetClient.send("syncChain", blockchainDatas.blockchainInfos["chainId"])
         blocksReceived = Internet.internetClient.receiveDatas()
         
-    def create_transaction(transactionType, sender, receiver, coins, fees, message) :
+    def create_transaction(datas) :
         
-        self.number = len(blockchainDatas.chain["transactions"])
-        self.prevhash = ""
+        self.prevhash = blockchainDatas.chain["prevtxhash"]
+        self.sender = datas["sender"]
+        self.receivers = datas["receivers"]
+        self.coins = datas["coins"]
+        self.fees = datas["fees"]
+        self.message = datas["message"]
+        
         self.datas = ""
-        self.hash = ""
-        self.diff = 0
         
-        self.transactionType = transactionType
-        self.sender = sender
-        self.receiver = receiver
-        self.coins = coins
-        self.fees = fees
-        self.transactionMessage = message
-        
-        if self.transactionType == 1 and self.coins >= Wallet.public_keys[(self.sender)["coins"]] +blockchainDatas.chain["chainMinimumTransactionFees"] and self.fees >= blockchainDatas.chain["chainMinimumTransactionFees"] :
+        if transactionType == 1 :
             
-            self.prevhash = blockchainDatas.blockchainInfos["previousTransactionHash"]
-            self.datas = "{'': " +self.number +"'txprevhash': '" +self.prevhash +"', 'sender': '" +self.sender +"', 'receiver': '" +self.receiver +"', 'coins': " +self.coins +", 'message': '" +self.message +"'}"
-            self.diff = blockchainDatas.chain["difficulty"] +random.randint(0, 10)
-            blockchainDatas.chain["difficulty"] = self.diff
-            self.hash = Algorithms.leya.encrypt(self.datas, self.diff)
-            return (self.hash)
+            for len(self.sender) == blockchainInfos.chain["pubkeysize"] and len(self.receiver) == 
+            self.datas = "{ 'prevtxhash': '" +self.prevhash +"', 'txsender': '" +self.sender +"', 'txreceiver': '" +self.receiver +"' +'coins': '" +self.coins +"', 'txfees': " +self.fees +"'message': '" +self.message +"' }"
             
-        elif self.transactionType == 2 and self.coins >= Wallet.public_keys[(self.sender)["coins"]] +blockchainDatas.chain["chainMinimumTransactionFees"] and self.fees >= blockchainDatas.chain["chainMinimumTransactionFees"] :
+        elif transactionType == 2 :
             
-            self.prevhash = blockchainDatas.blockchainInfos["previousTransactionHash"]
-            self.datas = "{'txprevhash': '" +self.prevhash +"', 'sender': '" +self.sender +"', 'receiver': '" +self.receiver +"', 'coins': " +self.coins +", 'message': '" +self.message +"'}"
-            self.diff = blockchainDatas.chain["difficulty"] +random.randint(0, 10)
-            blockchainDatas.chain["difficulty"] = self.diff
-            self.hash = Algorithms.leya.encrypt(self.datas, self.diff)
-            return (self.hash)
+            self.datas = "{ 'prevtxhash': '', 'txsender': '" +self.sender +"', 'txreceiver': [" +self.receivers +"], 'coins': [" +self.coins +"], 'txfees': self.fees, 'message': { 'tksender': '" +self.sender +"', 'tkreceiver': [] } }"
             
-        elif self.transactionType == 3 and self.coins >= Wallet.public_keys[(self.sender)["coins"]] +blockchainDatas.chain["transactionfees"] and self.fees >= blockchainDatas.chain["chainMinimumTransactionFees"] :
+        elif transactionType == 3 :
             
-            self.prevhash = blockchainDatas.blockchainInfos["previousTransactionHash"]
-            self.datas = "{'txprevhash': '" +self.prevhash +"', 'sender': '" +self.sender +"', 'receiver': '" +self.receiver +"', 'coins': " +self.coins +", 'message': '" +self.message +"'}"
-            self.diff = blockchainDatas.chain["difficulty"] +random.randint(0, 10)
-            blockchainDatas.chain["difficulty"] = self.diff
-            self.hash = Algorithms.leya.encrypt(self.datas, self.diff)
-            
-            Internet.internetServer.sendDatas(Internet.internetServer.peersConnected, "new diff : " self.diff)
-            return (self.hash)
+            self.datas = "{ 'prevtxhash': '', 'txsender': '" +self.sender +"', 'txreceiver': [" +self.receivers "], 'coins': [" +self.coins +"], 'txfees': self.fees, 'message': {  } }"
             
         else :
             
-            print ("Error during the creation of the transaction !")
-            return ("Error")
+            print ("Error during the creation of a transaction, the transactionType is not equal to 1, 2 or 3 !")
             
     def create_block(authorAddress, message) :
         
-        self.diff = blockchainDatas.chain["difficulty"] +random.randint(0, 100)
+        self.difficulty = blockchainDatas.chain["difficulty"] +random.randint(0, 100)
         
         self.number = (blocks+1)
         self.prevhash = previousBlockHash
         self.txs = blockTransactions
-        self.fees = totalFees
+        self.fees = blockchainDatas.chain["fees"]
         self.message = message
+        
         self.datas = "{'prevblknumb': " +self.number +", 'prevblkhash': '" +self.prevhash +", 'txs': " +self.txs +", 'blkfees': " +self.fees +", 'blkmsg': '" +self.message +"'}"
-        if Blockchain.blockchainDatas.algo == 1 :
+        if blockchainDatas.algo == 1 :
             
-            self.hash = Algorithms.caesar.encode(self.datas)
+            self.hash = Algorithms.caesar.encrypt(self.datas, self.difficulty)
             Algorithms.caesar.bruteForce()
             
-        elif Blockchain.blockchainDatas.algo == 2 :
+        elif blockchainDatas.algo == 2 :
             
             self.hash = Algorithms.leya.encrypt(self.datas, self.difficulty)
             Algorithms.leya.bruteForce(self.hash)
