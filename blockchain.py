@@ -243,7 +243,7 @@ class Main :
         def blockchainDatas :
             
             blockchainInfos = { "chainid": 0, "blkNumber": 0, "blkReward": 32, "blkTime": 60, "minTxCoins": 0.00000001, "minTxFees": 0.00000001, "halvEach": 2102400, "previousBlockHash": "0000000000000000000000000000000000000000000000000000000000000000", "previousTransactionHash": "0000000000000000000000000000000000000000000000000000000000000000" }
-            chain = { "difficulty": 1, "chainMinimumTransactionFees": 0.00000001, "transactions": {}, "fees": 0 }
+            chain = { "difficulty": 1, "chainMinimumTransactionFees": 0.00000001, "blocks": [], "transactions": [], "fees": 0 }
             chain0Peers = [ "176.136.166.254", "2001:861:4480:6fe0:f83c:e6ea:1b93:588f" ]
             constants = { "constant1": "blockchain", "constant2": "cryptocurrency", "constant3": "testchain", "constant4": "nfcs", "constant5": "tokens", "constant6": "proofofwork" }
             mining = 0
@@ -258,12 +258,31 @@ class Main :
             self.block = set({})
             self.blksNotValidated = set([])
             self.blksNumber = 0
+            self.blksReceived = set([])
             
-            blockchainDatas.peers = findPeers("1.0.0.0", "254.255.255.255", 8448, "leyaBlockchainChain")
-            Internet.internetClient.connect(blockchainDatas.peers[0 : (blockchainDatas.nodeDatas["maxcons"])])
-            Internet.internetClient.send("syncChain", blockchainDatas.blockchainInfos["chainId"])
-            blocksReceived = Internet.internetClient.receiveDatas()
-            
+            if len(blockchainDatas.peers) == 0 :
+                
+                blockchainDatas.peers = findPeers("1.0.0.0", "254.255.255.255", 8448, "leyaBlockchainChain")
+                if len(blockchainDatas.peers) == 0 :
+                    
+                    create_transaction("{'sender': 'COINBASE', 'receivers': [ '" +"' ], 'coins': [ '" +blockchainDatas.blockchainInfos["blkReward"] +"' ], 'fees': 0, 'message': 'MINED TRANSACTION'}")
+                    create_block()
+                    verify_block(blockchainDatas.chain["blocks"[len(blockchainDatas.chain["blocks"]) -1]])
+                    
+                else :
+                    
+                    Internet.internetClient.connect(blockchainDatas.peers[0 : (blockchainDatas.nodeDatas["maxcons"])])
+                    Internet.internetClient.send("{ 'command': 'syncChain', 'datas': " +blockchainDatas.blockchainInfos["chainId"] +" }")
+                    self.blksReceived = Internet.internetClient.icsocket.recv()
+                    self.blkchain.insert(len(self.blkchain), verifyChain(self.blksChain))
+                    
+            else :
+                
+                Internet.internetClient.connect(blockchainDatas.peers[0 : (blockchainDatas.nodeDatas["maxcons"])])
+                Internet.internetClient.send("{ 'command': 'syncChain', 'datas': " +blockchainDatas.blockchainInfos["chainId"] +" }")
+                self.blksReceived = Internet.internetClient.icsocket.recv()
+                self.blkchain.insert(len(self.blkchain), verifyChain(self.blksChain))
+                
     def create_transaction(datas) :
             
             self.prevhash = blockchainDatas.chain["prevtxhash"]
@@ -296,9 +315,9 @@ class Main :
             
             self.difficulty = blockchainDatas.chain["difficulty"] +random.randint(0, 100)
             
-            self.number = (blocks+1)
+            self.number = len(blockchainDatas.chain["blocks"])
             self.prevhash = previousBlockHash
-            self.txs = blockTransactions
+            self.txs = blockchainDatas.chain["transactions"]
             self.fees = blockchainDatas.chain["fees"]
             self.message = message
             
