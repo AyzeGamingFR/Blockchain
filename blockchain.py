@@ -393,20 +393,33 @@ class Main :
                 
                 "texts": {
                     
-                    "ch": { "home": "", "pubkeys": "", "sns": "", "cons": "", "help": "" },
-                    "de": { "home": "", "pubkeys": "", "sns": "", "cons": "", "help": "" },
-                    "en": { "home": "Home", "pubkeys": "Public Keys", "sns": "Social Networks", "cons": "Console", "help": "Help Page" },
-                    "fr": { "home": "Menu", "pubkeys": "Clés Publiques", "sns": "Réseaux Sociaux", "cons": "Console", "help": "Page d'Aide" },
-                    "jp": { "home": "", "pubkeys": "", "sns": "", "cons": "", "help": "" },
-                    "it": { "home": "", "pubkeys": "", "sns": "", "cons": "", "help": "" },
-                    "sp": { "home": "", "pubkeys": "", "sns": "Redes Socialès", "cons": "", "help": "" }
+                    "ch": { "home": "", "pubkeys": "", "sns": "", "cons": "", "files": "", "peers": "", "help": "", "params": "" },
+                    "de": { "home": "", "pubkeys": "", "sns": "", "cons": "", "files": "", "peers": "", "help": "", "params": "" },
+                    "en": { "home": "Home", "pubkeys": "Public Keys", "sns": "Social Networks", "cons": "Console", "files": "Files", "peers": "Peers", "help": "Help Page", "params": "Parameters" },
+                    "fr": { "home": "Menu", "pubkeys": "Clés Publiques", "sns": "Réseaux Sociaux", "cons": "Console", "files": "Fichiers", "peers": "Pairs", "help": "Page d'Aide", "params": "Paramètres" },
+                    "jp": { "home": "", "pubkeys": "", "sns": "", "cons": "", "files": "", "peers": "", "help": "", "params": "" },
+                    "it": { "home": "", "pubkeys": "", "sns": "", "cons": "", "files": "", "peers": "", "help": "", "params": "" },
+                    "sp": { "home": "", "pubkeys": "", "sns": "Redes Sociales", "cons": "", "files": "", "peers": "", "help": "", "params": "" }
                     
                 }
                 
             }
-            guiWindow = { "image": "", "title": "AyzeLYC Blockchain Wallet", "xSize": 1920, "ySize": 1080 }
+            guiWindow = {
+                
+                "icon": "",
+                "title": "AyzeLYC Blockchain Node",
+                "xSize": 1920,
+                "ySize": 1080
+                
+            }
             logs = []
             
+        gui = QVBoxLayout
+        gui.resize(guiDatas.guiWindow["xSize"], guiDatas.guiWindow["ySize"])
+        gui.setWindowIcon(guiDatas.guiWindow["icon"])
+        gui.setWindowOpacity(1)
+        gui.setWindowTitle(guiDatas.guiWindow["title"])
+        
         backgroundImage = QImage(guiDatas.guiButtons["background"["image"]], guiDatas.guiButtons["background"["xSize"]], guiDatas.guiButtons["background"["ySize"]] alignment=QtCore.Qt.AlignCenter)
         backgroundImage.enabled = False
         loadingImage = QImage(guiDatas.guiButtons["loading"["image"]], guiDatas.guiButtons["loading"["xSize"]], guiDatas.guiButtons["loading"["ySize"]] ,alignment=QtCore.Qt.AlignCenter)
@@ -426,6 +439,7 @@ class Main :
         peersButton.enabled = False
         
         socialNetworksButton = QPushButton("Social networks")
+        socialNetworksButton.enable = False
         discordButton = QPushButton("Discord")
         discordButton.enabled = False
         instagramButton = QPushButton("Instagram")
@@ -446,12 +460,6 @@ class Main :
             peersButton.enabled = True
             sendButton.enabled = True
             socialNetworksButton.enabled = True
-            
-            gui = QVBoxLayout
-            gui.resize(guiDatas.guiWindow["xSize"], guiDatas.guiWindow["ySize"])
-            gui.setWindowIcon(guiDatas.guiWindow["image"])
-            gui.setWindowOpacity(1)
-            gui.setWindowTitle(guiDatas.guiWindow["title"])
             
             gui.add_widget(backgroundImage)
             gui.add_widget(loadingImage)
@@ -702,4 +710,4 @@ if keyboard.on_press_key("ctrl+alt+s") :
     
 if Main.Gui.stopButton.clicked
     
-    Main.Gui
+    Main.Gui.gui.setWindowOpacity(0)
