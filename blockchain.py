@@ -15,7 +15,8 @@ class Main :
         peersFile = open("peers.abdat", "r+")
         Blockchain.blockchainDatas.peers = chr(ord(peersFile) /ord(Algorithms.leya.constantsresult) /ord("ayzelyc blockchain"))
         walletFile = open("wallet.abdat", "r+")
-        Wallet.public_keys = chr(ord(walletFile) /ord(Blockchain.constantsresult))
+        Wallet.public_keys = chr(ord(walletFile) /ord(Blockchain.constantsresult))["pubkeys"]
+        Wallet.private_keys = chr(ord(walletFile) /ord(Blockchain.constantsresult))["privkeys"]
         
     class Algorithms :
         
@@ -388,7 +389,21 @@ class Main :
         def guiDatas() :
             
             guiButtons = { "buttons": { "home": { "xSize": 100, "ySize": 100, "image": "" }, "addresses": { "xSize": 50, "ySize": 50, "image": "" }, "background": { "xSize": 1920, "ySize": 1080, "image": "" } ,"discord": { "xSize": 50, "ySize": 50, "image": "" }, "instagram": { "xSize": 50, "ySize": 50, "image": "" }, "loading": { "xSize": 1920, "ySize": 1080, "image": "" }, "twitter": { "xSize": 50, "ySize": 50, "image": "" } } }
-            guiTexts = { "texts": { "de": { "home": "" }, "en": { "home": "Home" }, "fr": { "home": "Menu" }, "it": { "home": "" }, "sp": { "home": "" } } }
+            guiTexts = {
+                
+                "texts": {
+                    
+                    "ch": { "home": "", "pubkeys": "", "sns": "", "cons": "", "help": "" },
+                    "de": { "home": "", "pubkeys": "", "sns": "", "cons": "", "help": "" },
+                    "en": { "home": "Home", "pubkeys": "Public Keys", "sns": "Social Networks", "cons": "Console", "help": "Help Page" },
+                    "fr": { "home": "Menu", "pubkeys": "Clés Publiques", "sns": "Réseaux Sociaux", "cons": "Console", "help": "Page d'Aide" },
+                    "jp": { "home": "", "pubkeys": "", "sns": "", "cons": "", "help": "" },
+                    "it": { "home": "", "pubkeys": "", "sns": "", "cons": "", "help": "" },
+                    "sp": { "home": "", "pubkeys": "", "sns": "Redes Socialès", "cons": "", "help": "" }
+                    
+                }
+                
+            }
             guiWindow = { "image": "", "title": "AyzeLYC Blockchain Wallet", "xSize": 1920, "ySize": 1080 }
             logs = []
             
@@ -678,11 +693,13 @@ Main.Blockchain.INIT
 
 if keyboard.on_press_key("ctrl+alt+s") :
     
-    Blockchain.blockchainDatas.verifyingBlocks = 0
-    Blockchain.blockchainDatas.mining = 0
-    Node.threading.stopAll
-    Internet.internetClient.icsocket.stop
-    Internet.internetServer.issocket.stop
-    walletDatas.blockchainFile.write(Blockchain.blockchainDatas.chain[(len(Blockchain.blockchainDatas.chain)] -len(walletDatas.blockchainFile) : len(Blockchain.blockchainDatas.chain))
+    Main.Blockchain.blockchainDatas.verifyingBlocks = 0
+    Main.Blockchain.blockchainDatas.mining = 0
+    Main.Node.threading.stopAll
+    Main.Internet.internetClient.icsocket.stop
+    Main.Internet.internetServer.issocket.stop
+    Main.walletDatas.blockchainFile.write(Blockchain.blockchainDatas.chain[(len(Blockchain.blockchainDatas.chain)] -len(walletDatas.blockchainFile) : len(Blockchain.blockchainDatas.chain))
     
 if Main.Gui.stopButton.clicked
+    
+    Main.Gui
