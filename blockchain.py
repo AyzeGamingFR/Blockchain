@@ -349,7 +349,7 @@ class Main :
             
         def getBinaryDate() :
             
-            binaryDate = (ord(time.tm_year) +ord(time.tm_month) +ord(time.tm_day) +ord(time.tm_hour) +ord(time.tm_minute))
+            binaryDate = time.tm_year +" " +time.tm_month +" " +time.tm_day +" " +time.tm_hour +" " +time.tm_minute
             return (binaryDate)
             
         def syncChain() :
@@ -674,7 +674,7 @@ class Main :
             
             return (time.tm_year +time.tm_month +time.tm_day +time.tm_hour +time.tm_min)
         
-    if keyboard.on_press_key("ctrl+alt+s") :
+if keyboard.on_press_key("ctrl+alt+s") :
         
         Blockchain.blockchainDatas.verifyingBlocks = 0
         Blockchain.blockchainDatas.mining = 0
