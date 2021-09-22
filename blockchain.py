@@ -677,10 +677,12 @@ class Main :
 Main.Blockchain.INIT
 
 if keyboard.on_press_key("ctrl+alt+s") :
-        
-        Blockchain.blockchainDatas.verifyingBlocks = 0
-        Blockchain.blockchainDatas.mining = 0
-        Node.threading.stopAll
-        Internet.internetClient.icsocket.stop
-        Internet.internetServer.issocket.stop
-        walletDatas.blockchainFile.write(Blockchain.blockchainDatas.chain[(len(Blockchain.blockchainDatas.chain) -len(walletDatas.blockchainFile)) : len(Blockchain.blockchainDatas.chain)])
+    
+    Blockchain.blockchainDatas.verifyingBlocks = 0
+    Blockchain.blockchainDatas.mining = 0
+    Node.threading.stopAll
+    Internet.internetClient.icsocket.stop
+    Internet.internetServer.issocket.stop
+    walletDatas.blockchainFile.write(Blockchain.blockchainDatas.chain[(len(Blockchain.blockchainDatas.chain)] -len(walletDatas.blockchainFile) : len(Blockchain.blockchainDatas.chain))
+    
+if Main.Gui.stopButton.clicked
