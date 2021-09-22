@@ -250,7 +250,7 @@ class Main :
             nodeDatas = { "name": "ABlockchain v1.0", "version": 1.0, "address": "127.0.0.1", "port": 8448, "maxcons": 32 }
             peers = []
             
-        def init() :
+        def INIT() :
             
             self.unspendTxs = set({})
             self.blkchain = set({})
@@ -673,7 +673,9 @@ class Main :
         def binaryDate() :
             
             return (time.tm_year +time.tm_month +time.tm_day +time.tm_hour +time.tm_min)
-        
+            
+Main.Blockchain.INIT
+
 if keyboard.on_press_key("ctrl+alt+s") :
         
         Blockchain.blockchainDatas.verifyingBlocks = 0
