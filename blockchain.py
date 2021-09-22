@@ -701,13 +701,19 @@ Main.Blockchain.INIT
 
 if keyboard.on_press_key("ctrl+alt+s") :
     
-    Main.Blockchain.blockchainDatas.verifyingBlocks = 0
-    Main.Blockchain.blockchainDatas.mining = 0
-    Main.Node.threading.stopAll
+    Main.Blockchain.blockchainDatas["verifyingBlocks"] = 0
+    Main.Blockchain.blockchainDatas["mining"] = 0
     Main.Internet.internetClient.icsocket.stop
     Main.Internet.internetServer.issocket.stop
-    Main.walletDatas.blockchainFile.write(Blockchain.blockchainDatas.chain[(len(Blockchain.blockchainDatas.chain)] -len(walletDatas.blockchainFile) : len(Blockchain.blockchainDatas.chain))
+    Main.Node.threading.stopAll
+    Main.walletDatas.blockchainFile.write(Main.Blockchain.blockchainDatas.chain[(len(Main.Blockchain.blockchainDatas.chain)) -len(Main.walletDatas.blockchainFile) : len(Main.Blockchain.blockchainDatas.chain))])
     
 if Main.Gui.stopButton.clicked
     
-    Main.Gui.gui.setWindowOpacity(0)
+    Main.Blockchain.blockchainDatas["verifyingBlock"] = 0
+    Main.Blockchain.blockchainDatas["mining"] = 0
+    Main.Internet.internetClient.icsocket.close
+    Main.Internet.internetServer.issocket.close
+    Main.Node.threading.stopAll
+    Main.Gui.stopAll
+    Main.walletDatas.blockchainFile.write(Main.Blockchain.blockchainDatas.chain[(len(Main.Blockchain.blockchainDatas.chain)) -len(Main.walletDatas.blockchainFile)] : len(Main.Blockchain.blockchainDatas.chain))])
