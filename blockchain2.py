@@ -29,7 +29,7 @@ class Main :
             key = ""
             for len(self.privatekey) < 64 :
                 
-                self.privatekey.insert(0[keysCharacters[random.randint(0, 36)])
+                self.privatekey.append(0[keysCharacters[random.randint(0, 36)])
                 
             else :
                 
