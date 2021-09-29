@@ -16,9 +16,49 @@ class Main :
         walletPrivateKeys = []
         walletPublicKeys = []
         
+        
+    class algorithms :
+        
+        class leya :
+            
+            def encrypt(datas, difficulty) :
+                
+                return (chr((ord(datas) +difficulty) *ord(constantsresult)))
+                
+            def decrypt(datas, difficulty) :
+                
+                datasToReturn = chr((ord(datas) +difficulty) *ord(constantsresult))
+                if datasToReturn.startsWith("{ 'datasType': '") :
+                    
+                    return (datasToReturn)
+                    
+                else :
+                    
+                    print("Datas were not able to be decrypted with this difficulty, starting a bruteforce against the datas !")
+                    return (bruteForce(datas))
+                    
+            def bruteForce(datas) :
+                
+                datasDecrypted = ""
+                difficulty = 1
+                if datasDecrypted.startsWith("{ 'datasType': '") :
+                    
+                    return (datasDecrypted)
+                    
+                else :
+                    
+                    datasDecrypted = chr((ord(datas) -difficulty) /ord(constantsresult))
+                    difficulty += 1
+                    
     class blockchain :
         
         def syncChain() :
+            
+            
+            
+        def verifyChain() :
+            
+            
             
     class wallet :
         
