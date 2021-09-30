@@ -10,7 +10,7 @@ class Main :
     
     class mainDatas :
         
-        blockchain = {"chainId": 0, "chainName": "", "chainBlocks": [[], [], [], [], []]}
+        blockchain = {"chainId": 0, "chainName": "", "chainBlocks": []}
         network = {"peers": [], "datas": []}
         nodeSettings = {"ligthningNetwork": 1, "messageResposter": 1, "blocksUnvalidated": 5}
         walletPrivateKeys = []
@@ -59,6 +59,17 @@ class Main :
         def verifyChain() :
             
             
+            
+        def createBlock(prevhash, number, transactions, fees, message, reward) :
+            
+            fees += reward
+            datas = "{ 'prevhash': '" +prevhash +"', 'number': " +number +", 'transactions': [" +transactions +"], 'fees': " +fees +", 'message': '" +message +"' }"
+            mainDatas.blockchain["chainBlocks"].append(verifyBlock(datas))
+            internet.issocket.send("new block : " +mainDatas.blockchain["chainBlocks"[(len(mainDatas.blockchain["chainBlocks"]) -1)]])
+            
+        def verifyBlock(datas) :
+            
+            return (algorithms.leya.bruteForce(datas))
             
     class wallet :
         
