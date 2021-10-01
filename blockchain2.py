@@ -60,6 +60,36 @@ class Main :
             
             
             
+        def createTransaction(prevhash, sender, receiver, coins, fees, message, privkey) :
+            
+            tx = 
+            
+        def verifyTransaction(datas) :
+            
+            tx = datas
+            generatedStrings = generateStrings
+            i = 0
+            for tx.startsWith("{ 'prevhash': '") :
+                
+                
+                
+            else :
+                
+                if i == 0 :
+                    
+                    tx /= generatedStrings[0]
+                    generatedStrings.remove(0)
+                    
+                else :
+                    
+                    if len(generatedStrings) == 0 :
+                        
+                        i += 1
+                        
+                    else :
+                        
+                        i += 1
+                        
         def createBlock(prevhash, number, transactions, fees, message, reward) :
             
             fees += reward
@@ -71,6 +101,10 @@ class Main :
             
             return (algorithms.leya.bruteForce(datas))
             
+    class threading :
+        
+        
+        
     class wallet :
         
         keysCharacters = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
