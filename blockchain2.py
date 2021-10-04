@@ -3,6 +3,7 @@ import keyboard
 import PySide6.QtCore
 import random
 import socket
+import string
 import threading
 import time
 
@@ -10,7 +11,7 @@ class Main :
     
     class mainDatas :
         
-        blockchain = {"chainId": 0, "chainName": "", "chainBlocks": []}
+        blockchain = {"chainId": 0, "chainName": "", "chainBlocks": [], "chainDiff": 1}
         network = {"peers": [], "datas": []}
         nodeSettings = {"ligthningNetwork": 1, "messageResposter": 1, "blocksUnvalidated": 5}
         walletPrivateKeys = []
@@ -40,16 +41,32 @@ class Main :
             def bruteForce(datas) :
                 
                 datasDecrypted = ""
-                difficulty = 1
                 if datasDecrypted.startsWith("{ 'datasType': '") :
                     
                     return (datasDecrypted)
                     
                 else :
                     
-                    datasDecrypted = chr((ord(datas) -difficulty) /ord(constantsresult))
-                    difficulty += 1
+                    datasDecrypted = string.ascii_letters(string.digits(datas) -1)
                     
+        class sha256 :
+            
+            def hash(datas) :
+                
+                hashlib.sha256(string.ascii_letters(string.ascii_digits(datas) +random.randint(mainDatas.blockchain["chainDiff"], random.randint(mainDatas.blockchain["chainDiff" +100])))).hexdigest()
+                
+            def bruteForce(hash) :
+                
+                strings = blockchain.stringsGenerator()
+                hashedDatas = ""
+                
+                for hashedDatas is not hash :
+                    
+                    hashedDatas = hashlib.sha256(strings[0]).hexdigest()
+                    strings.remove(0)
+                    
+                return (hashedDatas)
+                
     class blockchain :
         
         def syncChain() :
@@ -60,14 +77,16 @@ class Main :
             
             
             
-        def createTransaction(prevhash, sender, receiver, coins, fees, message, privkey) :
+        def createTransaction(txnumber, prevhash, sender, receiver, coins, fees, message, privkey) :
             
-            tx = 
+            tx = "{'txnumber': " +txnumber +", 'prevhash': '" +prevhash +"', 'sender': '+"sender +"', 'receiver': '"+ +receiver +"', 'coins': " +coins ", 'fees': " +fees"}"
+            tx = string.ascii_letters(string.digits(tx) *string.digits(privkey))
+            return (tx)
             
         def verifyTransaction(datas) :
             
             tx = datas
-            generatedStrings = generateStrings
+            generatedStrings = stringsGenerator()
             i = 0
             for tx.startsWith("{ 'prevhash': '") :
                 
@@ -101,6 +120,16 @@ class Main :
             
             return (algorithms.leya.bruteForce(datas))
             
+        def stringGenerator(numberOfStrings) :
+            
+            i = 0
+            generated = []
+            for i < numberOfStrings :
+                
+                generated.append("'" +string.ascii_letters(i) +"'")
+                
+            return (generated)
+            
     class threading :
         
         
@@ -128,4 +157,4 @@ class Main :
             
         def createWalletFile() :
             
-            fileContent = "{'privkeys': '" +mainDatas.walletPrivateKeys +"', 'pubkeys': '" +mainDatas.walletPublicKeys +"'}"
+            fileContent = "{'privkeys': '" +string.ascii_letters(string.digits(mainDatas.walletPrivateKeys) *string.digits(blockchain.) *string.digits(password)) +"', 'pubkeys': '" +string.ascii_letters(string.digits(mainDatas.walletPublicKeys) *string.digits(password) +512) +"'}"
