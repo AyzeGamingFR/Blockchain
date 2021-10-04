@@ -60,7 +60,7 @@ class Main :
                 strings = blockchain.stringsGenerator()
                 hashedDatas = ""
                 
-                for hashedDatas is not hash :
+                for hashedDatas != hash :
                     
                     hashedDatas = hashlib.sha256(strings[0]).hexdigest()
                     strings.remove(0)
