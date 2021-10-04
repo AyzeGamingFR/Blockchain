@@ -153,8 +153,7 @@ class Main :
                 
         def createPublicKey(privatekey) :
             
-            key = ""
-            key = chr(ord(privatekey) *(ord(Date.getYear()) +ord(Date.getMonth()) +ord(Date.getDay()) +ord(Date.getMinute()) +ord(Date.getSeconds())))
+            key = "A" +string.ascii_letters(string.digits(privatekey) *(string.digits(Date.getYear()) +string.digits(Date.getMonth()) +string.digits(Date.getDay()) +string.digits(Date.getMinute()) +string.digits(Date.getSeconds())))[0 : 62]
             return (key)
             
         def createWalletFile(password) :
