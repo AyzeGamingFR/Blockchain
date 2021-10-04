@@ -111,27 +111,32 @@ class Main :
                         
                         i += 1
                         
-        def createBlock(prevhash, number, transactions, fees, message, reward) :
+        def createBlock(self, prevhash, number, transactions, fees, message, reward) :
             
-            fees += reward
-            datas = "{ 'prevhash': '" +prevhash +"', 'number': " +number +", 'transactions': [" +transactions +"], 'fees': " +fees +", 'message': '" +message +"' }"
+            self.fees = fees +reward
+            self.datas = "{ 'prevhash': '" +prevhash +"', 'number': " +number +", 'transactions': [" +transactions +"], 'fees': " +fees +", 'message': '" +message +"' }"
             mainDatas.blockchain["chainBlocks"].append(verifyBlock(datas))
+            verifyBlock(mainDatas.blockchain["chainBlocks"[(len(mainDatas.blockchain["chainBlocks"] -1))]])
             internet.issocket.send("new block : " +mainDatas.blockchain["chainBlocks"[(len(mainDatas.blockchain["chainBlocks"]) -1)]])
             
         def verifyBlock(datas) :
             
             return (algorithms.leya.bruteForce(datas))
             
-        def stringGenerator(numberOfStrings) :
+        def stringGenerator(self, numberOfStrings) :
             
             i = 0
-            generated = []
+            self.generated = []
             for i < numberOfStrings :
                 
-                generated.append("'" +string.ascii_letters(i) +"'")
+                self.generated.append("'" +string.ascii_letters(i) +"'")
                 
-            return (generated)
+            return (self)
             
+    class gui :
+        
+        
+        
     class threading :
         
         
@@ -140,22 +145,22 @@ class Main :
         
         keysCharacters = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
         
-        def createPrivateKey() :
+        def createPrivateKey(self) :
             
-            key = ""
-            for len(self.privatekey) < 64 :
+            self.key = ""
+            for len(self) < 64 :
                 
-                self.privatekey.append(0[keysCharacters[random.randint(0, 36)])
+                self.key.append(0[keysCharacters[random.randint(0, 36)])
                 
             else :
                 
-                return (key)
+                return (self)
                 
-        def createPublicKey(privatekey) :
+        def createPublicKey(self, privatekey) :
             
-            key = "A" +string.ascii_letters(string.digits(privatekey) *(string.digits(Date.getYear()) +string.digits(Date.getMonth()) +string.digits(Date.getDay()) +string.digits(Date.getMinute()) +string.digits(Date.getSeconds())))[0 : 62]
-            return (key)
+            self.key = "A" +string.ascii_letters(string.digits(privatekey) *(string.digits(Date.getYear()) +string.digits(Date.getMonth()) +string.digits(Date.getDay()) +string.digits(Date.getMinute()) +string.digits(Date.getSeconds())))[0 : 62]
+            return (self)
             
-        def createWalletFile(password) :
+        def createWalletFile(self, password) :
             
-            fileContent = "{'privkeys': '" +string.ascii_letters(string.digits(mainDatas.walletPrivateKeys) *string.digits(blockchain.constantsresult) *string.digits(password)) +"', 'pubkeys': '" +string.ascii_letters(string.digits(mainDatas.walletPublicKeys) *string.digits(blockchain.constantsresult) *string.digits(password)) +"'}"
+            self.fileContent = "{'privkeys': '" +string.ascii_letters(string.digits(mainDatas.walletPrivateKeys) *string.digits(blockchain.constantsresult) *string.digits(password)) +"', 'pubkeys': '" +string.ascii_letters(string.digits(mainDatas.walletPublicKeys) *string.digits(blockchain.constantsresult) *string.digits(password)) +"'}"
