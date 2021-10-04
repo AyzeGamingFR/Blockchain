@@ -69,6 +69,8 @@ class Main :
                 
     class blockchain :
         
+        constantsresult = string.ascii_letters(string.digits("ayzelyc") +string.digits("blockchain") +string.digits("bitcoin") +string.digits("ethereum") +string.digits("marscoin") +string.digits("mooncoin") +string.digits("nfc") +string.digits("token"))
+        
         def syncChain() :
             
             
@@ -155,6 +157,6 @@ class Main :
             key = chr(ord(privatekey) *(ord(Date.getYear()) +ord(Date.getMonth()) +ord(Date.getDay()) +ord(Date.getMinute()) +ord(Date.getSeconds())))
             return (key)
             
-        def createWalletFile() :
+        def createWalletFile(password) :
             
-            fileContent = "{'privkeys': '" +string.ascii_letters(string.digits(mainDatas.walletPrivateKeys) *string.digits(blockchain.) *string.digits(password)) +"', 'pubkeys': '" +string.ascii_letters(string.digits(mainDatas.walletPublicKeys) *string.digits(password) +512) +"'}"
+            fileContent = "{'privkeys': '" +string.ascii_letters(string.digits(mainDatas.walletPrivateKeys) *string.digits(blockchain.constantsresult) *string.digits(password)) +"', 'pubkeys': '" +string.ascii_letters(string.digits(mainDatas.walletPublicKeys) *string.digits(blockchain.constantsresult) *string.digits(password)) +"'}"
