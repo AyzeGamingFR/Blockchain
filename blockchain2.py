@@ -152,13 +152,11 @@ class Main :
                 
                 self.key.append(0[keysCharacters[random.randint(0, 36)])
                 
-            else :
-                
-                return (self)
+            return (self)
                 
         def createPublicKey(self, privatekey) :
             
-            self.key = "A" +string.ascii_letters(string.digits(privatekey) *(string.digits(Date.getYear()) +string.digits(Date.getMonth()) +string.digits(Date.getDay()) +string.digits(Date.getMinute()) +string.digits(Date.getSeconds())))[0 : 62]
+            self.key = "A" +string.ascii_letters(string.digits(privatekey) *(string.digits(Date.getYear()) +string.digits(Date.getMonth()) +string.digits(Date.getDay()) +string.digits(Date.getMinute()) +string.digits(Date.getSeconds())))[1 : 64]
             return (self)
             
         def createWalletFile(self, password) :
