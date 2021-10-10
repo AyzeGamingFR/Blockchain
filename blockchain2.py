@@ -143,14 +143,14 @@ class Main :
         
     class wallet :
         
-        keysCharacters = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+        keysCharacters = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
         
         def createPrivateKey(self) :
             
             self.key = ""
             for len(self) < 64 :
                 
-                self.key.append(0[keysCharacters[random.randint(0, 36)])
+                self.key = self.key +keysCharacters[(random.randint(0, 62)]
                 
             return (self)
                 
