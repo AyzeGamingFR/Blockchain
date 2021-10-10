@@ -162,11 +162,11 @@ class Main :
         def createWalletFile(self, password) :
             
             self.fileContent = "{'privkeys': '" +mainDatas.walletPrivateKeys +"', 'pubkeys': '" +mainDatas.walletPublicKeys +"'}"
-            self.fileContent = string.ascii_letters(string.digits() *string.digits() *string.digits(password) +62)
+            self.fileContent = string.ascii_letters(string.digits(self.fileContent) *string.digits(blockchain.constantsresult) *string.digits(password) +62)
             return (self)
             
         def unlockWalletFile(self, password) :
             
             self.fileContent = ""
-            self.fileContent = string.ascii_letters(string.digits() /string.digits() /string.digits() -62)
+            self.fileContent = string.ascii_letters(string.digits() /string.digits(blockchain.constantsresult) /string.digits(password) -62)
             return (self)
