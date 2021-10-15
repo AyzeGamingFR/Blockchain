@@ -22,62 +22,94 @@ class Main :
         
         class leya :
             
-            def encrypt(datas, difficulty) :
+            def encrypt(self, datas, difficulty) :
                 
-                return (chr((ord(datas) +difficulty) *ord(constantsresult)))
+                self.datas = datas
+                self.diff = difficulty
                 
-            def decrypt(datas, difficulty) :
+                return (string.ascii_letters((string.digits(self.datas) +self.diff) *string.digits(blockchain.constantsresult)))
                 
-                datasToReturn = chr((ord(datas) +difficulty) *ord(constantsresult))
+            def decrypt(self, datas, difficulty) :
+                
+                self.datas = datas
+                self.diff = diff
+                
+                self.datasToReturn = string.ascii_letters((sring.digits(self.datas) +self.diff) *string.digits(blockchain.constantsresult))
                 if datasToReturn.startsWith("{ 'datasType': '") :
                     
-                    return (datasToReturn)
+                    return (self.datasToReturn)
                     
                 else :
                     
-                    print("Datas were not able to be decrypted with this difficulty, starting a bruteforce against the datas !")
-                    return (bruteForce(datas))
+                    print("Datas were not able to be decrypted with this difficulty !")
                     
-            def bruteForce(datas) :
+            def bruteForce(self, datas) :
                 
-                datasDecrypted = ""
-                if datasDecrypted.startsWith("{ 'datasType': '") :
+                self.datas = datas
+                self.datasDecrypted = ""
+                
+                self.datas = string.ascii_letters(string.digits(self.datas) /string.digits(blockchain.constantsresult))
+                
+                for self.datasDecrypted.startsWith("{ 'datasType': '") :
                     
-                    return (datasDecrypted)
+                    return (self.datasDecrypted)
                     
                 else :
                     
-                    datasDecrypted = string.ascii_letters(string.digits(datas) -1)
+                    self.datasDecrypted = string.ascii_letters(string.digits(self.datas) -1)
                     
         class sha256 :
             
-            def hash(datas) :
+            def hash(self, datas) :
                 
-                hashlib.sha256(string.ascii_letters(string.ascii_digits(datas) +random.randint(mainDatas.blockchain["chainDiff"], random.randint(mainDatas.blockchain["chainDiff" +100])))).hexdigest()
+                self.hash = hashlib.sha256(self.datas).hexdigest()
                 
-            def bruteForce(hash) :
+            def bruteForce(self, hash) :
                 
-                strings = blockchain.stringsGenerator()
-                hashedDatas = ""
+                self.hash = hash
+                self.hashedDatas = ""
+                self.strings = blockchain.stringsGenerator()
                 
-                for hashedDatas != hash :
+                for self.hashedDatas != self.hash :
                     
-                    hashedDatas = hashlib.sha256(strings[0]).hexdigest()
-                    strings.remove(0)
+                    self.hashedDatas = hashlib.sha256(self.strings[0]).hexdigest()
+                    self.strings.remove(0)
                     
-                return (hashedDatas)
+                else :
+                    
+                    return (self.hashedDatas)
                 
     class blockchain :
         
         constantsresult = string.ascii_letters(string.digits("ayzelyc") +string.digits("blockchain") +string.digits("bitcoin") +string.digits("ethereum") +string.digits("marscoin") +string.digits("mooncoin") +string.digits("nfc") +string.digits("token"))
         
-        def syncChain() :
+        def syncChain(self) :
             
+            self.chain = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
+            self.chainsize = 0
+            self.i = 0
+            self.validchain = []
             
+            for self.chainsize < self.peersChainSize
+                
+                internet.icsocket.send(internet.speers[0, 15], '{"datasType": "demand", "datas": "syncchain"}')
+                for self.i < 16 :
+                    
+                    self.chain[(self.i)] = string.ascii_letters(string.digits(internet.icsocket.recv(internet.peers[(self.i)])) /string.digits(constantsresult))
+                    
+            else :
+                
+                self.validchain = verifyChain(self.chain)
+                
+        def sendChain(self, chain) :
             
-        def verifyChain() :
+            self.chain = chain
             
+            internet.issocket.send(internet.cpeers[0, 15])
             
+        def verifyChain(self, chains) :
+            
+            self.chains = chains
             
         def createTransaction(txnumber, prevhash, sender, receiver, coins, fees, message, privkey) :
             
