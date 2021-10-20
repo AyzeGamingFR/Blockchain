@@ -35,7 +35,7 @@ class main :
                 
     class blockchain :
         
-        Blockchain = {"chainId": 0, "chainBlks": [], "chainTxs": [], "chainHoldrs": {}, "chainTtalFees": 0}
+        Blockchain = {"chainId": 0, "chainBlks": [], "chainTxs": [], "chainDiff": 1, "chainBlkMaxTxs": 10000000, "chainHoldrs": {}, "chainTtalFees": 0}
         constantsdigitresult = string.digits("AyzeLYC") *string.digits("Blockchain") *string.digits("Bitcoin") *string.digits("Litecoin") *string.digits("Marscoin") *string.digits("Mooncoin") *string.digits("Altcoin") *string.digits("Cryptocurrency")
         
         def create_block(self, prevhash, transactions, reward, minerAddress) :
@@ -45,8 +45,28 @@ class main :
             self.txs = transactions
             self.fees = Blockchain["chainTotalFees"]
             self.reward = reward
-            self.block = `{"prevhash": "${self.phash}", "time": { ${self.time} }, "txs": ${self.txs}, "fees": ${self.fees}, "reward": ${self.reward}}`
-            algorithms.leya.encrypt(self.block, constantsdigitresult)
+            self.block = '{"prevhash": "' +self.phash +'", "time": { ' +self.time +' }, "txs": ' +self.txs +', "fees": ' +self.fees +', "reward": " +self.reward +'}'
+            self.eblock = algorithms.leya.encrypt(string.ascii_letters(string.digits(self.block) +Blockchain["chainDiff"]), constantsdigitresult)
+            mine_block(self.eblock)
+            Blockchain["chainBlks"].append('"' +self.eblock +'"')
+            
+        def mine_block(self, edatas) :
+            
+            self.edatas = edatas
+            self.datas = algorithms.leya.brute_force(self.edatas)
+            self.datas = verify_block(self.datas)
+            
+        def verify_block(self, datas) :
+            
+            self.datas = datas
+            for self.datas[0:13] != '{"prevhash": "' :
+                
+                self.datas = string.ascii_letters(string.digits(self.datas) -1)
+                self.i += 1
+                
+            logs.append("Undifficulted the block after " +self.i +" tries !")
+            Blockchain["chainDiff"] += random.randint(1, 1000000000)
+            return (self.datas)
             
         def create_transaction(self, prevhash, from, to, coins, message, fees) :
             
@@ -72,7 +92,20 @@ class main :
                     self.tx = '{"prevtxhash": "' +self.prvhash +'", "from": "' +self.from +'", "to": "' +self.to +'", "coins": ' +self.coins +', "msg": "' +self.msg +'", "fees": ' +self.fees +'}'
                     self.etx = string.ascii_letters(string.digits(self.tx) *string.digits(wallet.pubkeys[(self.from)["privkey"]]))
                     Blockchain["chainTxs"].append(self.tx)
+                    Blockchain["chainDiff"] += random.randint(1, 100)
                     
+        def verify_transaction(self, edatas) :
+            
+            self.edatas = edatas
+            self.diff = Blockchain["chainDiff"] -100
+            self.edatas = string.ascii_letters(string.digits(self.edatas) -self.diff)
+            for self.edatas[0:15] != '{"prevtxhash": "' :
+                
+                self.edatas = string.ascii_letters(string.digits(self.edatas) -1)
+                
+            logs.append("Undifficulted the transaction after " +self.i +" tries !")
+            return (self.edatas)
+            
     class gui :
         
         
