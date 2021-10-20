@@ -35,7 +35,7 @@ class main :
                 
     class blockchain :
         
-        Blockchain = {"chainId": 0, "chainBlks": [], "chainTxs": [], "chainDiff": 1, "chainBlkMaxTxs": 10000000, "chainHoldrs": {}, "chainTtalFees": 0}
+        Blockchain = {"chainId": 0, "chainBlks": [], "chainTxs": [], "chainDiff": 1, "chainBlkMaxTxs": 10000000, "chainHoldrs": {}, "chainTtalFees": 0, "chainVrifBlks": 0}
         constantsdigitresult = string.digits("AyzeLYC") *string.digits("Blockchain") *string.digits("Bitcoin") *string.digits("Litecoin") *string.digits("Marscoin") *string.digits("Mooncoin") *string.digits("Altcoin") *string.digits("Cryptocurrency")
         
         def create_block(self, prevhash, transactions, reward, minerAddress) :
@@ -47,9 +47,15 @@ class main :
             self.reward = reward
             self.block = '{"prevhash": "' +self.phash +'", "time": { ' +self.time +' }, "txs": ' +self.txs +', "fees": ' +self.fees +', "reward": " +self.reward +'}'
             self.eblock = algorithms.leya.encrypt(string.ascii_letters(string.digits(self.block) +Blockchain["chainDiff"]), constantsdigitresult)
-            mine_block(self.eblock)
-            Blockchain["chainBlks"].append('"' +self.eblock +'"')
-            
+            if Blockchain["chainVrifBlks"] == 1 :
+                
+                mine_block(self.eblock)
+                Blockchain["chainBlks"].append(self.eblock)
+                
+            else :
+                
+                Blockchain["chainBlks"].append(self.eblock)
+                
         def mine_block(self, edatas) :
             
             self.edatas = edatas
